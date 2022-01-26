@@ -15,12 +15,15 @@ namespace TableTracker.Domain.Entities
         public string Cuisine { get; set; }
         public string PriceRange { get; set; }
         public int NumberOfTables { get; set; }
-        public RestaurantType Type { get; set; } 
+        public RestaurantType Type { get; set; }
         public Discount Discount { get; set; }
 
         public ICollection<Table> Tables { get; set; }
         public ICollection<Waiter> Waiters { get; set; }
+
+        public long FranchiseId { get; set; }
         public Franchise Franchise { get; set; }
+        public long LayoutId { get; set; }
         public Layout Layout { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace TableTracker.Domain.Entities
     {
         public ManagerState ManagerState { get; set; }
 
+        public long RestaurantId { get; set; }
         public Restaurant Restaurant { get; set; }
     }
 }
