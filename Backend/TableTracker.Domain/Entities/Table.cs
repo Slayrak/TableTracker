@@ -24,5 +24,7 @@ namespace TableTracker.Domain.Entities
         public Waiter Waiter { get; set; }
         public long RestaurantId { get; set; }
         public Restaurant Restaurant { get; set; }
+
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace TableTracker.Domain.Entities
     {
         public float GeneralTrustFactor { get; set; }
 
-        public ICollection<Table> Tables { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }
