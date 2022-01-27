@@ -1,5 +1,7 @@
 # TableTracker
 
+#Patterns: Repository, Unit of Work
+
 private fields
 public fields
 
