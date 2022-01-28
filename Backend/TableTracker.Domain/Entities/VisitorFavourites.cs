@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TableTracker.Domain.Entities
 {
-    public class VisitorFavourites
+    public class VisitorFavourites : IEntity<long>
     {
         public long Id { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TableTracker.Domain.Entities
 {
-    public class Reservation
+    public class Reservation : IEntity<long>
     {
         public long Id { get; set; }
         public DateTime Date { get; set; }

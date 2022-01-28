@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TableTracker.Domain.Entities
 {
-    public class VisitorHistory
+    public class VisitorHistory : IEntity<long>
     {
         public long Id { get; set; }
         public DateTime DateTime { get; set; }

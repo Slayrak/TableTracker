@@ -6,7 +6,7 @@ using TableTracker.Domain.Enums;
 
 namespace TableTracker.Domain.Entities
 {
-    public class Table
+    public class Table : IEntity<long>
     {
         public long Id { get; set; }
         public int Number { get; set; }

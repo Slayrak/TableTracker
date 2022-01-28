@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TableTracker.Domain.Entities
 {
-    public class RestaurantVisitor
+    public class RestaurantVisitor : IEntity<long>
     {
         public long Id { get; set; }
         //public UserState UserState { get; set; } я не знаю що за стан ми тут придумали
