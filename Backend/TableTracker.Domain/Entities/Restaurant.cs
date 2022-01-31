@@ -25,5 +25,8 @@ namespace TableTracker.Domain.Entities
         public Franchise Franchise { get; set; }
         public long LayoutId { get; set; }
         public Layout Layout { get; set; }
+        public long ManagerId { get; set; }
+        public Manager Manager { get; set; }
+
     }
 }

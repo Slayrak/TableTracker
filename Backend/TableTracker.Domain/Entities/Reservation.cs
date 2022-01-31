@@ -13,5 +13,6 @@ namespace TableTracker.Domain.Entities
 
         public ICollection<Visitor> Visitors { get; set; }
         public long TableId { get; set; }
+        public Table Table { get; set; }
     }
 }
