@@ -66,8 +66,14 @@ namespace TableTracker.Infrastructure
             modelBuilder.Entity<Table>()
                 .HasOne(x => x.Waiter)
                 .WithMany(x => x.Tables)
-                .HasForeignKey(x => x.WaiterId)
+                .HasForeignKey(x => x.ServingWaiterId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Restaurant>()
+            //    .HasMany(x => x.Cuisines)
+            //    .WithMany(x => x.Restaurants)
+            //    .UsingEntity<Restaurant>();
+
         }
     }
 }
