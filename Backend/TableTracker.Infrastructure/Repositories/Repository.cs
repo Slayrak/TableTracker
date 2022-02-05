@@ -24,11 +24,10 @@ namespace TableTracker.Infrastructure.Repositories
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<ICollection<TEntity>> GetAll(Expression filter = null, IQueryable include = null)
+        public async Task<ICollection<TEntity>> GetAll()
         {
             return await _context
                 .Set<TEntity>()
-                .Select(x => x)
                 .ToListAsync();
         }
 

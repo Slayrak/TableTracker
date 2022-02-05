@@ -13,7 +13,7 @@ namespace TableTracker.Domain.Interfaces.Repositories
             Restaurant restaurant,
             Waiter waiter = null,
             int? numberOfSeats = null,
-            double? TableSize = null,
+            double? tableSize = null,
             int? floor = null,
             DateTime? reserveDate = null,
             TableState? state = null);

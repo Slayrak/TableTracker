@@ -6,6 +6,6 @@ namespace TableTracker.Domain.Interfaces.Repositories
 {
     public interface IFranchiseRepository : IRepository<Franchise, long>
     {
-        Task<Franchise> GetFranchiseByName();
+        Task<Franchise> GetFranchiseByName(string name);
     }
 }

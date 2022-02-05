@@ -12,7 +12,6 @@ namespace TableTracker.Domain.Entities
         public double CoordX { get; set; }
         public double CoordY { get; set; }
         public float Rating { get; set; }
-        public string Cuisine { get; set; }
         public string PriceRange { get; set; }
         public int NumberOfTables { get; set; }
         public RestaurantType Type { get; set; }
@@ -20,6 +19,7 @@ namespace TableTracker.Domain.Entities
 
         public ICollection<Table> Tables { get; set; }
         public ICollection<Waiter> Waiters { get; set; }
+        public ICollection<string> Cuisines { get; set; }
 
         public long FranchiseId { get; set; }
         public Franchise Franchise { get; set; }

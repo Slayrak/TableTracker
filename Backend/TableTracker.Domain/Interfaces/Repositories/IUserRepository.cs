@@ -11,5 +11,6 @@ namespace TableTracker.Domain.Interfaces.Repositories
 
         Task<User> GetUserByEmail(string email);
 
+        Task<ICollection<User>> FilterUsers(string filter);
     }
 }
