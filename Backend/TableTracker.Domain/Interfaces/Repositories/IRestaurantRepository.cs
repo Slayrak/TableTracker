@@ -8,7 +8,7 @@ namespace TableTracker.Domain.Interfaces.Repositories
 {
     public interface IRestaurantRepository : IRepository<Restaurant, long>
     {
-        Task<ICollection<Restaurant>> GetAllRestaurantsWithFilteringByRating(
+        Task<ICollection<Restaurant>> GetAllRestaurantsWithFiltering(
             float? rating = null,
             IEnumerable<string> cuisines = null,
             string price = null,

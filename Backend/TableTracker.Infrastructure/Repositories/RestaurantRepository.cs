@@ -19,7 +19,7 @@ namespace TableTracker.Infrastructure.Repositories
         }
 
         //TODO change cuisines type to IEnumerable<Cuisine>
-        public async Task<ICollection<Restaurant>> GetAllRestaurantsWithFilteringByRating(
+        public async Task<ICollection<Restaurant>> GetAllRestaurantsWithFiltering(
             float? rating = null,
             IEnumerable<string> cuisines = null,
             string price = null,
