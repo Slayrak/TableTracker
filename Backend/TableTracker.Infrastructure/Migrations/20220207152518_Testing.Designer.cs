@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TableTracker.Infrastructure;
 
 namespace TableTracker.Infrastructure.Migrations
 {
     [DbContext(typeof(TableDbContext))]
-    partial class TableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220207152518_Testing")]
+    partial class Testing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,14 +145,9 @@ namespace TableTracker.Infrastructure.Migrations
                     b.Property<long>("TableId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("WaiterId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TableId");
-
-                    b.HasIndex("WaiterId");
 
                     b.ToTable("Reservations");
                 });
@@ -258,20 +255,20 @@ namespace TableTracker.Infrastructure.Migrations
                     b.Property<long>("RestaurantId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("ServingWaiterId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("State")
                         .HasColumnType("int");
 
                     b.Property<double>("TableSize")
                         .HasColumnType("float");
 
-                    b.Property<long?>("WaiterId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RestaurantId");
 
-                    b.HasIndex("WaiterId");
+                    b.HasIndex("ServingWaiterId");
 
                     b.ToTable("Tables");
                 });
@@ -369,12 +366,17 @@ namespace TableTracker.Infrastructure.Migrations
                     b.Property<long>("RestaurantId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("VisitorId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("WaiterState")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RestaurantId");
+
+                    b.HasIndex("VisitorId");
 
                     b.ToTable("Waiters");
                 });
@@ -439,10 +441,6 @@ namespace TableTracker.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TableTracker.Domain.Entities.Waiter", null)
-                        .WithMany("Reservations")
-                        .HasForeignKey("WaiterId");
-
                     b.Navigation("Table");
                 });
 
@@ -486,8 +484,9 @@ namespace TableTracker.Infrastructure.Migrations
 
                     b.HasOne("TableTracker.Domain.Entities.Waiter", "Waiter")
                         .WithMany("Tables")
-                        .HasForeignKey("WaiterId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ServingWaiterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Restaurant");
 
@@ -540,7 +539,15 @@ namespace TableTracker.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TableTracker.Domain.Entities.Visitor", "Visitor")
+                        .WithMany()
+                        .HasForeignKey("VisitorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Restaurant");
+
+                    b.Navigation("Visitor");
                 });
 
             modelBuilder.Entity("TableTracker.Domain.Entities.Franchise", b =>
@@ -566,8 +573,6 @@ namespace TableTracker.Infrastructure.Migrations
 
             modelBuilder.Entity("TableTracker.Domain.Entities.Waiter", b =>
                 {
-                    b.Navigation("Reservations");
-
                     b.Navigation("Tables");
                 });
 #pragma warning restore 612, 618
