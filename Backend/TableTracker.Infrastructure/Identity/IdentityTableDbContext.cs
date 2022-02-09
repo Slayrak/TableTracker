@@ -18,5 +18,21 @@ namespace TableTracker.Infrastructure
            : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<TableTrackerIdentityUser>(b =>
+            {
+                b.Property(u => u.Id).HasDefaultValueSql("newsequentialid()");
+            });
+
+            builder.Entity<TableTrackerIdentityRole>(b =>
+            {
+                b.Property(u => u.Id).HasDefaultValueSql("newsequentialid()");
+            });
+        }
+
     }
 }

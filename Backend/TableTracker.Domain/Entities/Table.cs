@@ -11,7 +11,6 @@ namespace TableTracker.Domain.Entities
         public long Id { get; set; }
         public int Number { get; set; }
         public TableState State { get; set; }
-        public DateTime ReserveDate { get; set; }
         public int NumberOfSeats { get; set; }
         public int Floor { get; set; }
         public double CoordX { get; set; }

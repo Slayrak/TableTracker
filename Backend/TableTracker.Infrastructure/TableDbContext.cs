@@ -35,11 +35,13 @@ namespace TableTracker.Infrastructure
 
         public DbSet<Visitor> Visitors { get; set; }
 
-        public DbSet<VisitorFavourites> VisitorFavouritess { get; set; }
+        public DbSet<VisitorFavourites> VisitorFavourites { get; set; }
 
         public DbSet<VisitorHistory> VisitorHistorys { get; set; }
 
         public DbSet<Waiter> Waiters { get; set; }
+
+        public DbSet<Cuisines> Cuisines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
