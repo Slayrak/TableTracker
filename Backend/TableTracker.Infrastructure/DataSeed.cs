@@ -11,9 +11,11 @@ namespace TableTracker.Infrastructure
 {
     public class DataSeed
     {
-        public static void SeedData(TableDbContext context)
+        public static async Task SeedData(TableDbContext context)
         {
-            if(!context.Cuisines.Any())
+            #region Cuisine
+
+            if (!context.Cuisines.Any())
             {
                 var cuisines = new List<Cuisines>();
 
@@ -22,11 +24,15 @@ namespace TableTracker.Infrastructure
                     cuisines.Add(new Cuisines { Cuisine = Cuisine.International, Id = i + 1 });
                 }
 
-                context.AddRange(cuisines);
-                context.SaveChanges();
+                await context.AddRangeAsync(cuisines);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.Franchises.Any())
+            #endregion
+
+            #region Frachise
+
+            if (!context.Franchises.Any())
             {
                 var franchises = new List<Franchise>();
 
@@ -35,13 +41,19 @@ namespace TableTracker.Infrastructure
                     franchises.Add(new Franchise { Id = i + 1, Name = $"{i + 1} franchise" });
                 }
 
-                context.AddRange(franchises);
-                context.SaveChanges();
+                await context.AddRangeAsync(franchises);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.Restaurants.Any())
+            #endregion
+
+            #region Restaurant
+
+            if (!context.Restaurants.Any())
             {
                 var restaurants = new List<Restaurant>();
+
+                List<Cuisines> cuisines = context.Cuisines.ToList();
 
                 for (int i = 0; i < 10; i++)
                 {
@@ -56,16 +68,20 @@ namespace TableTracker.Infrastructure
                         PriceRange = "$$",
                         Rating = 5,
                         Type = RestaurantType.Cafe,
-                        
+                        Cuisines = cuisines,
                     });
                 }
 
-                context.AddRange(restaurants);
-                context.SaveChanges();
+                await context.AddRangeAsync(restaurants);
+                await context.SaveChangesAsync();
 
             }
 
-            if(!context.Managers.Any())
+            #endregion
+
+            #region Manager
+
+            if (!context.Managers.Any())
             {
                 var managers = new List<Manager>();
 
@@ -82,19 +98,22 @@ namespace TableTracker.Infrastructure
                     });
 
                     Restaurant rest = context.Restaurants.Find(i + 1);
-                    rest.Manager = managers[-1];
                     rest.ManagerId = managers[-1].Id;
 
                     context.Restaurants.Update(rest);
 
                 }
 
-                context.AddRange(managers);
-                context.SaveChanges();
+                await context.AddRangeAsync(managers);
+                await context.SaveChangesAsync();
 
             }
 
-            if(!context.Layouts.Any())
+            #endregion
+
+            #region Layout
+
+            if (!context.Layouts.Any())
             {
                 var layouts = new List<Layout>();
 
@@ -103,17 +122,20 @@ namespace TableTracker.Infrastructure
                     layouts.Add(new Layout { Id = i + 1, LayoutData = 0, RestaurantId = i + 1 });
 
                     Restaurant rest = context.Restaurants.Find(i + 1);
-                    rest.Layout = layouts[-1];
                     rest.LayoutId = layouts[-1].Id;
 
                     context.Restaurants.Update(rest);
                 }
 
-                context.AddRange(layouts);
-                context.SaveChanges();
+                await context.AddRangeAsync(layouts);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.Visitors.Any())
+            #endregion;
+
+            #region Visitor
+
+            if (!context.Visitors.Any())
             {
                 var visitors = new List<Visitor>();
 
@@ -129,11 +151,15 @@ namespace TableTracker.Infrastructure
                     });
                 }
 
-                context.AddRange(visitors);
-                context.SaveChanges();
+                await context.AddRangeAsync(visitors);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.Waiters.Any())
+            #endregion
+
+            #region Waiter
+
+            if (!context.Waiters.Any())
             {
                 var waiters = new List<Waiter>();
 
@@ -151,11 +177,15 @@ namespace TableTracker.Infrastructure
                     });
                 }
 
-                context.AddRange(waiters);
-                context.SaveChanges();
+                await context.AddRangeAsync(waiters);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.Tables.Any())
+            #endregion
+
+            #region Table
+
+            if (!context.Tables.Any())
             {
                 var tables = new List<Table>();
 
@@ -176,14 +206,19 @@ namespace TableTracker.Infrastructure
                     });
                 }
 
-                context.AddRange(tables);
-                context.SaveChanges();
-
+                await context.AddRangeAsync(tables);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.Reservations.Any())
+            #endregion
+
+            #region Reservation
+
+            if (!context.Reservations.Any())
             {
                 var reservations = new List<Reservation>();
+
+                List<Visitor> visitors = context.Visitors.ToList();
 
                 for (int i = 0; i < 10; i++)
                 {
@@ -192,14 +227,19 @@ namespace TableTracker.Infrastructure
                         Date = DateTime.Now,
                         Id = i + 1,
                         TableId = i + 1,
+                        Visitors = visitors,
                     });
                 }
 
-                context.AddRange(reservations);
-                context.SaveChanges();
+                await context.AddRangeAsync(reservations);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.RestaurantVisitors.Any())
+            #endregion
+
+            #region RestaurantVisitor
+
+            if (!context.RestaurantVisitors.Any())
             {
                 var restVisitor = new List<RestaurantVisitor>();
 
@@ -216,11 +256,15 @@ namespace TableTracker.Infrastructure
                     });
                 }
 
-                context.AddRange(restVisitor);
-                context.SaveChanges();
+                await context.AddRangeAsync(restVisitor);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.VisitorFavourites.Any())
+            #endregion
+
+            #region VisitorFavourites
+
+            if (!context.VisitorFavourites.Any())
             {
                 var favourites = new List<VisitorFavourites>();
 
@@ -229,11 +273,15 @@ namespace TableTracker.Infrastructure
                     favourites.Add(new VisitorFavourites { Id = i + 1, RestaurantId = i + 1, VisitorId = i + 1 });
                 }
 
-                context.AddRange(favourites);
-                context.SaveChanges();
+                await context.AddRangeAsync(favourites);
+                await context.SaveChangesAsync();
             }
 
-            if(!context.VisitorHistorys.Any())
+            #endregion
+
+            #region VisitorHistory
+
+            if (!context.VisitorHistorys.Any())
             {
                 var history = new List<VisitorHistory>();
 
@@ -248,9 +296,11 @@ namespace TableTracker.Infrastructure
                     });
                 }
 
-                context.AddRange(history);
-                context.SaveChanges();
+               await context.AddRangeAsync(history);
+               await context.SaveChangesAsync();
             }
+
+            #endregion
         }
     }
 }
