@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +8,94 @@ using System.Threading.Tasks;
 
 using TableTracker.Domain.Entities;
 using TableTracker.Domain.Enums;
+using TableTracker.Infrastructure.Identity;
 
 namespace TableTracker.Infrastructure
 {
     public class DataSeed
     {
-        public static async Task SeedData(TableDbContext context)
+        private readonly UserManager<TableTrackerIdentityUser> _userManager;
+        private readonly RoleManager<TableTrackerIdentityRole> _roleManager;
+
+        public DataSeed(UserManager<TableTrackerIdentityUser> userManger, RoleManager<TableTrackerIdentityRole> roleManager)
         {
+            _userManager = userManger;
+            _roleManager = roleManager;
+        }
+
+        public async Task SeedData(TableDbContext context, IdentityTableDbContext identityContext)
+        {
+            #region Roles
+            string[] roleNames = { "Admin", "Developer", "Manager", "Waiter", "Vistor", "User" };
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await _roleManager.RoleExistsAsync(roleName);
+
+                if (!roleExist)
+                {
+                    roleResult = await _roleManager.CreateAsync(new TableTrackerIdentityRole() { Name = roleName });
+                }
+            }
+            #endregion
+
+            #region IdentityUsers
+            if (!identityContext.TableTrackerIdentityUsers.Any())
+            {
+
+                for (int i = 0; i < 30; i++)
+                {
+                    TableTrackerIdentityUser userToAdd = new TableTrackerIdentityUser();
+
+                    if (i < 10)
+                    {
+                        userToAdd = new TableTrackerIdentityUser
+                        {
+                            UserName = $"Generic Boy {i + 1}",
+                            Email = $"exampleEmail{i + 1}@service.domain",
+                        };
+
+                        var result = await _userManager.CreateAsync(userToAdd, "Secret123$");
+
+                        if (result.Succeeded)
+                        {
+                            await _userManager.AddToRoleAsync(userToAdd, Enum.GetName(typeof(UserRole), UserRole.Manager));
+                        }
+                    }
+                    else if (i < 20)
+                    {
+                        userToAdd = new TableTrackerIdentityUser
+                        {
+                            UserName = $"Juan{i + 1}",
+                            Email = $"MehBruh{i + 1}@service.domain",
+                        };
+                        var result = await _userManager.CreateAsync(userToAdd, "Secret123$");
+
+                        if (result.Succeeded)
+                        {
+                            await _userManager.AddToRoleAsync(userToAdd, Enum.GetName(typeof(UserRole), UserRole.Visitor));
+                        }
+                    }
+                    else if(i < 30)
+                    {
+                        userToAdd = new TableTrackerIdentityUser
+                        {
+                            UserName = $"DefaultChad{i + 1}",
+                            Email = $"WaiterClone{i + 1}@idk.com",
+                        };
+                        var result = await _userManager.CreateAsync(userToAdd, "Secret123$");
+
+                        if (result.Succeeded)
+                        {
+                            await _userManager.AddToRoleAsync(userToAdd, Enum.GetName(typeof(UserRole), UserRole.Waiter));
+                        }
+                    }
+                }
+            }
+            #endregion
+
+
             #region Cuisine
 
             if (!context.Cuisines.Any())

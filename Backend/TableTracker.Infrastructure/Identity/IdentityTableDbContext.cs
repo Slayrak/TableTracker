@@ -19,6 +19,8 @@ namespace TableTracker.Infrastructure
         {
         }
 
+        public DbSet<TableTrackerIdentityUser> TableTrackerIdentityUsers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
