@@ -12,6 +12,8 @@ namespace TableTracker.Domain.Entities
         public DateTime Date { get; set; }
 
         public ICollection<Visitor> Visitors { get; set; }
+
+        public Table Table { get; set; }
         public long TableId { get; set; }
         public Table Table { get; set; }
     }

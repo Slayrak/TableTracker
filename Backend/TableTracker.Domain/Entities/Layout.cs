@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TableTracker.Domain.Entities
+﻿namespace TableTracker.Domain.Entities
 {
     public class Layout : IEntity<long>
     {
