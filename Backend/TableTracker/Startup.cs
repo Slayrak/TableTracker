@@ -34,6 +34,7 @@ namespace TableTracker
             services.AddDbContext<IdentityTableDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityTableTracker")));
 
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
