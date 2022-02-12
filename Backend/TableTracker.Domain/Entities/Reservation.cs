@@ -15,6 +15,5 @@ namespace TableTracker.Domain.Entities
 
         public Table Table { get; set; }
         public long TableId { get; set; }
-        public Table Table { get; set; }
     }
 }
