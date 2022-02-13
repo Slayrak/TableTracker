@@ -37,7 +37,7 @@ namespace TableTracker.Infrastructure.Repositories
                 .Where(x => waiter == null || x.Waiter.Id == waiter.Id)
                 .Where(x => !tableSize.HasValue || x.TableSize - tableSize < 0.00001)
                 .Where(x => !floor.HasValue || x.Floor == floor)
-                .Where(x => !reserveDate.HasValue || x.ReserveDate == reserveDate)
+                //.Where(x => !reserveDate.HasValue || x.ReserveDate == reserveDate) треба видалити думаю
                 .Where(x => !state.HasValue || x.State == state)
                 .ToListAsync();
         }

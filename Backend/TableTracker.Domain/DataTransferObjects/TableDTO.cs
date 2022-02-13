@@ -16,8 +16,6 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public TableState State { get; set; }
 
-        public DateTime ReserveDate { get; set; }
-
         public int NumberOfSeats { get; set; }
 
         public int Floor { get; set; }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TableTracker.Domain.DataTransferObjects;
+using TableTracker.Domain.Entities;
 
 namespace TableTracker.Application.MapperProfiles
 {
@@ -16,7 +16,15 @@ namespace TableTracker.Application.MapperProfiles
     {
         public TableProfile()
         {
-            //._. не получається
+            CreateMap<Table, TableDTO>()
+                .ForMember(dest => dest.Reservations, opt => opt.MapFrom(src => src.Reservations))
+                .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))
+                .ForMember(dest => dest.Waiter, opt => opt.MapFrom(src => src.Waiter));
+
+            CreateMap<TableDTO, Table>()
+                .ForMember(dest => dest.Waiter, opt => opt.MapFrom(src => src.Waiter))
+                .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))
+                .ForMember(dest => dest.Reservations, opt => opt.MapFrom(src => src.Reservations));
         }
     }
 }

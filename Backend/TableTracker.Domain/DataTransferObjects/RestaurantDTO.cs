@@ -2,7 +2,6 @@
 
 using TableTracker.Domain.Enums;
 
-//TODO change Cuisines Type
 namespace TableTracker.Domain.DataTransferObjects
 {
     public class RestaurantDTO
@@ -27,7 +26,7 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public ICollection<WaiterDTO> Waiters { get; set; }
 
-        public ICollection<CuisinesDTO> Cuisines { get; set; } //create CuisineDTO?
+        public ICollection<CuisinesDTO> Cuisines { get; set; } 
 
         public FranchiseDTO Franchise { get; set; }
 

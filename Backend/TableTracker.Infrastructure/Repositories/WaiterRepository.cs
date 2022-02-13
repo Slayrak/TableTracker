@@ -23,7 +23,7 @@ namespace TableTracker.Infrastructure.Repositories
                 .Set<Waiter>()
                 .Include(x => x.Restaurant)
                 .Include(x => x.Visitor)
-                .Where(x => x.FullName.Contains(filter) || x.Email.Contains(filter))
+                .Where(x => x.FullName.Contains(filter) || x.Email.Contains(filter)) //TODO: переписати
                 .ToListAsync();
         }
 
@@ -32,7 +32,7 @@ namespace TableTracker.Infrastructure.Repositories
             return await _context
                 .Set<Waiter>()
                 .Include(x => x.Restaurant)
-                .Include(x => x.Visitor)
+                .Include(x => x.Visitor) //TODO: переписати
                 .Where(x => x.RestaurantId == restaurant.Id)
                 .ToListAsync();
         }
