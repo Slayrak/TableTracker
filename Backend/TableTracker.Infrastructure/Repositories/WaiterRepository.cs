@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,8 +21,8 @@ namespace TableTracker.Infrastructure.Repositories
             return await _context
                 .Set<Waiter>()
                 .Include(x => x.Restaurant)
-                .Include(x => x.Visitor)
-                .Where(x => x.FullName.Contains(filter) || x.Email.Contains(filter)) //TODO: rewrite
+                .Include(x => x.Reservations)
+                .Where(x => x.FullName.Contains(filter) || x.Email.Contains(filter))
                 .ToListAsync();
         }
 
@@ -32,7 +31,7 @@ namespace TableTracker.Infrastructure.Repositories
             return await _context
                 .Set<Waiter>()
                 .Include(x => x.Restaurant)
-                .Include(x => x.Visitor) //TODO: rewrite
+                .Include(x => x.Reservations)
                 .Where(x => x.RestaurantId == restaurant.Id)
                 .ToListAsync();
         }
