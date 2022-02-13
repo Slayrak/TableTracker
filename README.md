@@ -1,7 +1,5 @@
 # TableTracker
 
-#Patterns: Repository, Unit of Work
-
 private fields
 public fields
 
@@ -15,3 +13,5 @@ public methods
 static methods
 
 indexers
+
+Trello: https://trello.com/b/L5RY9JdA/tabletracker
