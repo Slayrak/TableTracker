@@ -25,4 +25,15 @@
     <ProjectReference Include="..\TableTracker.Domain\TableTracker.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Cuisines\Commands\" />
+    <Folder Include="Franchises\Commands\" />
+    <Folder Include="Managers\Commands\" />
+    <Folder Include="Reservations\Commands\" />
+    <Folder Include="Tables\Commands\" />
+    <Folder Include="Users\Commands\" />
+    <Folder Include="Visitors\Commands\" />
+    <Folder Include="Waiters\Commands\" />
+  </ItemGroup>
+
 </Project>

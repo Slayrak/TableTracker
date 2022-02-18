@@ -13,14 +13,14 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.Queries.Restaurants.GetAllRestaurants
+namespace TableTracker.Application.Reservations.Queries.GetAllReservations
 {
-    public class GetAllRestaurantsQueryHandler : IRequestHandler<GetAllRestaurantsQuery, RestaurantDTO[]>
+    public class GetAllRevervationsQueryHandler : IRequestHandler<GetAllReservationsQuery, ReservationDTO[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAllRestaurantsQueryHandler(
+        public GetAllRevervationsQueryHandler(
             IUnitOfWork<Guid> unitOfWork,
             IMapper mapper
             )
@@ -29,14 +29,14 @@ namespace TableTracker.Application.Queries.Restaurants.GetAllRestaurants
             _mapper = mapper;
         }
 
-        public async Task<RestaurantDTO[]> Handle(GetAllRestaurantsQuery request, CancellationToken cancellationToken)
+        public async Task<ReservationDTO[]> Handle(GetAllReservationsQuery request, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork
-                .GetRepository<IRestaurantRepository>()
+                .GetRepository<IReservationRepository>()
                 .GetAll();
 
             return result
-                .Select(x => _mapper.Map<RestaurantDTO>(x))
+                .Select(x => _mapper.Map<ReservationDTO>(x))
                 .ToArray();
         }
     }

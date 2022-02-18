@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.Queries.Restaurants.GetAllRestaurants
+namespace TableTracker.Application.Waiters.Queries.GetAllWaiters
 {
-    public class GetAllRestaurantsQuery : IRequest<RestaurantDTO[]>
+    public class GetAllWaitersQuery : IRequest<WaiterDTO[]>
     {
     }
 }
