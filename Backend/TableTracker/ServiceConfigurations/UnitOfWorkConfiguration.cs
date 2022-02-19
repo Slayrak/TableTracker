@@ -13,10 +13,10 @@ namespace TableTracker.ServiceConfigurations
     {
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
         {
-            return services.AddScoped<IUnitOfWork<Guid>, UnitOfWork<Guid>>(serviceProvider =>
+            return services.AddScoped<IUnitOfWork<long>, UnitOfWork<long>>(serviceProvider =>
             {
                 var context = serviceProvider.GetRequiredService<TableDbContext>();
-                var unitOfWork = new UnitOfWork<Guid>(context);
+                var unitOfWork = new UnitOfWork<long>(context);
                 unitOfWork.RegisterRepositories(typeof(IRepository<,>).Assembly, typeof(Repository<,>).Assembly);
                 return unitOfWork;
             });

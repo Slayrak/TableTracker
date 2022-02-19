@@ -31,6 +31,7 @@ namespace TableTracker
             services.AddMapper();
             services.AddDbContexts(Configuration);
             services.AddMediator();
+            services.AddUnitOfWork();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

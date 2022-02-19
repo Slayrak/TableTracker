@@ -19,5 +19,7 @@ namespace TableTracker.Domain.Interfaces.Repositories
         void Update(TEntity entity);
 
         void Remove(TEntity entity);
+
+        Task<bool> Contains(TEntity entity);
     }
 }

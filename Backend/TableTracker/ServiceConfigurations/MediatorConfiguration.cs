@@ -1,6 +1,10 @@
-﻿using MediatR;
+﻿using System.Reflection;
+
+using MediatR;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using TableTracker.Application;
 
 namespace TableTracker.ServiceConfigurations
 {
@@ -8,7 +12,7 @@ namespace TableTracker.ServiceConfigurations
     {
         public static IServiceCollection AddMediator(this IServiceCollection services)
         {
-            return services.AddMediatR();
+            return services.AddMediatR(typeof(CommandResponse<object>).Assembly);
         }
     }
 }
