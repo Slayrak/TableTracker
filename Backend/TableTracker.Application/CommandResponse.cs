@@ -1,6 +1,6 @@
 ﻿using TableTracker.Domain.Enums;
 
-namespace Tabloid.Application.Commands
+namespace TableTracker.Application
 {
     public class CommandResponse<T>  where T : class
     {
