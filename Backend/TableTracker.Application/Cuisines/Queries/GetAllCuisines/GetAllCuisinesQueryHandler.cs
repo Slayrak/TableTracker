@@ -17,11 +17,11 @@ namespace TableTracker.Application.Cuisines.Queries.GetAllCuisines
 {
     public class GetAllCuisinesQueryHandler : IRequestHandler<GetAllCuisinesQuery, CuisinesDTO[]>
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
+        private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
         public GetAllCuisinesQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
+            IUnitOfWork<long> unitOfWork,
             IMapper mapper
             )
         {
@@ -33,7 +33,7 @@ namespace TableTracker.Application.Cuisines.Queries.GetAllCuisines
         public async Task<CuisinesDTO[]> Handle(GetAllCuisinesQuery request, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork
-               .GetRepository(ICuisineRepository)
+               .GetRepository<ICuisineRepository>()
                .GetAll();
 
             return result

@@ -1,12 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
+using System;
+
 using TableTracker.Infrastructure;
+using TableTracker.Infrastructure.Identity;
 using TableTracker.ServiceConfigurations;
 
 namespace TableTracker
@@ -30,7 +35,18 @@ namespace TableTracker
 
             services.AddMapper();
             services.AddDbContexts(Configuration);
+            services.AddUnitOfWork();
             services.AddMediator();
+
+            services.AddIdentity<TableTrackerIdentityUser, TableTrackerIdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<IdentityTableDbContext>()
+                .AddDefaultTokenProviders()
+                .AddUserStore<UserStore<TableTrackerIdentityUser, TableTrackerIdentityRole, IdentityTableDbContext, Guid>>()
+                .AddRoleStore<RoleStore<TableTrackerIdentityRole, IdentityTableDbContext, Guid>>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -15,13 +15,13 @@ using TableTracker.Domain.Interfaces.Repositories;
 
 namespace TableTracker.Application.Visitors.Queries.GetAllVisitors
 {
-    public class GetAllVisitorsQueryHandler : IRequestHandler<GetAllVisitorsQuery, UserDTO[]>
+    public class GetAllVisitorsQueryHandler : IRequestHandler<GetAllVisitorsQuery, VisitorDTO[]>
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
+        private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
         public GetAllVisitorsQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
+            IUnitOfWork<long> unitOfWork,
             IMapper mapper
             )
         {

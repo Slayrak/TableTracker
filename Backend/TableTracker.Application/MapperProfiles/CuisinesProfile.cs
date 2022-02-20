@@ -15,11 +15,11 @@ namespace TableTracker.Application.MapperProfiles
     {
         public CuisinesProfile()
         {
-            CreateMap<Cuisines, CuisinesDTO>()
+            CreateMap<Domain.Entities.Cuisines, CuisinesDTO>()
                 .ForMember(dest => dest.Cuisine, opt => opt.MapFrom(src => src.Cuisine))
                 .ForMember(dest => dest.Restaurants, opt => opt.MapFrom(src => src.Restaurants));
 
-            CreateMap<CuisinesDTO, Cuisines>()
+            CreateMap<CuisinesDTO, Domain.Entities.Cuisines>()
                 .ForMember(dest => dest.Restaurants, opt => opt.MapFrom(src => src.Restaurants))
                 .ForMember(dest => dest.Cuisine, opt => opt.MapFrom(src => src.Cuisine));
         }

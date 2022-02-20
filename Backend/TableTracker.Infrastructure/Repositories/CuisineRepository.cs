@@ -19,7 +19,7 @@ namespace TableTracker.Infrastructure.Repositories
         {
         }
 
-        public async Task<Cuisines> GetCuisineByName(Cuisine cuisine)
+        public async Task<Cuisines> GetCuisineByName(CuisineName cuisine)
         {
             return await _context
                 .Set<Cuisines>()

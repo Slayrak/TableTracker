@@ -17,11 +17,11 @@ namespace TableTracker.Application.Managers.Queries.GetAllManagers
 {
     public class GetAllManagersQueryHandler : IRequestHandler<GetAllManagersQuery, ManagerDTO[]>
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
+        private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
         public GetAllManagersQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
+            IUnitOfWork<long> unitOfWork,
             IMapper mapper
             )
         {

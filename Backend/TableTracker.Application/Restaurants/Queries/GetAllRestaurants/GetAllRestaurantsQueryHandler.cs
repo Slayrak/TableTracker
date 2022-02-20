@@ -17,11 +17,11 @@ namespace TableTracker.Application.Restaurants.Queries.GetAllRestaurants
 {
     public class GetAllRestaurantsQueryHandler : IRequestHandler<GetAllRestaurantsQuery, RestaurantDTO[]>
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
+        private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
         public GetAllRestaurantsQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
+            IUnitOfWork<long> unitOfWork,
             IMapper mapper
             )
         {

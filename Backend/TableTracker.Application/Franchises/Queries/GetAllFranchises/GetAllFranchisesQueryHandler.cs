@@ -17,11 +17,11 @@ namespace TableTracker.Application.Franchises.Queries.GetAllFranchises
 {
     public class GetAllFranchisesQueryHandler : IRequestHandler<GetAllFranchisesQuery, FranchiseDTO[]>
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
+        private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
         public GetAllFranchisesQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
+            IUnitOfWork<long> unitOfWork,
             IMapper mapper
             )
         {

@@ -17,11 +17,11 @@ namespace TableTracker.Application.Reservations.Queries.GetAllReservations
 {
     public class GetAllRevervationsQueryHandler : IRequestHandler<GetAllReservationsQuery, ReservationDTO[]>
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
+        private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
         public GetAllRevervationsQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
+            IUnitOfWork<long> unitOfWork,
             IMapper mapper
             )
         {

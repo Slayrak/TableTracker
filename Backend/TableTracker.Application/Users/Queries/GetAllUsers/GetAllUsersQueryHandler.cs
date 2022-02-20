@@ -17,11 +17,11 @@ namespace TableTracker.Application.Users.Queries.GetAllUsers
 {
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, UserDTO[]>
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
+        private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
         public GetAllUsersQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
+            IUnitOfWork<long> unitOfWork,
             IMapper mapper
             )
         {

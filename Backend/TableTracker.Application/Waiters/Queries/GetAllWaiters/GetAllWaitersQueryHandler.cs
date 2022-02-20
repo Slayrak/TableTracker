@@ -17,11 +17,11 @@ namespace TableTracker.Application.Waiters.Queries.GetAllWaiters
 {
     public class GetAllWaitersQueryHandler : IRequestHandler<GetAllWaitersQuery, WaiterDTO[]>
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
+        private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
         public GetAllWaitersQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
+            IUnitOfWork<long> unitOfWork,
             IMapper mapper
             )
         {
