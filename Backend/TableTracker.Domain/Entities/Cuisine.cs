@@ -4,11 +4,11 @@ using TableTracker.Domain.Enums;
 
 namespace TableTracker.Domain.Entities
 {
-    public class Cuisines : IEntity<long>
+    public class Cuisine : IEntity<long>
     {
         public long Id { get; set; }
 
-        public CuisineName Cuisine { get; set; }
+        public CuisineName CuisineEnum { get; set; }
 
         public ICollection<Restaurant> Restaurants { get; set; }
     }

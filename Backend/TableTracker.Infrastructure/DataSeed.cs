@@ -31,7 +31,7 @@ namespace TableTracker.Infrastructure
 
             var restaurants = new List<Restaurant>();
             var tableTrackerIdentityUsers = new List<TableTrackerIdentityUser>();
-            var cuisines = new List<Cuisines>();
+            var cuisines = new List<Cuisine>();
             var franchises = new List<Franchise>();
             var managers = new List<Manager>();
             var layouts = new List<Layout>();
@@ -124,7 +124,7 @@ namespace TableTracker.Infrastructure
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    cuisines.Add(new Cuisines { Cuisine = CuisineName.International });
+                    cuisines.Add(new Cuisine { CuisineEnum = CuisineName.International });
                 }
 
                 await context.AddRangeAsync(cuisines);
