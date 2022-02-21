@@ -19,7 +19,7 @@ namespace TableTracker.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CuisinesRestaurant", b =>
+            modelBuilder.Entity("CuisineRestaurant", b =>
                 {
                     b.Property<long>("CuisinesId")
                         .HasColumnType("bigint");
@@ -31,7 +31,7 @@ namespace TableTracker.Infrastructure.Migrations
 
                     b.HasIndex("RestaurantsId");
 
-                    b.ToTable("CuisinesRestaurant");
+                    b.ToTable("CuisineRestaurant");
                 });
 
             modelBuilder.Entity("ReservationVisitor", b =>
@@ -49,14 +49,14 @@ namespace TableTracker.Infrastructure.Migrations
                     b.ToTable("ReservationVisitor");
                 });
 
-            modelBuilder.Entity("TableTracker.Domain.Entities.Cuisines", b =>
+            modelBuilder.Entity("TableTracker.Domain.Entities.Cuisine", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Cuisine")
+                    b.Property<int>("CuisineEnum")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -376,9 +376,9 @@ namespace TableTracker.Infrastructure.Migrations
                     b.ToTable("Waiters");
                 });
 
-            modelBuilder.Entity("CuisinesRestaurant", b =>
+            modelBuilder.Entity("CuisineRestaurant", b =>
                 {
-                    b.HasOne("TableTracker.Domain.Entities.Cuisines", null)
+                    b.HasOne("TableTracker.Domain.Entities.Cuisine", null)
                         .WithMany()
                         .HasForeignKey("CuisinesId")
                         .OnDelete(DeleteBehavior.Cascade)

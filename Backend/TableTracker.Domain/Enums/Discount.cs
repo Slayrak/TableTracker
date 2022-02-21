@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TableTracker.Domain.Enums
+﻿namespace TableTracker.Domain.Enums
 {
     public enum Discount
     {

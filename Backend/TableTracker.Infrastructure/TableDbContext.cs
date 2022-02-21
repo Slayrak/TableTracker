@@ -41,7 +41,7 @@ namespace TableTracker.Infrastructure
 
         public DbSet<Waiter> Waiters { get; set; }
 
-        public DbSet<Cuisines> Cuisines { get; set; }
+        public DbSet<Cuisine> Cuisines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

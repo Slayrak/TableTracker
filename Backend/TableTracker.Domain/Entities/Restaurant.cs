@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 using TableTracker.Domain.Enums;
 
@@ -19,7 +17,7 @@ namespace TableTracker.Domain.Entities
 
         public ICollection<Table> Tables { get; set; }
         public ICollection<Waiter> Waiters { get; set; }
-        public ICollection<Cuisines> Cuisines { get; set; }
+        public ICollection<Cuisine> Cuisines { get; set; }
 
         public long FranchiseId { get; set; }
         public Franchise Franchise { get; set; }
