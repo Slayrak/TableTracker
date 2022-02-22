@@ -5,8 +5,8 @@ using TableTracker.Domain.Enums;
 
 namespace TableTracker.Domain.Interfaces.Repositories
 {
-    public interface ICuisinesRepository : IRepository<Cuisines, long>
+    public interface ICuisinesRepository : IRepository<Cuisine, long>
     {
-        Task<Cuisines> FindCuisineByName(Cuisine cuisine);
+        Task<Cuisine> FindCuisineByName(CuisineName cuisine);
     }
 }

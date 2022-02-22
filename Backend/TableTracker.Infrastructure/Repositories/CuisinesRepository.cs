@@ -8,18 +8,18 @@ using TableTracker.Domain.Interfaces.Repositories;
 
 namespace TableTracker.Infrastructure.Repositories
 {
-    public class CuisinesRepository : Repository<Cuisines, long>, ICuisinesRepository
+    public class CuisinesRepository : Repository<Cuisine, long>, ICuisinesRepository
     {
         public CuisinesRepository(TableDbContext context)
             : base(context)
         {
         }
 
-        public async Task<Cuisines> FindCuisineByName(Cuisine cuisine)
+        public async Task<Cuisine> FindCuisineByName(CuisineName cuisine)
         {
             return await _context
-                .Set<Cuisines>()
-                .FirstOrDefaultAsync(x => x.Cuisine == cuisine);
+                .Set<Cuisine>()
+                .FirstOrDefaultAsync(x => x.CuisineEnum == cuisine);
         }
     }
 }
