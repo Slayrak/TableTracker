@@ -8,7 +8,7 @@ namespace TableTracker.ServiceConfigurations
 {
     public static class DbContextConfiguration
     {
-        public static IServiceCollection AddDbContexts(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDataAccess(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<TableDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("TableTracker")));

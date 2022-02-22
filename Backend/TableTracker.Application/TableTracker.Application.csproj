@@ -32,6 +32,7 @@
     <Folder Include="Reservations\Commands\" />
     <Folder Include="Tables\Commands\" />
     <Folder Include="Users\Commands\" />
+    <Folder Include="Validators\Restaurants\Queries\" />
     <Folder Include="Visitors\Commands\" />
     <Folder Include="Waiters\Commands\" />
   </ItemGroup>
