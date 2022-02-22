@@ -33,9 +33,10 @@ namespace TableTracker
             });
 
             services.AddMapper();
-            services.AddDbContexts(Configuration);
+            services.AddDataAccess(Configuration);
             services.AddUnitOfWork();
             services.AddMediator();
+            services.AddValidaton();
 
             services.AddIdentity<TableTrackerIdentityUser, TableTrackerIdentityRole>(options =>
             {
