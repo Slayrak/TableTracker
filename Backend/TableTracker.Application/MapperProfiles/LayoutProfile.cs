@@ -20,7 +20,8 @@ namespace TableTracker.Application.MapperProfiles
 
 
             CreateMap<LayoutDTO, Layout>()
-                .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant));
+                .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))
+                .ForMember(dest => dest.RestaurantId, opt => opt.MapFrom(src => src.Restaurant.Id));
         }
     }
 }

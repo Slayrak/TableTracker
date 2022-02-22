@@ -19,7 +19,7 @@ namespace TableTracker.Infrastructure.Repositories
 
         public async Task<ICollection<Restaurant>> GetAllRestaurantsWithFiltering(
             float? rating = null,
-            IEnumerable<Cuisines> cuisines = null,
+            IEnumerable<Cuisine> cuisines = null,
             string price = null,
             RestaurantType? type = null,
             Discount? discount = null,
@@ -31,7 +31,7 @@ namespace TableTracker.Infrastructure.Repositories
                 .Include(x => x.Layout)
                 .Include(x => x.Franchise)
                 .Where(x => !rating.HasValue || x.Rating == rating)
-                .Where(x => cuisines == null || x.Cuisines.All(x => cuisines.Any(y => y.Cuisine == x.Cuisine)))
+                .Where(x => cuisines == null || x.Cuisines.All(x => cuisines.Any(y => y.CuisineEnum == x.CuisineEnum)))
                 .Where(x => price == null || x.PriceRange == price)
                 .Where(x => !type.HasValue || x.Type == type)
                 .Where(x => !discount.HasValue || x.Discount == discount)
