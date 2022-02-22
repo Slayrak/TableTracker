@@ -17,31 +17,38 @@ namespace TableTracker.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<TEntity> FindById(TId id)
+        public virtual async Task<TEntity> FindById(TId id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<ICollection<TEntity>> GetAll()
+        public virtual async Task<ICollection<TEntity>> GetAll()
         {
             return await _context
                 .Set<TEntity>()
                 .ToListAsync();
         }
 
-        public async Task Insert(TEntity entity)
+        public virtual async Task Insert(TEntity entity)
         {
             await _context.Set<TEntity>().AddAsync(entity);
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
         }
 
-        public void Remove(TEntity entity)
+        public virtual void Remove(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
+        }
+
+        public virtual async Task<bool> Contains(TEntity entity)
+        {
+            return await _context
+                .Set<TEntity>()
+                .ContainsAsync(entity);
         }
     }
 }

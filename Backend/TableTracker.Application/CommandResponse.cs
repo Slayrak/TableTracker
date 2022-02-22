@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using TableTracker.Domain.Enums;
+﻿using TableTracker.Domain.Enums;
 
 namespace TableTracker.Application
 {
-    public class CommandResponse<T> where T : class
+    public class CommandResponse<T>  where T : class
     {
         public CommandResponse(
             T obj = null,
