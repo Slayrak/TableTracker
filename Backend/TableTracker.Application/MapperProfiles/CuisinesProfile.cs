@@ -15,13 +15,13 @@ namespace TableTracker.Application.MapperProfiles
     {
         public CuisinesProfile()
         {
-            CreateMap<Cuisines, CuisinesDTO>()
-                .ForMember(dest => dest.Cuisine, opt => opt.MapFrom(src => src.Cuisine))
+            CreateMap<Domain.Entities.Cuisine, CuisinesDTO>()
+                .ForMember(dest => dest.Cuisine, opt => opt.MapFrom(src => src.CuisineEnum))
                 .ForMember(dest => dest.Restaurants, opt => opt.MapFrom(src => src.Restaurants));
 
-            CreateMap<CuisinesDTO, Cuisines>()
+            CreateMap<CuisinesDTO, Domain.Entities.Cuisine>()
                 .ForMember(dest => dest.Restaurants, opt => opt.MapFrom(src => src.Restaurants))
-                .ForMember(dest => dest.Cuisine, opt => opt.MapFrom(src => src.Cuisine));
+                .ForMember(dest => dest.CuisineEnum, opt => opt.MapFrom(src => src.Cuisine));
         }
     }
 }

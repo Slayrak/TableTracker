@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,10 +17,9 @@ namespace TableTracker.Infrastructure.Repositories
         {
         }
 
-        //TODO change cuisines type to IEnumerable<Cuisine>
         public async Task<ICollection<Restaurant>> GetAllRestaurantsWithFiltering(
             float? rating = null,
-            IEnumerable<string> cuisines = null,
+            IEnumerable<Cuisine> cuisines = null,
             string price = null,
             RestaurantType? type = null,
             Discount? discount = null,
@@ -33,7 +31,7 @@ namespace TableTracker.Infrastructure.Repositories
                 .Include(x => x.Layout)
                 .Include(x => x.Franchise)
                 .Where(x => !rating.HasValue || x.Rating == rating)
-                .Where(x => cuisines == null || x.Cuisines == cuisines)
+                .Where(x => cuisines == null || x.Cuisines.All(x => cuisines.Any(y => y.CuisineEnum == x.CuisineEnum)))
                 .Where(x => price == null || x.PriceRange == price)
                 .Where(x => !type.HasValue || x.Type == type)
                 .Where(x => !discount.HasValue || x.Discount == discount)

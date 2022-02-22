@@ -10,7 +10,7 @@ namespace TableTracker.Domain.Interfaces.Repositories
     {
         Task<ICollection<Restaurant>> GetAllRestaurantsWithFiltering(
             float? rating = null,
-            IEnumerable<string> cuisines = null,
+            IEnumerable<Cuisine> cuisines = null,
             string price = null,
             RestaurantType? type = null,
             Discount? discount = null,

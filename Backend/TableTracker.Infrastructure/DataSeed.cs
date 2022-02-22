@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using TableTracker.Domain.Entities;
@@ -25,9 +24,24 @@ namespace TableTracker.Infrastructure
 
         public async Task SeedData(TableDbContext context, IdentityTableDbContext identityContext)
         {
+
             #region Roles
-            string[] roleNames = { "Admin", "Developer", "Manager", "Waiter", "Vistor", "User" };
+            string[] roleNames = { "Admin", "Developer", "Manager", "Waiter", "Visitor", "User" };
             IdentityResult roleResult;
+
+            var restaurants = new List<Restaurant>();
+            var tableTrackerIdentityUsers = new List<TableTrackerIdentityUser>();
+            var cuisines = new List<Cuisine>();
+            var franchises = new List<Franchise>();
+            var managers = new List<Manager>();
+            var layouts = new List<Layout>();
+            var visitors = new List<Visitor>();
+            var waiters = new List<Waiter>();
+            var tables = new List<Table>();
+            var reservations = new List<Reservation>();
+            var restVisitor = new List<RestaurantVisitor>();
+            var favourites = new List<VisitorFavourites>();
+            var history = new List<VisitorHistory>();
 
             foreach (var roleName in roleNames)
             {
@@ -56,6 +70,8 @@ namespace TableTracker.Infrastructure
                             Email = $"exampleEmail{i + 1}@service.domain",
                         };
 
+                        tableTrackerIdentityUsers.Add(userToAdd);
+
                         var result = await _userManager.CreateAsync(userToAdd, "Secret123$");
 
                         if (result.Succeeded)
@@ -72,6 +88,9 @@ namespace TableTracker.Infrastructure
                         };
                         var result = await _userManager.CreateAsync(userToAdd, "Secret123$");
 
+                        tableTrackerIdentityUsers.Add(userToAdd);
+
+
                         if (result.Succeeded)
                         {
                             await _userManager.AddToRoleAsync(userToAdd, Enum.GetName(typeof(UserRole), UserRole.Visitor));
@@ -85,6 +104,9 @@ namespace TableTracker.Infrastructure
                             Email = $"WaiterClone{i + 1}@idk.com",
                         };
                         var result = await _userManager.CreateAsync(userToAdd, "Secret123$");
+
+                        tableTrackerIdentityUsers.Add(userToAdd);
+
 
                         if (result.Succeeded)
                         {
@@ -100,15 +122,12 @@ namespace TableTracker.Infrastructure
 
             if (!context.Cuisines.Any())
             {
-                var cuisines = new List<Cuisines>();
-
                 for (int i = 0; i < 10; i++)
                 {
-                    cuisines.Add(new Cuisines { Cuisine = Cuisine.International, Id = i + 1 });
+                    cuisines.Add(new Cuisine { CuisineEnum = CuisineName.International });
                 }
 
                 await context.AddRangeAsync(cuisines);
-                await context.SaveChangesAsync();
             }
 
             #endregion
@@ -117,15 +136,12 @@ namespace TableTracker.Infrastructure
 
             if (!context.Franchises.Any())
             {
-                var franchises = new List<Franchise>();
-
                 for (int i = 0; i < 10; i++)
                 {
-                    franchises.Add(new Franchise { Id = i + 1, Name = $"{i + 1} franchise" });
+                    franchises.Add(new Franchise { Name = $"{i + 1} franchise" });
                 }
 
                 await context.AddRangeAsync(franchises);
-                await context.SaveChangesAsync();
             }
 
             #endregion
@@ -134,9 +150,6 @@ namespace TableTracker.Infrastructure
 
             if (!context.Restaurants.Any())
             {
-                var restaurants = new List<Restaurant>();
-
-                List<Cuisines> cuisines = context.Cuisines.ToList();
 
                 for (int i = 0; i < 10; i++)
                 {
@@ -145,8 +158,7 @@ namespace TableTracker.Infrastructure
                         CoordX = i + 1,
                         CoordY = i,
                         Discount = Discount.NoDiscount,
-                        FranchiseId = i + 1,
-                        Id = i + 1,
+                        Franchise = franchises[i],
                         NumberOfTables = 10 + i,
                         PriceRange = "$$",
                         Rating = 5,
@@ -156,7 +168,6 @@ namespace TableTracker.Infrastructure
                 }
 
                 await context.AddRangeAsync(restaurants);
-                await context.SaveChangesAsync();
 
             }
 
@@ -166,29 +177,26 @@ namespace TableTracker.Infrastructure
 
             if (!context.Managers.Any())
             {
-                var managers = new List<Manager>();
+
+                //TODO: Define Rest find 
 
                 for (int i = 0; i < 10; i++)
                 {
                     managers.Add(new Manager
                     {
-                        RestaurantId = i + 1,
+                        Restaurant = restaurants[i],
                         ManagerState = ManagerState.Unocupied,
                         Avatar = "RandomStr",
                         Email = $"exampleEmail{i+1}@service.domain",
                         FullName = $"Generic Boy {i + 1}",
-                        Id = i + 1,
                     });
 
-                    Restaurant rest = context.Restaurants.Find(i + 1);
-                    rest.ManagerId = managers[-1].Id;
-
-                    context.Restaurants.Update(rest);
+                    //Restaurant rest = context.Restaurants.Find(restaurants[i].Id);
+                    restaurants[i].Manager = managers[^1];
 
                 }
 
                 await context.AddRangeAsync(managers);
-                await context.SaveChangesAsync();
 
             }
 
@@ -198,20 +206,19 @@ namespace TableTracker.Infrastructure
 
             if (!context.Layouts.Any())
             {
-                var layouts = new List<Layout>();
+                //TODO: Define Rest find
 
                 for (int i = 0; i < 10; i++)
                 {
-                    layouts.Add(new Layout { Id = i + 1, LayoutData = 0, RestaurantId = i + 1 });
+                    layouts.Add(new Layout { LayoutData = 0, Restaurant = restaurants[i] });
 
-                    Restaurant rest = context.Restaurants.Find(i + 1);
-                    rest.LayoutId = layouts[-1].Id;
+                    //Restaurant rest = context.Restaurants.Find((long) i + 1);
+                    restaurants[i].Layout = layouts[^1];
 
-                    context.Restaurants.Update(rest);
+                    //context.Restaurants.Update(restaurants[i]);
                 }
 
                 await context.AddRangeAsync(layouts);
-                await context.SaveChangesAsync();
             }
 
             #endregion;
@@ -220,7 +227,7 @@ namespace TableTracker.Infrastructure
 
             if (!context.Visitors.Any())
             {
-                var visitors = new List<Visitor>();
+                //TODO link IdentityUsers
 
                 for (int i = 0; i < 10; i++)
                 {
@@ -230,12 +237,10 @@ namespace TableTracker.Infrastructure
                         Email = $"MehBruh{i + 1}@service.domain",
                         FullName = $"Juan{i + 1}",
                         GeneralTrustFactor = 2,
-                        Id = i + 1,
                     });
                 }
 
                 await context.AddRangeAsync(visitors);
-                await context.SaveChangesAsync();
             }
 
             #endregion
@@ -244,7 +249,7 @@ namespace TableTracker.Infrastructure
 
             if (!context.Waiters.Any())
             {
-                var waiters = new List<Waiter>();
+                //TODO: link IdentityUsers
 
                 for (int i = 0; i < 10; i++)
                 {
@@ -255,13 +260,11 @@ namespace TableTracker.Infrastructure
                         WaiterState = WaiterState.Unoccupied,
                         Avatar = "Random str",
                         Email = $"WaiterClone{i + 1}@idk.com",
-                        Id = i + 1,
-                        RestaurantId = i + 1,
+                        Restaurant = restaurants[i],
                     });
                 }
 
                 await context.AddRangeAsync(waiters);
-                await context.SaveChangesAsync();
             }
 
             #endregion
@@ -270,7 +273,6 @@ namespace TableTracker.Infrastructure
 
             if (!context.Tables.Any())
             {
-                var tables = new List<Table>();
 
                 for (int i = 0; i < 10; i++)
                 {
@@ -282,15 +284,13 @@ namespace TableTracker.Infrastructure
                         State = TableState.Unoccupied,
                         NumberOfSeats = 4,
                         TableSize = 10,
-                        Id = i + 1,
                         Number = 1,
-                        RestaurantId = i + 1,
-                        WaiterId = i + 1,
+                        Restaurant = restaurants[i],
+                        Waiter = waiters[i],
                     });
                 }
 
                 await context.AddRangeAsync(tables);
-                await context.SaveChangesAsync();
             }
 
             #endregion
@@ -299,23 +299,17 @@ namespace TableTracker.Infrastructure
 
             if (!context.Reservations.Any())
             {
-                var reservations = new List<Reservation>();
-
-                List<Visitor> visitors = context.Visitors.ToList();
-
                 for (int i = 0; i < 10; i++)
                 {
                     reservations.Add(new Reservation
                     {
                         Date = DateTime.Now,
-                        Id = i + 1,
-                        TableId = i + 1,
+                        Table = tables[i],
                         Visitors = visitors,
                     });
                 }
 
                 await context.AddRangeAsync(reservations);
-                await context.SaveChangesAsync();
             }
 
             #endregion
@@ -324,23 +318,20 @@ namespace TableTracker.Infrastructure
 
             if (!context.RestaurantVisitors.Any())
             {
-                var restVisitor = new List<RestaurantVisitor>();
 
                 for (int i = 0; i < 10; i++)
                 {
                     restVisitor.Add(new RestaurantVisitor
                     {
-                        RestaurantId = i + 1,
+                        Restaurant = restaurants[i],
                         AverageMoneySpent = 10,
-                        Id = i + 1,
                         RestaurantRate = 5,
                         TimesVisited = i + 1,
-                        VisitorId = i + 1,
+                        Visitor = visitors[i],
                     });
                 }
 
                 await context.AddRangeAsync(restVisitor);
-                await context.SaveChangesAsync();
             }
 
             #endregion
@@ -349,15 +340,13 @@ namespace TableTracker.Infrastructure
 
             if (!context.VisitorFavourites.Any())
             {
-                var favourites = new List<VisitorFavourites>();
 
                 for (int i = 0; i < 10; i++)
                 {
-                    favourites.Add(new VisitorFavourites { Id = i + 1, RestaurantId = i + 1, VisitorId = i + 1 });
+                    favourites.Add(new VisitorFavourites { Restaurant = restaurants[i], Visitor = visitors[i] });
                 }
 
                 await context.AddRangeAsync(favourites);
-                await context.SaveChangesAsync();
             }
 
             #endregion
@@ -366,24 +355,26 @@ namespace TableTracker.Infrastructure
 
             if (!context.VisitorHistorys.Any())
             {
-                var history = new List<VisitorHistory>();
 
                 for (int i = 0; i < 10; i++)
                 {
                     history.Add(new VisitorHistory
                     {
                         DateTime = DateTime.Now,
-                        Id = i + 1,
-                        RestaurantId = i + 1,
-                        VisitorId = i + 1,
+                        Restaurant = restaurants[i],
+                        Visitor = visitors[i],
                     });
                 }
 
                await context.AddRangeAsync(history);
-               await context.SaveChangesAsync();
             }
 
             #endregion
+
+            await context.SaveChangesAsync();
+
+            await identityContext.SaveChangesAsync();
         }
+
     }
 }
