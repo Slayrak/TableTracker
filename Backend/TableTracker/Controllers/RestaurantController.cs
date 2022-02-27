@@ -9,6 +9,7 @@ using TableTracker.Application.Restaurants.Commands.AddRestaurant;
 using TableTracker.Application.Restaurants.Commands.DeleteRestaurant;
 using TableTracker.Application.Restaurants.Commands.UpdateRestaurant;
 using TableTracker.Application.Restaurants.Queries.FindRestaurantById;
+using TableTracker.Application.Restaurants.Queries.GetAllRestaurantsWithFiltering;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Enums;
 using TableTracker.Helpers;
@@ -56,6 +57,18 @@ namespace TableTracker.Controllers
             var response = await _mediator.Send(new DeleteRestaurantCommand(id));
 
             return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllRestaurantsWithFiltering(RestaurantsFilterModel request)
+        {
+            var response = await _mediator.Send(new GetAllRestaurantsWithFilteringQuery(request));
+
+            return response switch
+            {
+                null => new NotFoundObjectResult("Object could not be found"),
+                _ => new OkObjectResult(response),
+            };
         }
     }
 }
