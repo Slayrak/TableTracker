@@ -15,6 +15,7 @@ using TableTracker.Application.Tables.Queries.FindTableById;
 using TableTracker.Application.Tables.Queries.GetAllTablesWithFiltering;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Enums;
+using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
@@ -34,11 +35,7 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new FindTableByIdQuery(id));
 
-            return response switch
-            {
-                null => new NotFoundObjectResult("Object could not be found"),
-                _ => new OkObjectResult(response),
-            };
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpPost("add")]
@@ -46,13 +43,7 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new AddTableCommand(table));
 
-            return response.Result switch
-            {
-                CommandResult.NotFound => new NotFoundObjectResult(response.ErrorMessage),
-                CommandResult.Failure => new NotFoundObjectResult(response.ErrorMessage),
-                CommandResult.Success => new OkObjectResult(response.Object),
-                _ => throw new NotSupportedException(),
-            };
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
 
         [HttpPut("update")]
@@ -60,13 +51,7 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new UpdateTableCommand(table));
 
-            return response.Result switch
-            {
-                CommandResult.NotFound => new NotFoundObjectResult(response.ErrorMessage),
-                CommandResult.Failure => new NotFoundObjectResult(response.ErrorMessage),
-                CommandResult.Success => new OkObjectResult(response.Object),
-                _ => throw new NotSupportedException(),
-            };
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
 
         [HttpDelete("delete/{id}")]
@@ -74,13 +59,7 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new DeleteTableCommand(id));
 
-            return response.Result switch
-            {
-                CommandResult.NotFound => new NotFoundObjectResult(response.ErrorMessage),
-                CommandResult.Failure => new NotFoundObjectResult(response.ErrorMessage),
-                CommandResult.Success => new OkObjectResult(response.Object),
-                _ => throw new NotSupportedException(),
-            };
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
 
         [HttpGet]
@@ -88,11 +67,7 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new GetAllTablesWithFilteringQuery(tableFilterModel));
 
-            return response switch
-            {
-                null => new NotFoundObjectResult("Object could not be found"),
-                _ => new OkObjectResult(response),
-            };
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
     }
 }

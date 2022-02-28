@@ -35,10 +35,6 @@ namespace TableTracker
 
             //await seed.SeedData(dbContext, identityDbContext);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Add reservation controller and table controller
             dbContext.Database.Migrate();
             identityDbContext.Database.Migrate();
         }
