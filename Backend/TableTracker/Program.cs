@@ -35,9 +35,6 @@ namespace TableTracker
 
             //await seed.SeedData(dbContext, identityDbContext);
 
-            //var seed = new DataSeed(scope.ServiceProvider.GetRequiredService<UserManager<TableTrackerIdentityUser>>(),
-            //    scope.ServiceProvider.GetRequiredService<RoleManager<TableTrackerIdentityRole>>());
-
             seed.SeedData(dbContext, identityDbContext).Wait();
 
             dbContext.Database.Migrate();
