@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 using System;
+using System.Text.Json.Serialization;
 
 using TableTracker.Infrastructure;
 using TableTracker.Infrastructure.Identity;
@@ -46,6 +47,9 @@ namespace TableTracker
                 .AddDefaultTokenProviders()
                 .AddUserStore<UserStore<TableTrackerIdentityUser, TableTrackerIdentityRole, IdentityTableDbContext, Guid>>()
                 .AddRoleStore<RoleStore<TableTrackerIdentityRole, IdentityTableDbContext, Guid>>();
+
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
         }
 

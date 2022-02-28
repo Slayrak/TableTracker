@@ -20,7 +20,7 @@ namespace TableTracker
             host.Run();
         }
 
-        public async static void Migrate(IServiceProvider serviceProvider)
+        public static void Migrate(IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider
                 .GetRequiredService<IServiceScopeFactory>()
@@ -33,10 +33,10 @@ namespace TableTracker
             var seed = new DataSeed(scope.ServiceProvider.GetRequiredService<UserManager<TableTrackerIdentityUser>>(),
                 scope.ServiceProvider.GetRequiredService<RoleManager<TableTrackerIdentityRole>>());
 
-            await seed.SeedData(dbContext, identityDbContext);
+            //await seed.SeedData(dbContext, identityDbContext);
 
-            var seed = new DataSeed(scope.ServiceProvider.GetRequiredService<UserManager<TableTrackerIdentityUser>>(),
-                scope.ServiceProvider.GetRequiredService<RoleManager<TableTrackerIdentityRole>>());
+            //var seed = new DataSeed(scope.ServiceProvider.GetRequiredService<UserManager<TableTrackerIdentityUser>>(),
+            //    scope.ServiceProvider.GetRequiredService<RoleManager<TableTrackerIdentityRole>>());
 
             seed.SeedData(dbContext, identityDbContext).Wait();
 
