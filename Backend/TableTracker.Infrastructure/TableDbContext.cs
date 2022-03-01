@@ -76,7 +76,43 @@ namespace TableTracker.Infrastructure
                 .WithOne(x => x.Waiter)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //навіщо офіціанту ключ на відвідувача, розказати про баги і що ще не тестив
+            #region Cuisine
+
+            modelBuilder.Entity<Cuisine>()
+                .HasIndex(x => x.CuisineEnum)
+                .IsUnique();
+
+            modelBuilder.Entity<Cuisine>()
+                .Property(x => x.CuisineEnum)
+                .IsRequired();
+
+            #endregion
+
+            #region Franchise
+
+            modelBuilder.Entity<Franchise>()
+                .HasIndex(x => x.Name)
+                .IsUnique();
+
+            modelBuilder.Entity<Franchise>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            #endregion
+
+            //#region User
+
+            //modelBuilder.Entity<User>()
+            //    .Property(x => x.Email)
+            //    .IsRequired();
+
+            //modelBuilder.Entity<User>()
+            //    .HasIndex(x => x.Email)
+            //    .IsUnique();
+
+            //#endregion
+
+            //why waiter need a key on visitor
 
             //modelBuilder.Entity<Restaurant>()
             //    .HasMany(x => x.Cuisines)
