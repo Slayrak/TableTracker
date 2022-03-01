@@ -2,7 +2,7 @@
 {
     public class User : IEntity<long>
     {
-        public long Id { get; set; } //чи це треба
+        public long Id { get; set; } 
 
         public string FullName { get; set; }
 

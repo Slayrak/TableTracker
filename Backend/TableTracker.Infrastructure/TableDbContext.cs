@@ -100,19 +100,19 @@ namespace TableTracker.Infrastructure
 
             #endregion
 
-            #region User
+            //#region User
 
-            modelBuilder.Entity<User>()
-                .Property(x => x.Email)
-                .IsRequired();
+            //modelBuilder.Entity<User>()
+            //    .Property(x => x.Email)
+            //    .IsRequired();
 
-            modelBuilder.Entity<User>()
-                .HasIndex(x => x.Email)
-                .IsUnique();
+            //modelBuilder.Entity<User>()
+            //    .HasIndex(x => x.Email)
+            //    .IsUnique();
 
-            #endregion
+            //#endregion
 
-            //навіщо офіціанту ключ на відвідувача
+            //why waiter need a key on visitor
 
             //modelBuilder.Entity<Restaurant>()
             //    .HasMany(x => x.Cuisines)
