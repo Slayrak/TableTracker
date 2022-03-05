@@ -35,5 +35,16 @@ namespace TableTracker.Infrastructure.Repositories
                 .Where(x => x.RestaurantId == restaurant.Id)
                 .ToListAsync();
         }
+
+        public async override Task<Waiter> FindById(long id)
+        {
+            return await _context
+                .Waiters
+                .Where(x => x.Id == id)
+                .Include(x => x.Reservations)
+                .Include(x => x.Restaurant)
+                .Include(x => x.Tables)
+                .FirstOrDefaultAsync();
+        }
     }
 }

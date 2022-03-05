@@ -39,7 +39,7 @@ namespace TableTracker.Application.Tables.Commands.AddTable
                 return new CommandResponse<TableDTO>(
                     request.Table,
                     CommandResult.Failure,
-                    "The restaurant is already in the database.");
+                    "The table is already in the database.");
             }
 
             await _unitOfWork.GetRepository<ITableRepository>().Insert(entity);

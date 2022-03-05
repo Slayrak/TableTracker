@@ -72,7 +72,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllReservationsForTable(ReservationFilterModel model)
+        public async Task<IActionResult> GetAllReservationsForTable([FromQuery] ReservationFilterModel model)
         {
             var response = await _mediator.Send(new GetAllReservationsForTableQuery(model));
 

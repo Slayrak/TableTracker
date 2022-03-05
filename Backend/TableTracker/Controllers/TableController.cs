@@ -63,7 +63,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllTablesWithFiltering(TableFilterModel tableFilterModel)
+        public async Task<IActionResult> GetAllTablesWithFiltering([FromQuery] TableFilterModel tableFilterModel)
         {
             var response = await _mediator.Send(new GetAllTablesWithFilteringQuery(tableFilterModel));
 

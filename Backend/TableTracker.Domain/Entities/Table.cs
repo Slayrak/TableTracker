@@ -16,7 +16,9 @@ namespace TableTracker.Domain.Entities
         public double TableSize { get; set; }
 
         public long? WaiterId { get; set; }
-        public Waiter Waiter { get; set; }
+#nullable enable
+        public Waiter? Waiter { get; set; }
+#nullable disable
         public long RestaurantId { get; set; }
         public Restaurant Restaurant { get; set; }
 
