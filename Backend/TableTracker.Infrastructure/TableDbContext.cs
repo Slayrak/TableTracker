@@ -76,6 +76,7 @@ namespace TableTracker.Infrastructure
                 .WithOne(x => x.Waiter)
                 .OnDelete(DeleteBehavior.Restrict);
 
+
             #region Cuisine
 
             modelBuilder.Entity<Cuisine>()

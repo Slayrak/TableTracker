@@ -12,5 +12,6 @@ namespace TableTracker.Application.Waiters.Queries.GetAllWaiters
 {
     public class GetAllWaitersQuery : IRequest<WaiterDTO[]>
     {
+
     }
 }

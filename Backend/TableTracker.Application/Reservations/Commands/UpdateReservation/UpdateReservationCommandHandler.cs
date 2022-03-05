@@ -45,7 +45,7 @@ namespace TableTracker.Application.Reservations.Commands.UpdateReservation
             return new CommandResponse<ReservationDTO>(
                 request.Reservation,
                 Domain.Enums.CommandResult.NotFound,
-                "Could not find the given restaurant.");
+                "Could not find the given reservation.");
         }
     }
 }

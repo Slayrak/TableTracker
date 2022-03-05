@@ -44,7 +44,7 @@ namespace TableTracker.Application.Reservations.Commands.DeleteReservation
             return new CommandResponse<ReservationDTO>(
                 _mapper.Map<ReservationDTO>(entity),
                 Domain.Enums.CommandResult.NotFound,
-                "Could not find the given restaurant.");
+                "Could not find the given reservation.");
         }
     }
 }
