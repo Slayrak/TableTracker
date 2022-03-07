@@ -18,7 +18,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/waiters")]
     [ApiController]
     public class WaiterController : ControllerBase
     {

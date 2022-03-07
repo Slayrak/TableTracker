@@ -15,11 +15,11 @@ namespace TableTracker.Application.MapperProfiles
     {
         public LayoutProfile()
         {
-            CreateMap<Layout, LayoutDTO>()
+            CreateMap<Domain.Entities.Layout, LayoutDTO>()
                 .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant));
 
 
-            CreateMap<LayoutDTO, Layout>()
+            CreateMap<LayoutDTO, Domain.Entities.Layout>()
                 .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))
                 .ForMember(dest => dest.RestaurantId, opt => opt.MapFrom(src => src.Restaurant.Id));
         }
