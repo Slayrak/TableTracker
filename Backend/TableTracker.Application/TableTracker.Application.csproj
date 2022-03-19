@@ -27,13 +27,14 @@
 
   <ItemGroup>
     <Folder Include="Cuisines\Commands\" />
+    <Folder Include="Franchises\Commands\" />
     <Folder Include="Managers\Commands\" />
     <Folder Include="Reservations\Commands\" />
     <Folder Include="Tables\Commands\" />
     <Folder Include="Users\Commands\" />
     <Folder Include="Validators\Restaurants\Queries\" />
     <Folder Include="Visitors\Commands\" />
-    <Folder Include="Waiters\Commands\" />
+    <Folder Include="Waiters\Queries\FindWaiterById\" />
   </ItemGroup>
 
 </Project>

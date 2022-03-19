@@ -122,9 +122,9 @@ namespace TableTracker.Infrastructure
 
             if (!context.Cuisines.Any())
             {
-                for (int i = 0; i < 10; i++)
+                foreach (int entity in Enum.GetValues(typeof(CuisineName)))
                 {
-                    cuisines.Add(new Cuisine { CuisineEnum = CuisineName.International });
+                    cuisines.Add(new Cuisine { CuisineEnum = (CuisineName)entity});
                 }
 
                 await context.AddRangeAsync(cuisines);
