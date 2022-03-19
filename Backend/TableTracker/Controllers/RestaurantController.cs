@@ -83,13 +83,6 @@ namespace TableTracker.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllRestaurantsWithFiltering(RestaurantsFilterModel request)
         {
-            var response = await _mediator.Send(new GetAllRestaurantsWithFilteringQuery(request));
-
-            return response switch
-            {
-                null => new NotFoundObjectResult("Object could not be found"),
-                _ => new OkObjectResult(response),
-            };
         }
     }
 }

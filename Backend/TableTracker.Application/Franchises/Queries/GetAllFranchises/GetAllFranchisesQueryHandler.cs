@@ -22,8 +22,7 @@ namespace TableTracker.Application.Franchises.Queries.GetAllFranchises
 
         public GetAllFranchisesQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

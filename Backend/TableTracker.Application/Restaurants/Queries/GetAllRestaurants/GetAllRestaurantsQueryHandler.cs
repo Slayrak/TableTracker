@@ -22,8 +22,7 @@ namespace TableTracker.Application.Restaurants.Queries.GetAllRestaurants
 
         public GetAllRestaurantsQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

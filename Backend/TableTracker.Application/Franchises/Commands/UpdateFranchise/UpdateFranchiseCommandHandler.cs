@@ -6,18 +6,19 @@ using AutoMapper;
 using MediatR;
 
 using TableTracker.Domain.DataTransferObjects;
+using TableTracker.Domain.Entities;
 using TableTracker.Domain.Enums;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.Restaurants.Commands.DeleteRestaurant
+namespace TableTracker.Application.Franchises.Commands.UpdateFranchise
 {
-    public class DeleteRestaurantCommandHandler : IRequestHandler<DeleteRestaurantCommand, CommandResponse<RestaurantDTO>>
+    public class UpdateFranchiseCommandHandler : IRequestHandler<UpdateFranchiseCommand, CommandResponse<FranchiseDTO>>
     {
         private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
-        public DeleteRestaurantCommandHandler(
+        public UpdateFranchiseCommandHandler(
             IUnitOfWork<long> unitOfWork,
             IMapper mapper)
         {
@@ -25,21 +26,21 @@ namespace TableTracker.Application.Restaurants.Commands.DeleteRestaurant
             _mapper = mapper;
         }
 
-        public async Task<CommandResponse<RestaurantDTO>> Handle(DeleteRestaurantCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<FranchiseDTO>> Handle(UpdateFranchiseCommand request, CancellationToken cancellationToken)
         {
-            var repository = _unitOfWork.GetRepository<IRestaurantRepository>();
-            var entity = await repository.FindById(request.RestaurantId);
+            var repository = _unitOfWork.GetRepository<IFranchiseRepository>();
+            var entity = _mapper.Map<Franchise>(request.Franchise);
 
             if (await repository.Contains(entity))
             {
-                repository.Remove(entity);
+                repository.Update(entity);
                 await _unitOfWork.Save();
 
-                return new CommandResponse<RestaurantDTO>(_mapper.Map<RestaurantDTO>(entity));
+                return new CommandResponse<FranchiseDTO>(request.Franchise);
             }
 
-            return new CommandResponse<RestaurantDTO>(
-                _mapper.Map<RestaurantDTO>(entity),
+            return new CommandResponse<FranchiseDTO>(
+                request.Franchise,
                 CommandResult.NotFound,
                 "Could not find the given restaurant.");
         }
