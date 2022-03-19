@@ -4,9 +4,14 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
+using TableTracker.Application.Franchises.Commands.AddFranchise;
+using TableTracker.Application.Franchises.Commands.DeleteFranchise;
+using TableTracker.Application.Franchises.Commands.UpdateFranchise;
 using TableTracker.Application.Franchises.Queries.FindFranchiseById;
 using TableTracker.Application.Franchises.Queries.GetAllFranchises;
 using TableTracker.Application.Franchises.Queries.GetFranchiseByName;
+using TableTracker.Domain.DataTransferObjects;
+using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
@@ -26,11 +31,7 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new FindFranchiseByIdQuery(id));
 
-            return response switch
-            {
-                null => new NotFoundObjectResult("Object could not be found"),
-                _ => new OkObjectResult(response),
-            };
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("/{name}")]
@@ -38,11 +39,7 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new GetFranchiseByNameQuery(name));
 
-            return response switch
-            {
-                null => new NotFoundObjectResult("Object could not be found"),
-                _ => new OkObjectResult(response),
-            };
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet]
@@ -50,23 +47,31 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new GetAllFranchisesQuery());
 
-            return response switch
-            {
-                null => new NotFoundObjectResult("Object could not be found"),
-                _ => new OkObjectResult(response),
-            };
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpPost("add")]
+        public async Task<IActionResult> AddFranchise([FromBody] FranchiseDTO franchise)
+        {
+            var response = await _mediator.Send(new AddFranchiseCommand(franchise));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateFranchise([FromBody] FranchiseDTO franchise)
+        {
+            var response = await _mediator.Send(new UpdateFranchiseCommand(franchise));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
 
         [HttpDelete("delete/{id}")]
-        public async void DeleteFranchiseById(long id)
+        public async Task<IActionResult> DeleteFranchiseById(long id)
         {
-            var response = await _mediator.Send(new GetAllFranchisesQuery());
+            var response = await _mediator.Send(new DeleteFranchiseCommand(id));
 
-            return response switch
-            {
-                null => new NotFoundObjectResult("Object could not be found"),
-                _ => new OkObjectResult(response),
-            };
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
     }
 }

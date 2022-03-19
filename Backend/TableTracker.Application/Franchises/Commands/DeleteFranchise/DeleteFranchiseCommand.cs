@@ -6,11 +6,11 @@ namespace TableTracker.Application.Franchises.Commands.DeleteFranchise
 {
     public class DeleteFranchiseCommand : IRequest<CommandResponse<FranchiseDTO>>
     {
-        public DeleteFranchiseCommand(int id)
+        public DeleteFranchiseCommand(long id)
         {
             Id = id;
         }
 
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }
