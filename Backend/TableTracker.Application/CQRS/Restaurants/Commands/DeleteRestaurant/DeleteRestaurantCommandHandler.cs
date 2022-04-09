@@ -6,7 +6,7 @@ using AutoMapper;
 using MediatR;
 
 using TableTracker.Domain.DataTransferObjects;
-using TableTracker.Domain.Entities;
+using TableTracker.Domain.Enums;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
@@ -40,7 +40,7 @@ namespace TableTracker.Application.CQRS.Restaurants.Commands.DeleteRestaurant
 
             return new CommandResponse<RestaurantDTO>(
                 _mapper.Map<RestaurantDTO>(entity),
-                Domain.Enums.CommandResult.NotFound,
+                CommandResult.NotFound,
                 "Could not find the given restaurant.");
         }
     }

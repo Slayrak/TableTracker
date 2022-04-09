@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using AutoMapper;
@@ -10,14 +9,14 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Franchises.Queries.GetAllFranchises
+namespace TableTracker.Application.CQRS.Franchises.Queries.FindFranchiseById
 {
-    public class GetAllFranchisesQueryHandler : IRequestHandler<GetAllFranchisesQuery, FranchiseDTO[]>
+    public class FindFranchiseByIdQueryHandler : IRequestHandler<FindFranchiseByIdQuery, FranchiseDTO>
     {
         private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAllFranchisesQueryHandler(
+        public FindFranchiseByIdQueryHandler(
             IUnitOfWork<long> unitOfWork,
             IMapper mapper)
         {
@@ -25,15 +24,13 @@ namespace TableTracker.Application.CQRS.Franchises.Queries.GetAllFranchises
             _mapper = mapper;
         }
 
-        public async Task<FranchiseDTO[]> Handle(GetAllFranchisesQuery request, CancellationToken cancellationToken)
+        public async Task<FranchiseDTO> Handle(FindFranchiseByIdQuery request, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork
                 .GetRepository<IFranchiseRepository>()
-                .GetAll();
+                .FindById(request.Id);
 
-            return result
-                .Select(x => _mapper.Map<FranchiseDTO>(x))
-                .ToArray();
+            return _mapper.Map<FranchiseDTO>(result);
         }
     }
 }
