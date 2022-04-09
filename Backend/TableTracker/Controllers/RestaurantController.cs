@@ -5,11 +5,11 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
-using TableTracker.Application.Restaurants.Commands.AddRestaurant;
-using TableTracker.Application.Restaurants.Commands.DeleteRestaurant;
-using TableTracker.Application.Restaurants.Commands.UpdateRestaurant;
-using TableTracker.Application.Restaurants.Queries.FindRestaurantById;
-using TableTracker.Application.Restaurants.Queries.GetAllRestaurantsWithFiltering;
+using TableTracker.Application.CQRS.Restaurants.Commands.AddRestaurant;
+using TableTracker.Application.CQRS.Restaurants.Commands.DeleteRestaurant;
+using TableTracker.Application.CQRS.Restaurants.Commands.UpdateRestaurant;
+using TableTracker.Application.CQRS.Restaurants.Queries.FindRestaurantById;
+using TableTracker.Application.CQRS.Restaurants.Queries.GetAllRestaurantsWithFiltering;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Enums;
 using TableTracker.Helpers;

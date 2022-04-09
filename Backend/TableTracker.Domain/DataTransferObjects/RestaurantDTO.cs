@@ -26,7 +26,7 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public ICollection<WaiterDTO> Waiters { get; set; }
 
-        public ICollection<CuisinesDTO> Cuisines { get; set; } 
+        public ICollection<CuisineDTO> Cuisines { get; set; } 
 
         public FranchiseDTO Franchise { get; set; }
 

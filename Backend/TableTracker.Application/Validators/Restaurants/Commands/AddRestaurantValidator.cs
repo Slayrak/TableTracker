@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using TableTracker.Application.Restaurants.Queries.FindRestaurantById;
+using TableTracker.Application.CQRS.Restaurants.Queries.FindRestaurantById;
 
 namespace TableTracker.Application.Validators.Restaurants.Commands
 {

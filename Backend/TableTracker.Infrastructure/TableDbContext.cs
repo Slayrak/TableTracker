@@ -35,7 +35,7 @@ namespace TableTracker.Infrastructure
 
         public DbSet<Visitor> Visitors { get; set; }
 
-        public DbSet<VisitorFavourites> VisitorFavourites { get; set; }
+        public DbSet<VisitorFavourite> VisitorFavourites { get; set; }
 
         public DbSet<VisitorHistory> VisitorHistorys { get; set; }
 

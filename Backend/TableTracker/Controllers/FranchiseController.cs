@@ -4,12 +4,12 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
-using TableTracker.Application.Franchises.Commands.AddFranchise;
-using TableTracker.Application.Franchises.Commands.DeleteFranchise;
-using TableTracker.Application.Franchises.Commands.UpdateFranchise;
-using TableTracker.Application.Franchises.Queries.FindFranchiseById;
-using TableTracker.Application.Franchises.Queries.GetAllFranchises;
-using TableTracker.Application.Franchises.Queries.GetFranchiseByName;
+using TableTracker.Application.CQRS.Franchises.Commands.AddFranchise;
+using TableTracker.Application.CQRS.Franchises.Commands.DeleteFranchise;
+using TableTracker.Application.CQRS.Franchises.Commands.UpdateFranchise;
+using TableTracker.Application.CQRS.Franchises.Queries.FindFranchiseById;
+using TableTracker.Application.CQRS.Franchises.Queries.GetAllFranchises;
+using TableTracker.Application.CQRS.Franchises.Queries.GetFranchiseByName;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Helpers;
 

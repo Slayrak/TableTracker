@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using TableTracker.Application.Tables.Commands.AddTable;
-using TableTracker.Application.Tables.Commands.DeleteTable;
-using TableTracker.Application.Tables.Commands.UpdateTable;
-using TableTracker.Application.Tables.Queries.FindTableById;
-using TableTracker.Application.Tables.Queries.GetAllTablesWithFiltering;
+using TableTracker.Application.CQRS.Tables.Commands.AddTable;
+using TableTracker.Application.CQRS.Tables.Commands.DeleteTable;
+using TableTracker.Application.CQRS.Tables.Commands.UpdateTable;
+using TableTracker.Application.CQRS.Tables.Queries.FindTableById;
+using TableTracker.Application.CQRS.Tables.Queries.GetAllTablesWithFiltering;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Enums;
 using TableTracker.Helpers;

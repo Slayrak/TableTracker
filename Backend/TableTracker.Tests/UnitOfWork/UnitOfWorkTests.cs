@@ -27,7 +27,7 @@ namespace TableTracker.Tests.UnitOfWork
             var repo6 = unitOfWorkFixture.UnitOfWork.GetRepository<IRestaurantVisitorRepository>();
             var repo7 = unitOfWorkFixture.UnitOfWork.GetRepository<ITableRepository>();
             var repo8 = unitOfWorkFixture.UnitOfWork.GetRepository<IUserRepository>();
-            var repo9 = unitOfWorkFixture.UnitOfWork.GetRepository<IVisitorFavouritesRepository>();
+            var repo9 = unitOfWorkFixture.UnitOfWork.GetRepository<IVisitorFavouriteRepository>();
             var repo10 = unitOfWorkFixture.UnitOfWork.GetRepository<IVisitorHistoryRepository>();
             var repo11 = unitOfWorkFixture.UnitOfWork.GetRepository<IVisitorRepository>();
             var repo12 = unitOfWorkFixture.UnitOfWork.GetRepository<IWaiterRepository>();
@@ -40,7 +40,7 @@ namespace TableTracker.Tests.UnitOfWork
             Assert.IsType<RestaurantVisitorRepository>(repo6);
             Assert.IsType<TableRepository>(repo7);
             Assert.IsType<UserRepository>(repo8);
-            Assert.IsType<VisitorFavouritesRepository>(repo9);
+            Assert.IsType<VisitorFavouriteRepository>(repo9);
             Assert.IsType<VisitorHistoryRepository>(repo10);
             Assert.IsType<VisitorRepository>(repo11);
             Assert.IsType<WaiterRepository>(repo12);

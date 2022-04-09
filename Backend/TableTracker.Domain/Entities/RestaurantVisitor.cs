@@ -12,6 +12,5 @@
         public Restaurant Restaurant { get; set; }
         public long VisitorId { get; set; }
         public Visitor Visitor { get; set; }
-
     }
 }

@@ -27,7 +27,6 @@ namespace TableTracker
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TableTracker", Version = "v1" });
@@ -50,7 +49,6 @@ namespace TableTracker
 
             services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,6 +59,8 @@ namespace TableTracker
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TableTracker v1"));
             }
+
+            app.UseCustomMiddlewares();
 
             app.UseHttpsRedirection();
 

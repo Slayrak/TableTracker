@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using TableTracker.Application;
+using TableTracker.Application.CQRS;
 using TableTracker.Domain.Enums;
 
 namespace TableTracker.Helpers

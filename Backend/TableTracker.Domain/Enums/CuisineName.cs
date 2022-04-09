@@ -12,6 +12,6 @@
         American = 7,
         Georgian = 8,
         Japanese = 9,
-        Sweden = 10,
+        Swedish = 10,
     }
 }

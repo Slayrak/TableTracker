@@ -15,11 +15,11 @@ namespace TableTracker.Application.MapperProfiles
     {
         public VisitorFavouritesProfile()
         {
-            CreateMap<VisitorFavourites, VisitorFavouritesDTO>()
+            CreateMap<VisitorFavourite, VisitorFavouriteDTO>()
                 .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))
                 .ForMember(dest => dest.Visitor, opt => opt.MapFrom(src => src.Visitor));
 
-            CreateMap<VisitorFavouritesDTO, VisitorFavourites>()
+            CreateMap<VisitorFavouriteDTO, VisitorFavourite>()
                 .ForMember(dest => dest.Visitor, opt => opt.MapFrom(src => src.Visitor))
                 .ForMember(dest => dest.VisitorId, opt => opt.MapFrom(src => src.Visitor.Id))
                 .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))

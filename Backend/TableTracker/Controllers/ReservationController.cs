@@ -8,12 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using TableTracker.Application.Reservations.Commands.AddReservation;
-using TableTracker.Application.Reservations.Commands.DeleteReservation;
-using TableTracker.Application.Reservations.Commands.UpdateReservation;
-using TableTracker.Application.Reservations.Queries.FindReservationById;
-using TableTracker.Application.Reservations.Queries.GetAllReservationsByDate;
-using TableTracker.Application.Reservations.Queries.GetAllReservationsForTable;
+using TableTracker.Application.CQRS.Reservations.Commands.AddReservation;
+using TableTracker.Application.CQRS.Reservations.Commands.DeleteReservation;
+using TableTracker.Application.CQRS.Reservations.Commands.UpdateReservation;
+using TableTracker.Application.CQRS.Reservations.Queries.FindReservationById;
+using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDate;
+using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsForTable;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Enums;
 using TableTracker.Helpers;
