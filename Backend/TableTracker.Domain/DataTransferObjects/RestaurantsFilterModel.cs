@@ -8,7 +8,7 @@ namespace TableTracker.Domain.DataTransferObjects
     {
         public float? Rating { get; set; }
 
-        public IEnumerable<CuisinesDTO> Cuisines { get; set; }
+        public IEnumerable<CuisineDTO> Cuisines { get; set; }
 
         public string Price { get; set; }
 

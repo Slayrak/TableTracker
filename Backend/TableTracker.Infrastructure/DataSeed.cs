@@ -40,7 +40,7 @@ namespace TableTracker.Infrastructure
             var tables = new List<Table>();
             var reservations = new List<Reservation>();
             var restVisitor = new List<RestaurantVisitor>();
-            var favourites = new List<VisitorFavourites>();
+            var favourites = new List<VisitorFavourite>();
             var history = new List<VisitorHistory>();
 
             foreach (var roleName in roleNames)
@@ -343,7 +343,7 @@ namespace TableTracker.Infrastructure
 
                 for (int i = 0; i < 10; i++)
                 {
-                    favourites.Add(new VisitorFavourites { Restaurant = restaurants[i], Visitor = visitors[i] });
+                    favourites.Add(new VisitorFavourite { Restaurant = restaurants[i], Visitor = visitors[i] });
                 }
 
                 await context.AddRangeAsync(favourites);

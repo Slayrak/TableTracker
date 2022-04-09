@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -26,12 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Cuisines\Commands\" />
-    <Folder Include="Franchises\Commands\" />
-    <Folder Include="Users\Commands\" />
+    <Folder Include="CQRS\Franchises\Commands\" />
     <Folder Include="Validators\Restaurants\Queries\" />
-    <Folder Include="Visitors\Commands\" />
-    <Folder Include="Waiters\Queries\FindWaiterById\" />
   </ItemGroup>
 
 </Project>

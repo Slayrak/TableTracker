@@ -8,12 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using TableTracker.Application.Layout.Commands;
-using TableTracker.Application.Layout.Commands.AddLayout;
-using TableTracker.Application.Layout.Commands.DeleteLayout;
-using TableTracker.Application.Layout.Commands.UpdateLayout;
-using TableTracker.Application.Layout.Queries.FindLayoutById;
-using TableTracker.Application.Layout.Queries.FindLayoutByRestaurant;
+using TableTracker.Application.CQRS.Layout.Commands;
+using TableTracker.Application.CQRS.Layout.Commands.AddLayout;
+using TableTracker.Application.CQRS.Layout.Commands.DeleteLayout;
+using TableTracker.Application.CQRS.Layout.Commands.UpdateLayout;
+using TableTracker.Application.CQRS.Layout.Queries.FindLayoutById;
+using TableTracker.Application.CQRS.Layout.Queries.FindLayoutByRestaurant;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Helpers;
 

@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using TableTracker.Application.Managers.Commands.AddManager;
-using TableTracker.Application.Managers.Commands.DeleteManager;
-using TableTracker.Application.Managers.Commands.UpdateManager;
-using TableTracker.Application.Managers.Queries.FindManagerById;
-using TableTracker.Application.Managers.Queries.FindManagerByRestaurant;
+using TableTracker.Application.CQRS.Managers.Commands.AddManager;
+using TableTracker.Application.CQRS.Managers.Commands.DeleteManager;
+using TableTracker.Application.CQRS.Managers.Commands.UpdateManager;
+using TableTracker.Application.CQRS.Managers.Queries.FindManagerById;
+using TableTracker.Application.CQRS.Managers.Queries.FindManagerByRestaurant;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Helpers;
 

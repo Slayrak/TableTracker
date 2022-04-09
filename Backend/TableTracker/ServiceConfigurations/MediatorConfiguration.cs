@@ -4,7 +4,7 @@ using MediatR;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using TableTracker.Application;
+using TableTracker.Application.CQRS;
 
 namespace TableTracker.ServiceConfigurations
 {
