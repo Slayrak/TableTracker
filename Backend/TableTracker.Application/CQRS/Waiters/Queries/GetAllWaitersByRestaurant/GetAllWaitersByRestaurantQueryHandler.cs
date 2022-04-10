@@ -15,7 +15,6 @@ namespace TableTracker.Application.CQRS.Waiters.Queries.GetAllWaitersByRestauran
 {
     public class GetAllWaitersByRestaurantQueryHandler : IRequestHandler<GetAllWaitersByRestaurantQuery, WaiterDTO[]>
     {
-
         private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 

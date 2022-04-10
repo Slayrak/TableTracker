@@ -18,8 +18,7 @@ namespace TableTracker.Application.CQRS.RestaurantVisitors.Queries.GetRestaurant
 
         public GetRestaurantVisitorByIdQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

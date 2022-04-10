@@ -17,7 +17,7 @@ namespace TableTracker.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/visitors")]
     public class VisitorController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -28,7 +28,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllVisitors()
         {
             var response = await _mediator.Send(new GetAllVisitorsQuery());
 
@@ -44,7 +44,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("trust")]
-        public async Task<IActionResult> GetAllVisitorsByTrustFactor([FromRoute] float trust)
+        public async Task<IActionResult> GetAllVisitorsByTrustFactor(float trust)
         {
             var response = await _mediator.Send(new GetAllVisitorsByTrustFactorQuery(trust));
 

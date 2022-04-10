@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
 
@@ -11,10 +12,14 @@ namespace TableTracker.Middlewares
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger _logger;
 
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        public ErrorHandlingMiddleware(
+            RequestDelegate next,
+            ILogger logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -25,6 +30,8 @@ namespace TableTracker.Middlewares
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
+
                 await HandleExceptionAsync(httpContext, ex);
             }
         }

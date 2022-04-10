@@ -2,6 +2,7 @@
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TableTracker.Application.CQRS.Franchises.Commands.AddFranchise;
@@ -15,6 +16,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/franchises")]
     public class FranchiseController : ControllerBase
@@ -27,15 +29,15 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> FindFranchiseById(long id)
+        public async Task<IActionResult> FindFranchiseById([FromRoute] long id)
         {
             var response = await _mediator.Send(new FindFranchiseByIdQuery(id));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("/{name}")]
-        public async Task<IActionResult> GetFranchiseByName(string name)
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetFranchiseByName([FromRoute] string name)
         {
             var response = await _mediator.Send(new GetFranchiseByNameQuery(name));
 
@@ -50,7 +52,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddFranchise([FromBody] FranchiseDTO franchise)
         {
             var response = await _mediator.Send(new AddFranchiseCommand(franchise));
@@ -58,7 +60,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateFranchise([FromBody] FranchiseDTO franchise)
         {
             var response = await _mediator.Send(new UpdateFranchiseCommand(franchise));
@@ -66,7 +68,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFranchiseById(long id)
         {
             var response = await _mediator.Send(new DeleteFranchiseCommand(id));

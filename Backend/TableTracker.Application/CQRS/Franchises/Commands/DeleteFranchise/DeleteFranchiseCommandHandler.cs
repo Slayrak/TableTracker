@@ -5,7 +5,6 @@ using AutoMapper;
 
 using MediatR;
 
-using TableTracker.Application.CQRS;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Enums;
 using TableTracker.Domain.Interfaces;

@@ -1,12 +1,9 @@
-﻿using MediatR;
+﻿using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Http;
+using MediatR;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using TableTracker.Application.CQRS.Tables.Commands.AddTable;
 using TableTracker.Application.CQRS.Tables.Commands.DeleteTable;
@@ -14,13 +11,13 @@ using TableTracker.Application.CQRS.Tables.Commands.UpdateTable;
 using TableTracker.Application.CQRS.Tables.Queries.FindTableById;
 using TableTracker.Application.CQRS.Tables.Queries.GetAllTablesWithFiltering;
 using TableTracker.Domain.DataTransferObjects;
-using TableTracker.Domain.Enums;
 using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Route("api/tables")]
+    [Authorize]
     [ApiController]
+    [Route("api/tables")]
     public class TableController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -31,14 +28,14 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> FindTableById(long id)
+        public async Task<IActionResult> FindTableById([FromRoute] long id)
         {
             var response = await _mediator.Send(new FindTableByIdQuery(id));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddTable([FromBody] TableDTO table)
         {
             var response = await _mediator.Send(new AddTableCommand(table));
@@ -46,7 +43,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateRestaurant([FromBody] TableDTO table)
         {
             var response = await _mediator.Send(new UpdateTableCommand(table));
@@ -54,8 +51,8 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteRestaurant(long id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRestaurant([FromRoute] long id)
         {
             var response = await _mediator.Send(new DeleteTableCommand(id));
 

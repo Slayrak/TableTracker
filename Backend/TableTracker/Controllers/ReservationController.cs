@@ -1,12 +1,10 @@
-﻿using MediatR;
-
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+
+using MediatR;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 using TableTracker.Application.CQRS.Reservations.Commands.AddReservation;
 using TableTracker.Application.CQRS.Reservations.Commands.DeleteReservation;
@@ -15,13 +13,13 @@ using TableTracker.Application.CQRS.Reservations.Queries.FindReservationById;
 using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDate;
 using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsForTable;
 using TableTracker.Domain.DataTransferObjects;
-using TableTracker.Domain.Enums;
 using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Route("api/reservations")]
+    [Authorize]
     [ApiController]
+    [Route("api/reservations")]
     public class ReservationController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -31,39 +29,7 @@ namespace TableTracker.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> FindByReservationId(long id)
-        {
-            var response = await _mediator.Send(new FindReservationByIdQuery(id));
-
-            return ReturnResultHelper.ReturnQueryResult(response);
-        }
-
-        [HttpPost("add")]
-        public async Task<IActionResult> AddReservation([FromBody] ReservationDTO reservation)
-        {
-            var response = await _mediator.Send(new AddReservationCommand(reservation));
-
-            return ReturnResultHelper.ReturnCommandResult(response);
-        }
-
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateReservation([FromBody] ReservationDTO reservation)
-        {
-            var response = await _mediator.Send(new UpdateReservationCommand(reservation));
-
-            return ReturnResultHelper.ReturnCommandResult(response);
-        }
-
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteReservation(long id)
-        {
-            var response = await _mediator.Send(new DeleteReservationCommand(id));
-
-            return ReturnResultHelper.ReturnCommandResult(response);
-        }
-
-        [HttpGet("date/{date}")]
+        [HttpGet("date")]
         public async Task<IActionResult> GetAllReservationsByDate(DateTime date)
         {
             var response = await _mediator.Send(new GetAllReservationsByDateQuery(date));
@@ -72,12 +38,43 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllReservationsForTable([FromQuery] ReservationFilterModel model)
+        public async Task<IActionResult> GetAllReservations([FromQuery] ReservationFilterModel model)
         {
             var response = await _mediator.Send(new GetAllReservationsForTableQuery(model));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> FindByReservationId([FromRoute] long id)
+        {
+            var response = await _mediator.Send(new FindReservationByIdQuery(id));
+
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddReservation([FromBody] ReservationDTO reservation)
+        {
+            var response = await _mediator.Send(new AddReservationCommand(reservation));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateReservation([FromBody] ReservationDTO reservation)
+        {
+            var response = await _mediator.Send(new UpdateReservationCommand(reservation));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReservation([FromRoute] long id)
+        {
+            var response = await _mediator.Send(new DeleteReservationCommand(id));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
     }
 }

@@ -1,13 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Entities;
@@ -24,8 +20,7 @@ namespace TableTracker.Application.CQRS.Waiters.Commands.AddWaiter
 
         public AddWaiterCommandHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -48,6 +43,5 @@ namespace TableTracker.Application.CQRS.Waiters.Commands.AddWaiter
 
             return new CommandResponse<WaiterDTO>(request.Waiter);
         }
-
     }
 }

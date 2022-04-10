@@ -27,11 +27,13 @@ namespace TableTracker
                 .CreateScope();
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TableDbContext>();
-
             var identityDbContext = scope.ServiceProvider.GetRequiredService<IdentityTableDbContext>();
 
-            var seed = new DataSeed(scope.ServiceProvider.GetRequiredService<UserManager<TableTrackerIdentityUser>>(),
-                scope.ServiceProvider.GetRequiredService<RoleManager<TableTrackerIdentityRole>>());
+            var seed = new DataSeed(
+                scope.ServiceProvider
+                    .GetRequiredService<UserManager<TableTrackerIdentityUser>>(),
+                scope.ServiceProvider
+                    .GetRequiredService<RoleManager<TableTrackerIdentityRole>>());
 
             seed.SeedData(dbContext, identityDbContext).Wait();
 
@@ -42,8 +44,6 @@ namespace TableTracker
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    webBuilder.UseStartup<Startup>());
     }
 }

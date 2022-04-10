@@ -1,17 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-using System;
-using System.Text.Json.Serialization;
-
-using TableTracker.Infrastructure;
-using TableTracker.Infrastructure.Identity;
 using TableTracker.ServiceConfigurations;
 
 namespace TableTracker
@@ -34,21 +27,10 @@ namespace TableTracker
 
             services.AddMapper();
             services.AddDataAccess(Configuration);
-            services.AddUnitOfWork();
             services.AddMediator();
             services.AddValidaton();
-
-            services.AddIdentity<TableTrackerIdentityUser, TableTrackerIdentityRole>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-            })
-                .AddEntityFrameworkStores<IdentityTableDbContext>()
-                .AddDefaultTokenProviders()
-                .AddUserStore<UserStore<TableTrackerIdentityUser, TableTrackerIdentityRole, IdentityTableDbContext, Guid>>()
-                .AddRoleStore<RoleStore<TableTrackerIdentityRole, IdentityTableDbContext, Guid>>();
-
-            services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddCustomAuthorization();
+            services.AddApiControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,13 +43,9 @@ namespace TableTracker
             }
 
             app.UseCustomMiddlewares();
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseCrossOriginResourceSharing();
 
             app.UseEndpoints(endpoints =>

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 
-using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 using TableTracker.Infrastructure.Identity;
 
@@ -30,6 +30,5 @@ namespace TableTracker.Infrastructure
                 b.Property(u => u.Id).HasDefaultValueSql("newsequentialid()");
             });
         }
-
     }
 }

@@ -19,8 +19,7 @@ namespace TableTracker.Application.CQRS.Users.Queries.GetAllUsers
 
         public GetAllUsersQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

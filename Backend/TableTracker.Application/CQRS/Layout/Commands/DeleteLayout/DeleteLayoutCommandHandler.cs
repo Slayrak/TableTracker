@@ -1,13 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
@@ -47,6 +43,5 @@ namespace TableTracker.Application.CQRS.Layout.Commands.DeleteLayout
                 "Could not find the given layout."
                 );
         }
-
     }
 }

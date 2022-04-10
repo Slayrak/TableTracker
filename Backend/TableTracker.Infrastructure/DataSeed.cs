@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Identity;
 
 using TableTracker.Domain.Entities;
 using TableTracker.Domain.Enums;
@@ -60,7 +60,7 @@ namespace TableTracker.Infrastructure
 
                 for (int i = 0; i < 30; i++)
                 {
-                    TableTrackerIdentityUser userToAdd = new TableTrackerIdentityUser();
+                    TableTrackerIdentityUser userToAdd;
 
                     if (i < 10)
                     {
@@ -375,6 +375,5 @@ namespace TableTracker.Infrastructure
 
             await identityContext.SaveChangesAsync();
         }
-
     }
 }

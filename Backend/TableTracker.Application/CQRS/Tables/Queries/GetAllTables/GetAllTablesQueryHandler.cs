@@ -1,13 +1,10 @@
-﻿using AutoMapper;
-
-using MediatR;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
+using AutoMapper;
+
+using MediatR;
 
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
@@ -22,8 +19,7 @@ namespace TableTracker.Application.CQRS.Tables.Queries.GetAllTables
 
         public GetAllTablesQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

@@ -17,7 +17,7 @@ namespace TableTracker.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/visits")]
     public class VisitorHistoryController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -36,7 +36,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAllVisits([FromRoute] long id)
+        public async Task<IActionResult> FindVisitById([FromRoute] long id)
         {
             var response = await _mediator.Send(new FindVisitByIdQuery(id));
 

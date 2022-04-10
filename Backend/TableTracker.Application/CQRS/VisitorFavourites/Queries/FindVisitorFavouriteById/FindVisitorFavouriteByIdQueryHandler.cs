@@ -18,8 +18,7 @@ namespace TableTracker.Application.CQRS.VisitorFavourites.Queries.FindVisitorFav
 
         public FindVisitorFavouriteByIdQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

@@ -1,13 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
@@ -22,8 +18,7 @@ namespace TableTracker.Application.CQRS.Waiters.Queries.FindWaiterById
 
         public FindWaiterByIdQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
