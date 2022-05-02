@@ -12,14 +12,14 @@ namespace TableTracker.Middlewares
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
+        //private readonly ILogger _logger;
 
         public ErrorHandlingMiddleware(
-            RequestDelegate next,
-            ILogger logger)
+            RequestDelegate next)
+            //ILogger logger)
         {
             _next = next;
-            _logger = logger;
+            //_logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -30,7 +30,7 @@ namespace TableTracker.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                //_logger.LogError(ex.Message);
 
                 await HandleExceptionAsync(httpContext, ex);
             }
