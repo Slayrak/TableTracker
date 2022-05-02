@@ -2,6 +2,7 @@
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TableTracker.Application.CQRS.Waiters.Commands.AddWaiter;
@@ -15,8 +16,9 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Route("api/waiters")]
+    [Authorize]
     [ApiController]
+    [Route("api/waiters")]
     public class WaiterController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -35,7 +37,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> FindWaiterById(long id)
+        public async Task<IActionResult> FindWaiterById([FromRoute] long id)
         {
             var response = await _mediator.Send(new FindWaiterByIdQuery(id));
 
@@ -50,7 +52,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddWaiter([FromBody] WaiterDTO waiter)
         {
             var response = await _mediator.Send(new AddWaiterCommand(waiter));
@@ -58,7 +60,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateWaiter([FromBody] WaiterDTO waiter)
         {
             var response = await _mediator.Send(new UpdateWaiterCommand(waiter));
@@ -66,8 +68,8 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteWaiter(long id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteWaiter([FromRoute] long id)
         {
             var response = await _mediator.Send(new DeleteWaiterCommand(id));
 

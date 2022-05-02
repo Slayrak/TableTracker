@@ -1,25 +1,24 @@
-﻿using MediatR;
+﻿using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Http;
+using MediatR;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using TableTracker.Application.CQRS.Managers.Commands.AddManager;
 using TableTracker.Application.CQRS.Managers.Commands.DeleteManager;
 using TableTracker.Application.CQRS.Managers.Commands.UpdateManager;
 using TableTracker.Application.CQRS.Managers.Queries.FindManagerById;
 using TableTracker.Application.CQRS.Managers.Queries.FindManagerByRestaurant;
+using TableTracker.Application.CQRS.Managers.Queries.GetAllManagers;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Route("api/manager")]
+    [Authorize]
     [ApiController]
+    [Route("api/managers")]
     public class ManagerController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -29,15 +28,23 @@ namespace TableTracker.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllManagers()
+        {
+            var response = await _mediator.Send(new GetAllManagersQuery());
+
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> FindManagerById(long id)
+        public async Task<IActionResult> FindManagerById([FromRoute] long id)
         {
             var response = await _mediator.Send(new FindManagerByIdQuery(id));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddManager([FromBody] ManagerDTO managerDTO)
         {
             var response = await _mediator.Send(new AddManagerCommand(managerDTO));
@@ -45,7 +52,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateManager([FromBody] ManagerDTO managerDTO)
         {
             var response = await _mediator.Send(new UpdateManagerCommand(managerDTO));
@@ -53,8 +60,8 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteManager(long id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteManager([FromRoute] long id)
         {
             var response = await _mediator.Send(new DeleteManagerCommand(id));
 

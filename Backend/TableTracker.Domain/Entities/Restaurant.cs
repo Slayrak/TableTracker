@@ -25,6 +25,5 @@ namespace TableTracker.Domain.Entities
         public Layout Layout { get; set; }
         public long? ManagerId { get; set; }
         public Manager Manager { get; set; }
-
     }
 }

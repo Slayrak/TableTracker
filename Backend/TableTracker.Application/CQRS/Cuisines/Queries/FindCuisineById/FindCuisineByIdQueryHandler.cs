@@ -18,8 +18,7 @@ namespace TableTracker.Application.CQRS.Cuisines.Queries.FindCuisineById
 
         public FindCuisineByIdQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

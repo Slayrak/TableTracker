@@ -30,7 +30,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllCuisines()
         {
             var response = await _mediator.Send(new GetAllCuisinesQuery());
 
@@ -46,7 +46,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("name")]
-        public async Task<IActionResult> GetCuisineByName([FromQuery] CuisineName name)
+        public async Task<IActionResult> FindCuisineByName([FromQuery] CuisineName name)
         {
             var response = await _mediator.Send(new GetCuisineByNameQuery(name));
 
@@ -58,7 +58,7 @@ namespace TableTracker.Controllers
         {
             var response = await _mediator.Send(new AddCuisineCommand(cuisine));
 
-            return ReturnResultHelper.ReturnCommandResult<CuisineDTO>(response);
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
 
         [HttpPut]
@@ -69,7 +69,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("{id}/delete")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(long id)
         {
             var response = await _mediator.Send(new DeleteCuisineCommand(id));

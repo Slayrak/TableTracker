@@ -1,14 +1,10 @@
-﻿using MediatR;
+﻿using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Http;
+using MediatR;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using TableTracker.Application.CQRS.Layout.Commands;
 using TableTracker.Application.CQRS.Layout.Commands.AddLayout;
 using TableTracker.Application.CQRS.Layout.Commands.DeleteLayout;
 using TableTracker.Application.CQRS.Layout.Commands.UpdateLayout;
@@ -19,8 +15,9 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Route("api/layouts")]
+    [Authorize]
     [ApiController]
+    [Route("api/layouts")]
     public class LayoutController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -31,14 +28,14 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> FindLayoutById(long id)
+        public async Task<IActionResult> FindLayoutById([FromRoute] long id)
         {
             var response = await _mediator.Send(new FindLayoutByIdQuery(id));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddLayout([FromBody] LayoutDTO layoutDTO)
         {
             var response = await _mediator.Send(new AddLayoutCommand(layoutDTO));
@@ -46,7 +43,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateLayout([FromBody] LayoutDTO layoutDTO)
         {
             var response = await _mediator.Send(new UpdateLayoutCommand(layoutDTO));
@@ -54,8 +51,8 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteLayout(long id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteLayout([FromRoute] long id)
         {
             var response = await _mediator.Send(new DeleteLayoutCommand(id));
 

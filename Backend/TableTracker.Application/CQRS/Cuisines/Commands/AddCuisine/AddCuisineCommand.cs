@@ -1,7 +1,6 @@
 ﻿using MediatR;
 
 using TableTracker.Domain.DataTransferObjects;
-using TableTracker.Domain.Entities;
 
 namespace TableTracker.Application.CQRS.Cuisines.Commands.AddCuisine
 {

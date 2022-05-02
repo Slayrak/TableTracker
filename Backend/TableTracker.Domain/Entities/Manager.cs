@@ -1,5 +1,4 @@
-﻿
-using TableTracker.Domain.Enums;
+﻿using TableTracker.Domain.Enums;
 
 namespace TableTracker.Domain.Entities
 {

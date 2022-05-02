@@ -32,6 +32,5 @@ namespace TableTracker.Application.CQRS.Tables.Queries.FindTableById
 
             return _mapper.Map<TableDTO>(result);
         }
-
     }
 }

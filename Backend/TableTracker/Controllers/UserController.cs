@@ -31,7 +31,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllUsers()
         {
             var response = await _mediator.Send(new GetAllUsersQuery());
 
@@ -86,7 +86,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("{id}/delete")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(long id)
         {
             var response = await _mediator.Send(new DeleteUserCommand(id));

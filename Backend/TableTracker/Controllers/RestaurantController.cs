@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TableTracker.Application.CQRS.Restaurants.Commands.AddRestaurant;
@@ -11,13 +11,13 @@ using TableTracker.Application.CQRS.Restaurants.Commands.UpdateRestaurant;
 using TableTracker.Application.CQRS.Restaurants.Queries.FindRestaurantById;
 using TableTracker.Application.CQRS.Restaurants.Queries.GetAllRestaurantsWithFiltering;
 using TableTracker.Domain.DataTransferObjects;
-using TableTracker.Domain.Enums;
 using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Route("api/restaurants")]
+    [Authorize]
     [ApiController]
+    [Route("api/restaurants")]
     public class RestaurantController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -28,14 +28,14 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> FindRestaurantById(long id)
+        public async Task<IActionResult> FindRestaurantById([FromRoute] long id)
         {
             var response = await _mediator.Send(new FindRestaurantByIdQuery(id));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddRestaurant([FromBody] RestaurantDTO restaurant)
         {
             var response = await _mediator.Send(new AddRestaurantCommand(restaurant));
@@ -43,7 +43,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateRestaurant([FromBody] RestaurantDTO restaurant)
         {
             var response = await _mediator.Send(new UpdateRestaurantCommand(restaurant));
@@ -51,8 +51,8 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteRestaurant(long id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRestaurant([FromRoute] long id)
         {
             var response = await _mediator.Send(new DeleteRestaurantCommand(id));
 
@@ -60,7 +60,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllRestaurantsWithFiltering(RestaurantsFilterModel request)
+        public async Task<IActionResult> GetAllRestaurants(RestaurantsFilterModel request)
         {
             var response = await _mediator.Send(new GetAllRestaurantsWithFilteringQuery(request));
 

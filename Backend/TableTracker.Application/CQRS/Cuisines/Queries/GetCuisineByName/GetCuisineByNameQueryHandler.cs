@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using AutoMapper;
@@ -22,8 +18,7 @@ namespace TableTracker.Application.CQRS.Cuisines.Queries.GetCuisineByName
 
         public GetCuisineByNameQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

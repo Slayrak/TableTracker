@@ -19,8 +19,7 @@ namespace TableTracker.Application.CQRS.VisitorHistories.Queries.GetAllVisits
 
         public GetAllVisitsQueryHandler(
             IUnitOfWork<long> unitOfWork,
-            IMapper mapper
-            )
+            IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

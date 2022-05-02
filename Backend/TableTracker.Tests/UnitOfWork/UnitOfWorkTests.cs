@@ -1,7 +1,7 @@
 ﻿using System;
 
-using TableTracker.Infrastructure.Repositories;
 using TableTracker.Domain.Interfaces.Repositories;
+using TableTracker.Infrastructure.Repositories;
 
 using Xunit;
 
@@ -9,28 +9,28 @@ namespace TableTracker.Tests.UnitOfWork
 {
     public class UnitOfWorkTests : IClassFixture<UnitOfWorkFixture>
     {
-        private readonly UnitOfWorkFixture unitOfWorkFixture;
+        private readonly UnitOfWorkFixture _fixture;
 
         public UnitOfWorkTests(UnitOfWorkFixture fixture)
         {
-            unitOfWorkFixture = fixture;
+            _fixture = fixture;
         }
 
         [Fact]
         public void GenerateRepositories_Generates()
         {
-            var repo1 = unitOfWorkFixture.UnitOfWork.GetRepository<IFranchiseRepository>();
-            var repo2 = unitOfWorkFixture.UnitOfWork.GetRepository<ILayoutRepository>();
-            var repo3 = unitOfWorkFixture.UnitOfWork.GetRepository<IManagerRepository>();
-            var repo4 = unitOfWorkFixture.UnitOfWork.GetRepository<IReservationRepository>();
-            var repo5 = unitOfWorkFixture.UnitOfWork.GetRepository<IRestaurantRepository>();
-            var repo6 = unitOfWorkFixture.UnitOfWork.GetRepository<IRestaurantVisitorRepository>();
-            var repo7 = unitOfWorkFixture.UnitOfWork.GetRepository<ITableRepository>();
-            var repo8 = unitOfWorkFixture.UnitOfWork.GetRepository<IUserRepository>();
-            var repo9 = unitOfWorkFixture.UnitOfWork.GetRepository<IVisitorFavouriteRepository>();
-            var repo10 = unitOfWorkFixture.UnitOfWork.GetRepository<IVisitorHistoryRepository>();
-            var repo11 = unitOfWorkFixture.UnitOfWork.GetRepository<IVisitorRepository>();
-            var repo12 = unitOfWorkFixture.UnitOfWork.GetRepository<IWaiterRepository>();
+            var repo1 = _fixture.UnitOfWork.GetRepository<IFranchiseRepository>();
+            var repo2 = _fixture.UnitOfWork.GetRepository<ILayoutRepository>();
+            var repo3 = _fixture.UnitOfWork.GetRepository<IManagerRepository>();
+            var repo4 = _fixture.UnitOfWork.GetRepository<IReservationRepository>();
+            var repo5 = _fixture.UnitOfWork.GetRepository<IRestaurantRepository>();
+            var repo6 = _fixture.UnitOfWork.GetRepository<IRestaurantVisitorRepository>();
+            var repo7 = _fixture.UnitOfWork.GetRepository<ITableRepository>();
+            var repo8 = _fixture.UnitOfWork.GetRepository<IUserRepository>();
+            var repo9 = _fixture.UnitOfWork.GetRepository<IVisitorFavouriteRepository>();
+            var repo10 = _fixture.UnitOfWork.GetRepository<IVisitorHistoryRepository>();
+            var repo11 = _fixture.UnitOfWork.GetRepository<IVisitorRepository>();
+            var repo12 = _fixture.UnitOfWork.GetRepository<IWaiterRepository>();
 
             Assert.IsType<FranchiseRepository>(repo1);
             Assert.IsType<LayoutRepository>(repo2);
@@ -49,8 +49,8 @@ namespace TableTracker.Tests.UnitOfWork
         [Fact]
         public void GetRepository_IncorrectParameter_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(unitOfWorkFixture.UnitOfWork.GetRepository<string>);
-            Assert.Throws<NotSupportedException>(unitOfWorkFixture.UnitOfWork.GetRepository<FranchiseRepository>);
+            Assert.Throws<NotSupportedException>(_fixture.UnitOfWork.GetRepository<string>);
+            Assert.Throws<NotSupportedException>(_fixture.UnitOfWork.GetRepository<FranchiseRepository>);
         }
     }
 }

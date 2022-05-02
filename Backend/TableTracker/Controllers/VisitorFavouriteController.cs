@@ -28,7 +28,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllVisitorFavourites()
         {
             var response = await _mediator.Send(new GetAllVisitorFavouritesQuery());
 
@@ -36,7 +36,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAll(long id)
+        public async Task<IActionResult> FindVisitorFavouriteById([FromRoute] long id)
         {
             var response = await _mediator.Send(new FindVisitorFavouriteByIdQuery(id));
 
