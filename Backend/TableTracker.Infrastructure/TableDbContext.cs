@@ -80,11 +80,11 @@ namespace TableTracker.Infrastructure
             #region Cuisine
 
             modelBuilder.Entity<Cuisine>()
-                .HasIndex(x => x.CuisineEnum)
+                .HasIndex(x => x.CuisineName)
                 .IsUnique();
 
             modelBuilder.Entity<Cuisine>()
-                .Property(x => x.CuisineEnum)
+                .Property(x => x.CuisineName)
                 .IsRequired();
 
             #endregion

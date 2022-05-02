@@ -10,6 +10,7 @@ using TableTracker.Application.CQRS.Reservations.Commands.AddReservation;
 using TableTracker.Application.CQRS.Reservations.Commands.DeleteReservation;
 using TableTracker.Application.CQRS.Reservations.Commands.UpdateReservation;
 using TableTracker.Application.CQRS.Reservations.Queries.FindReservationById;
+using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservations;
 using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDate;
 using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsForTable;
 using TableTracker.Domain.DataTransferObjects;
@@ -17,7 +18,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/reservations")]
     public class ReservationController : ControllerBase
@@ -38,9 +39,9 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllReservations([FromQuery] ReservationFilterModel model)
+        public async Task<IActionResult> GetAllReservations()
         {
-            var response = await _mediator.Send(new GetAllReservationsForTableQuery(model));
+            var response = await _mediator.Send(new GetAllReservationsQuery());
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }

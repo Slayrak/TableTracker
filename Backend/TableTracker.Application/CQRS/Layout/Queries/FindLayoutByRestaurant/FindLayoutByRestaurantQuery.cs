@@ -6,11 +6,11 @@ namespace TableTracker.Application.CQRS.Layout.Queries.FindLayoutByRestaurant
 {
     public class FindLayoutByRestaurantQuery : IRequest<LayoutDTO>
     {
-        public FindLayoutByRestaurantQuery(RestaurantDTO restaurantDTO)
+        public FindLayoutByRestaurantQuery(long restaurantDTO)
         {
             RestaurantDTO = restaurantDTO;
         }
 
-        public RestaurantDTO RestaurantDTO { get; set; }
+        public long RestaurantDTO { get; set; }
     }
 }

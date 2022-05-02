@@ -7,6 +7,6 @@ namespace TableTracker.Domain.Interfaces.Repositories
 {
     public interface ICuisineRepository : IRepository<Cuisine, long>
     {
-        Task<Cuisine> GetCuisineByName(CuisineName cuisineName);
+        Task<Cuisine> GetCuisineByName(string cuisineName);
     }
 }

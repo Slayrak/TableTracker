@@ -15,7 +15,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/layouts")]
     public class LayoutController : ControllerBase
@@ -60,7 +60,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("restaurant")]
-        public async Task<IActionResult> FindLayoutByRestaurant([FromQuery] RestaurantDTO restaurantDTO)
+        public async Task<IActionResult> FindLayoutByRestaurant([FromQuery] long restaurantDTO)
         {
             var response = await _mediator.Send(new FindLayoutByRestaurantQuery(restaurantDTO));
 

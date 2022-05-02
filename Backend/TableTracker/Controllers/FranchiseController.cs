@@ -16,7 +16,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/franchises")]
     public class FranchiseController : ControllerBase
@@ -36,8 +36,8 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetFranchiseByName([FromRoute] string name)
+        [HttpGet("name")]
+        public async Task<IActionResult> GetFranchiseByName([FromQuery] string name)
         {
             var response = await _mediator.Send(new GetFranchiseByNameQuery(name));
 

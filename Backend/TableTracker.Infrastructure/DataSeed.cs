@@ -122,10 +122,17 @@ namespace TableTracker.Infrastructure
 
             if (!context.Cuisines.Any())
             {
-                foreach (int entity in Enum.GetValues(typeof(CuisineName)))
-                {
-                    cuisines.Add(new Cuisine { CuisineEnum = (CuisineName)entity});
-                }
+                cuisines.Add(new Cuisine { CuisineName = "International" });
+                cuisines.Add(new Cuisine { CuisineName = "Ukranian" });
+                cuisines.Add(new Cuisine { CuisineName = "Polish" });
+                cuisines.Add(new Cuisine { CuisineName = "English" });
+                cuisines.Add(new Cuisine { CuisineName = "Italian" });
+                cuisines.Add(new Cuisine { CuisineName = "German" });
+                cuisines.Add(new Cuisine { CuisineName = "French" });
+                cuisines.Add(new Cuisine { CuisineName = "American" });
+                cuisines.Add(new Cuisine { CuisineName = "Georgian" });
+                cuisines.Add(new Cuisine { CuisineName = "Japanese" });
+                cuisines.Add(new Cuisine { CuisineName = "Swedish" });
 
                 await context.AddRangeAsync(cuisines);
             }

@@ -10,12 +10,12 @@ namespace TableTracker.Application.MapperProfiles
         public CuisineProfile()
         {
             CreateMap<Cuisine, CuisineDTO>()
-                .ForMember(dest => dest.Cuisine, opt => opt.MapFrom(src => src.CuisineEnum))
+                .ForMember(dest => dest.Cuisine, opt => opt.MapFrom(src => src.CuisineName))
                 .ForMember(dest => dest.Restaurants, opt => opt.MapFrom(src => src.Restaurants));
 
             CreateMap<CuisineDTO, Cuisine>()
                 .ForMember(dest => dest.Restaurants, opt => opt.MapFrom(src => src.Restaurants))
-                .ForMember(dest => dest.CuisineEnum, opt => opt.MapFrom(src => src.Cuisine));
+                .ForMember(dest => dest.CuisineName, opt => opt.MapFrom(src => src.Cuisine));
         }
     }
 }

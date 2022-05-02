@@ -15,7 +15,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/tables")]
     public class TableController : ControllerBase
@@ -44,7 +44,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateRestaurant([FromBody] TableDTO table)
+        public async Task<IActionResult> UpdateTable([FromBody] TableDTO table)
         {
             var response = await _mediator.Send(new UpdateTableCommand(table));
 
@@ -52,19 +52,19 @@ namespace TableTracker.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRestaurant([FromRoute] long id)
+        public async Task<IActionResult> DeleteTable([FromRoute] long id)
         {
             var response = await _mediator.Send(new DeleteTableCommand(id));
 
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllTablesWithFiltering([FromQuery] TableFilterModel tableFilterModel)
-        {
-            var response = await _mediator.Send(new GetAllTablesWithFilteringQuery(tableFilterModel));
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllTablesWithFiltering([FromQuery] TableFilterModel tableFilterModel)
+        //{
+        //    var response = await _mediator.Send(new GetAllTablesWithFilteringQuery(tableFilterModel));
 
-            return ReturnResultHelper.ReturnQueryResult(response);
-        }
+        //    return ReturnResultHelper.ReturnQueryResult(response);
+        //}
     }
 }

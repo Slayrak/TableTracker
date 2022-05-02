@@ -16,7 +16,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/managers")]
     public class ManagerController : ControllerBase

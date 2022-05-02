@@ -14,12 +14,12 @@ namespace TableTracker.Infrastructure.Repositories
         {
         }
 
-        public async Task<Layout> FindLayoutByRestaurant(Restaurant restaurant)
+        public async Task<Layout> FindLayoutByRestaurant(long restaurant)
         {
             return await _context
                 .Set<Layout>()
                 .Include(x => x.Restaurant)
-                .FirstOrDefaultAsync(x => x.RestaurantId == restaurant.Id);
+                .FirstOrDefaultAsync(x => x.RestaurantId == restaurant);
         }
     }
 }

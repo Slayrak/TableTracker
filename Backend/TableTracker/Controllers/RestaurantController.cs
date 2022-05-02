@@ -9,13 +9,14 @@ using TableTracker.Application.CQRS.Restaurants.Commands.AddRestaurant;
 using TableTracker.Application.CQRS.Restaurants.Commands.DeleteRestaurant;
 using TableTracker.Application.CQRS.Restaurants.Commands.UpdateRestaurant;
 using TableTracker.Application.CQRS.Restaurants.Queries.FindRestaurantById;
+using TableTracker.Application.CQRS.Restaurants.Queries.GetAllRestaurants;
 using TableTracker.Application.CQRS.Restaurants.Queries.GetAllRestaurantsWithFiltering;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/restaurants")]
     public class RestaurantController : ControllerBase
@@ -60,9 +61,9 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllRestaurants(RestaurantsFilterModel request)
+        public async Task<IActionResult> GetAllRestaurants()
         {
-            var response = await _mediator.Send(new GetAllRestaurantsWithFilteringQuery(request));
+            var response = await _mediator.Send(new GetAllRestaurantsQuery());
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }

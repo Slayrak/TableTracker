@@ -8,7 +8,7 @@ namespace TableTracker.Domain.DataTransferObjects
     {
         public long Id { get; set; }
 
-        public CuisineName Cuisine { get; set; }
+        public string Cuisine { get; set; }
 
         public ICollection<RestaurantDTO> Restaurants { get; set; }
     }

@@ -15,11 +15,11 @@ namespace TableTracker.Infrastructure.Repositories
         {
         }
 
-        public async Task<Cuisine> GetCuisineByName(CuisineName cuisine)
+        public async Task<Cuisine> GetCuisineByName(string cuisine)
         {
             return await _context
                 .Set<Cuisine>()
-                .FirstOrDefaultAsync(x => x.CuisineEnum == cuisine);
+                .FirstOrDefaultAsync(x => x.CuisineName == cuisine);
         }
     }
 }

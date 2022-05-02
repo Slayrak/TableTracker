@@ -29,7 +29,7 @@ namespace TableTracker.Application.CQRS.Layout.Queries.FindLayoutByRestaurant
         {
             var result = await _unitOfWork
                 .GetRepository<ILayoutRepository>()
-                .FindLayoutByRestaurant(restaurant: _mapper.Map<Restaurant>(request.RestaurantDTO));
+                .FindLayoutByRestaurant(request.RestaurantDTO);
 
             return _mapper.Map<LayoutDTO>(result);
         }

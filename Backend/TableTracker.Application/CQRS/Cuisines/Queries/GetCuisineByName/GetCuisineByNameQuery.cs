@@ -7,11 +7,11 @@ namespace TableTracker.Application.CQRS.Cuisines.Queries.GetCuisineByName
 {
     public class GetCuisineByNameQuery : IRequest<CuisineDTO>
     {
-        public GetCuisineByNameQuery(CuisineName name)
+        public GetCuisineByNameQuery(string name)
         {
             Name = name;
         }
 
-        public CuisineName Name { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -6,6 +6,6 @@ namespace TableTracker.Domain.Interfaces.Repositories
 {
     public interface ILayoutRepository : IRepository<Layout, long>
     {
-        Task<Layout> FindLayoutByRestaurant(Restaurant restaurant);
+        Task<Layout> FindLayoutByRestaurant(long restaurant);
     }
 }
