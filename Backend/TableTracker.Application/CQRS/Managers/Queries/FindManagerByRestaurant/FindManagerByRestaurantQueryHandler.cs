@@ -29,7 +29,7 @@ namespace TableTracker.Application.CQRS.Managers.Queries.FindManagerByRestaurant
         {
             var result = await _unitOfWork
                 .GetRepository<IManagerRepository>()
-                .FindManagerByRestaurant(_mapper.Map<Restaurant>(request.RestaurantDTO));
+                .FindManagerByRestaurant(request.RestaurantDTO);
 
             return _mapper.Map<ManagerDTO>(result);
         }

@@ -38,6 +38,9 @@ namespace TableTracker.Application.CQRS.Reservations.Commands.AddReservation
                     "The reservation is already in the database.");
             }
 
+            entity.Table = null;
+            entity.Visitors = null;
+
             await _unitOfWork.GetRepository<IReservationRepository>().Insert(entity);
             await _unitOfWork.Save();
 

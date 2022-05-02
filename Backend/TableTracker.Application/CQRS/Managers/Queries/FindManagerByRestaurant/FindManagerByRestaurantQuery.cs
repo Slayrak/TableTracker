@@ -6,11 +6,11 @@ namespace TableTracker.Application.CQRS.Managers.Queries.FindManagerByRestaurant
 {
     public class FindManagerByRestaurantQuery : IRequest<ManagerDTO>
     {
-        public FindManagerByRestaurantQuery(RestaurantDTO restaurantDTO)
+        public FindManagerByRestaurantQuery(long restaurantDTO)
         {
             RestaurantDTO = restaurantDTO;
         }
 
-        public RestaurantDTO RestaurantDTO { get; set; }
+        public long RestaurantDTO { get; set; }
     }
 }

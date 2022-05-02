@@ -16,7 +16,7 @@ namespace TableTracker.Application.MapperProfiles
             CreateMap<ReservationDTO, Reservation>()
                 .ForMember(dest => dest.Visitors, opt => opt.MapFrom(src => src.Visitors))
                 .ForMember(dest => dest.Table, opt => opt.MapFrom(src => src.Table))
-                .ForMember(dest => dest.TableId, opt => opt.MapFrom(src => src.Table));
+                .ForMember(dest => dest.TableId, opt => opt.MapFrom(src => src.Table.Id));
         }
     }
 }

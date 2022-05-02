@@ -31,6 +31,7 @@ namespace TableTracker.Application.CQRS.Layout.Commands.UpdateLayout
 
             if(await repository.Contains(entity))
             {
+                entity.Restaurant = null;
                 repository.Update(entity);
                 await _unitOfWork.Save();
 

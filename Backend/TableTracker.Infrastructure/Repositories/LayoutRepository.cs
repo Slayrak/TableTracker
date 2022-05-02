@@ -21,5 +21,13 @@ namespace TableTracker.Infrastructure.Repositories
                 .Include(x => x.Restaurant)
                 .FirstOrDefaultAsync(x => x.RestaurantId == restaurant);
         }
+
+        public override async Task<Layout> FindById(long id)
+        {
+            return await _context
+                .Set<Layout>()
+                .Include(x => x.Restaurant)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

@@ -69,7 +69,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet("restaurant")]
-        public async Task<IActionResult> FindManagerByRestaurant([FromQuery] RestaurantDTO restaurantDTO)
+        public async Task<IActionResult> FindManagerByRestaurant([FromQuery] long restaurantDTO)
         {
             var response = await _mediator.Send(new FindManagerByRestaurantQuery(restaurantDTO));
 

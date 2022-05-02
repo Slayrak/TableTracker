@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,14 +10,14 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDate
+namespace TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDateAndTime
 {
-    public class GetAllReservationsByDateQueryHandler : IRequestHandler<GetAllReservationsByDateQuery, ReservationDTO[]>
+    public class GetAllReservationsByDateQueryAndTimeHandler : IRequestHandler<GetAllReservationsByDateAndTimeQuery, ReservationDTO[]>
     {
         private readonly IUnitOfWork<long> _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAllReservationsByDateQueryHandler(
+        public GetAllReservationsByDateQueryAndTimeHandler(
             IUnitOfWork<long> unitOfWork,
             IMapper mapper)
         {
@@ -28,11 +25,11 @@ namespace TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsB
             _mapper = mapper;
         }
 
-        public async Task<ReservationDTO[]> Handle(GetAllReservationsByDateQuery request, CancellationToken cancellationToken)
+        public async Task<ReservationDTO[]> Handle(GetAllReservationsByDateAndTimeQuery request, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork
                 .GetRepository<IReservationRepository>()
-                .GetAllReservationsByDate(request.Date.Date);
+                .GetAllReservationsByDateAndTime(request.Date);
 
             return result
                 .Select(x => _mapper.Map<ReservationDTO>(x))

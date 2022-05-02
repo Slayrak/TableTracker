@@ -17,13 +17,23 @@ namespace TableTracker.Infrastructure.Repositories
         {
         }
 
-        public async Task<ICollection<Reservation>> GetAllReservationsByDate(DateTime date)
+        public async Task<ICollection<Reservation>> GetAllReservationsByDateAndTime(DateTime date)
         {
             return await _context
                 .Set<Reservation>()
                 .Include(x => x.Visitors)
                 .Include(x => x.Table)
                 .Where(x => x.Date == date)
+                .ToListAsync();
+        }
+
+        public async Task<ICollection<Reservation>> GetAllReservationsByDate(DateTime date)
+        {
+            return await _context
+                .Set<Reservation>()
+                .Include(x => x.Visitors)
+                .Include(x => x.Table)
+                .Where(x => x.Date.Date == date.Date)
                 .ToListAsync();
         }
 

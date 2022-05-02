@@ -38,6 +38,10 @@ namespace TableTracker.Application.CQRS.Restaurants.Commands.AddRestaurant
                     "The restaurant is already in the database.");
             }
 
+            entity.Manager = null;
+            entity.Franchise = null;
+            entity.Layout = null;
+
             await _unitOfWork.GetRepository<IRestaurantRepository>().Insert(entity);
             await _unitOfWork.Save();
 

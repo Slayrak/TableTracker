@@ -34,9 +34,10 @@ namespace TableTracker.Application.CQRS.Managers.Commands.AddManager
                 return new CommandResponse<ManagerDTO>(
                     request.ManagerDTO,
                     Domain.Enums.CommandResult.Failure,
-                    "The manager is already in the database."
-                    );
+                    "The manager is already in the database.");
             }
+
+            entity.Restaurant = null;
 
             await _unitOfWork.GetRepository<IManagerRepository>().Insert(entity);
             await _unitOfWork.Save();

@@ -7,7 +7,7 @@ namespace TableTracker.Domain.Interfaces.Repositories
 {
     public interface IManagerRepository : IRepository<Manager, long>
     {
-        Task<Manager> FindManagerByRestaurant(Restaurant restaurant);
+        Task<Manager> FindManagerByRestaurant(long restaurant);
 
         Task<ICollection<Manager>> FilterManagers(string filter);
     }

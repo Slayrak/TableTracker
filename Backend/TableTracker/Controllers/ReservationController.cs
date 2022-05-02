@@ -12,6 +12,7 @@ using TableTracker.Application.CQRS.Reservations.Commands.UpdateReservation;
 using TableTracker.Application.CQRS.Reservations.Queries.FindReservationById;
 using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservations;
 using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDate;
+using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDateAndTime;
 using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsForTable;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Helpers;
@@ -28,6 +29,14 @@ namespace TableTracker.Controllers
         public ReservationController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet("date-and-time")]
+        public async Task<IActionResult> GetAllReservationsByDateAndTime(DateTime date)
+        {
+            var response = await _mediator.Send(new GetAllReservationsByDateAndTimeQuery(date));
+
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("date")]

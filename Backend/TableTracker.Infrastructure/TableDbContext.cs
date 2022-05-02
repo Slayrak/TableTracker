@@ -113,7 +113,7 @@ namespace TableTracker.Infrastructure
 
             //#endregion
 
-            //why waiter need a key on visitor
+            //why does waiter need a key on visitor
 
             //modelBuilder.Entity<Restaurant>()
             //    .HasMany(x => x.Cuisines)

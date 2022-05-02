@@ -10,6 +10,8 @@ namespace TableTracker.Domain.Interfaces.Repositories
     {
         Task<ICollection<Reservation>> GetAllReservationsByDate(DateTime date);
 
+        Task<ICollection<Reservation>> GetAllReservationsByDateAndTime(DateTime date);
+
         Task<ICollection<Reservation>> GetAllReservationsForTable(Table table, DateTime? date = null);
     }
 }

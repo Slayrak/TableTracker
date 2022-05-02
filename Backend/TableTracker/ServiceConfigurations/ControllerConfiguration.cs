@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace TableTracker.ServiceConfigurations
 {
@@ -8,8 +8,10 @@ namespace TableTracker.ServiceConfigurations
     {
         public static IServiceCollection AddApiControllers(this IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services
+                .AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             return services;
         }

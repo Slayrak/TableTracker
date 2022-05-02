@@ -32,6 +32,8 @@ namespace TableTracker.Application.CQRS.Managers.Commands.UpdateManager
 
             if(await repository.Contains(entity))
             {
+                entity.Restaurant = null;
+
                 repository.Update(entity);
                 await _unitOfWork.Save();
 

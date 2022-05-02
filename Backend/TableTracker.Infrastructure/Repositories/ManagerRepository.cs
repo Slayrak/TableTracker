@@ -25,12 +25,12 @@ namespace TableTracker.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Manager> FindManagerByRestaurant(Restaurant restaurant)
+        public async Task<Manager> FindManagerByRestaurant(long restaurant)
         {
             return await _context
                 .Set<Manager>()
                 .Include(x => x.Restaurant)
-                .FirstOrDefaultAsync(x => x.RestaurantId == restaurant.Id);
+                .FirstOrDefaultAsync(x => x.RestaurantId == restaurant);
         }
     }
 }

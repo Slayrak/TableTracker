@@ -33,9 +33,10 @@ namespace TableTracker.Application.CQRS.Layout.Commands.AddLayout
                 return new CommandResponse<LayoutDTO>(
                     request.LayoutDTO,
                     Domain.Enums.CommandResult.Failure,
-                    "The Layout is already in the database"
-                    );
+                    "The Layout is already in the database");
             }
+
+            entity.Restaurant = null;
 
             await _unitOfWork.GetRepository<ILayoutRepository>().Insert(entity);
             await _unitOfWork.Save();
