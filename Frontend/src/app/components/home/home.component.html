@@ -1,0 +1,30 @@
+<header class="header">
+    <h2>Table Tracker</h2>
+
+    <div class="align-end">
+        <button mat-button>Restaurants family</button>
+
+        <button mat-button>Sign up</button>
+
+        <button mat-button>Log in</button>
+
+        <div id="avatar"></div>
+
+        <button mat-button>
+            <mat-icon aria-hidden="false" aria-label="bitch">logout</mat-icon>
+        </button>
+    </div>
+</header>
+
+<div class="search">
+    <form [formGroup]="myFormGroup">
+        <input formControlName="people" type="text" />
+        <input formControlName="date" type="text" />
+        <input formControlName="time" type="text" />
+        <input formControlName="restaurant" type="text" />
+    </form>
+</div>
+
+<footer class="footer">
+    FAQ
+</footer>
