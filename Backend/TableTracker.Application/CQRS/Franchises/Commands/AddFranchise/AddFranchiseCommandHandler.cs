@@ -5,8 +5,6 @@ using AutoMapper;
 
 using MediatR;
 
-using Microsoft.EntityFrameworkCore;
-
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Entities;
 using TableTracker.Domain.Enums;
@@ -32,17 +30,18 @@ namespace TableTracker.Application.CQRS.Franchises.Commands.AddFranchise
         {
             var entity = _mapper.Map<Franchise>(request.Franchise);
 
-            await _unitOfWork.GetRepository<IFranchiseRepository>().Insert(entity);
+            if (entity.Id != 0)
+            {
+                return new CommandResponse<FranchiseDTO>(
+                    request.Franchise,
+                    CommandResult.Failure,
+                    "The franchise is already in the database");
+            }
 
-            try
-            {
-                await _unitOfWork.Save();
-                return new CommandResponse<FranchiseDTO>(_mapper.Map<FranchiseDTO>(entity));
-            }
-            catch (DbUpdateException ex)
-            {
-                return new CommandResponse<FranchiseDTO>(_mapper.Map<FranchiseDTO>(entity), CommandResult.Failure, ex.Message);
-            }
+            await _unitOfWork.GetRepository<IFranchiseRepository>().Insert(entity);
+            await _unitOfWork.Save();
+
+            return new CommandResponse<FranchiseDTO>(_mapper.Map<FranchiseDTO>(entity));
         }
     }
 }
