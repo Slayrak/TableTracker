@@ -16,13 +16,30 @@
     </div>
 </header>
 
-<div class="search">
-    <form [formGroup]="myFormGroup">
-        <input formControlName="people" type="text" />
-        <input formControlName="date" type="text" />
-        <input formControlName="time" type="text" />
-        <input formControlName="restaurant" type="text" />
-    </form>
+<div class="picture">
+    <div class="search">
+        <form [formGroup]="myFormGroup">
+            <mat-form-field formControlName="people" class="mat-form-field-class">
+                <mat-label>People</mat-label>
+                <input matInput type="text" />
+            </mat-form-field>
+            
+            <mat-form-field formControlName="date" class="mat-form-field-class">
+                <mat-label>Date</mat-label>
+                <input matInput type="text" />
+            </mat-form-field>
+            
+            <mat-form-field formControlName="time" class="mat-form-field-class">
+                <mat-label>Time</mat-label>
+                <input matInput type="text" />
+            </mat-form-field>
+    
+            <mat-form-field formControlName="restaurant" class="mat-form-field-class">
+                <mat-label>Restaurant</mat-label>
+                <input matInput type="text" />
+            </mat-form-field>
+        </form>
+    </div>
 </div>
 
 <footer class="footer">

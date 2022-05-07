@@ -8,16 +8,17 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
-  myFormGroup: FormGroup = new FormGroup({
-    people: new FormControl(),
-    date: new FormControl(),
-    time: new FormControl(),
-    restaurant: new FormControl(),
-  });
+  public myFormGroup!: FormGroup;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.myFormGroup = new FormGroup({
+      people: new FormControl(),
+      date: new FormControl(),
+      time: new FormControl(),
+      restaurant: new FormControl(),
+    })
   }
 
 }

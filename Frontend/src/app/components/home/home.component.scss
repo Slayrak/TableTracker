@@ -26,3 +26,23 @@
     background: gray;
     color: white;
 }
+
+.search {
+    position: absolute;
+    top: 50%;
+    left: 33%;
+}
+
+.picture {
+    height: 100%;
+    background-image: url("../../../assets/bg-search.png");
+    background-size: cover;
+}
+
+.mat-form-field-class {
+    background-color: white;
+}
+
+h2 {
+    margin: 0px !important;
+}
