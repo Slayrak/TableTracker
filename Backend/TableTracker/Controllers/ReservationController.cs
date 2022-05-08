@@ -31,26 +31,26 @@ namespace TableTracker.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("date-and-time")]
-        public async Task<IActionResult> GetAllReservationsByDateAndTime(DateTime date)
+        [HttpGet("{restaurantId}/date-and-time")]
+        public async Task<IActionResult> GetAllReservationsByDateAndTime([FromRoute] long restaurantId, [FromQuery] DateTime date)
         {
-            var response = await _mediator.Send(new GetAllReservationsByDateAndTimeQuery(date));
+            var response = await _mediator.Send(new GetAllReservationsByDateAndTimeQuery(restaurantId, date));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("date")]
-        public async Task<IActionResult> GetAllReservationsByDate(DateTime date)
+        [HttpGet("{restaurantId}/date")]
+        public async Task<IActionResult> GetAllReservationsByDate([FromRoute] long restaurantId, [FromQuery] DateTime date)
         {
-            var response = await _mediator.Send(new GetAllReservationsByDateQuery(date));
+            var response = await _mediator.Send(new GetAllReservationsByDateQuery(restaurantId, date));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllReservations()
+        [HttpGet("{restaurantId}")]
+        public async Task<IActionResult> GetAllReservations([FromRoute] long restaurantId)
         {
-            var response = await _mediator.Send(new GetAllReservationsQuery());
+            var response = await _mediator.Send(new GetAllReservationsQuery(restaurantId));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }

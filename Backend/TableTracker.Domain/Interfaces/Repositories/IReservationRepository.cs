@@ -8,9 +8,11 @@ namespace TableTracker.Domain.Interfaces.Repositories
 {
     public interface IReservationRepository : IRepository<Reservation, long>
     {
-        Task<ICollection<Reservation>> GetAllReservationsByDate(DateTime date);
+        Task<ICollection<Reservation>> GetAllReservations(long restaurantId);
 
-        Task<ICollection<Reservation>> GetAllReservationsByDateAndTime(DateTime date);
+        Task<ICollection<Reservation>> GetAllReservationsByDate(long restaurantId, DateTime date);
+
+        Task<ICollection<Reservation>> GetAllReservationsByDateAndTime(long restaurantId, DateTime date);
 
         Task<ICollection<Reservation>> GetAllReservationsForTable(Table table, DateTime? date = null);
     }
