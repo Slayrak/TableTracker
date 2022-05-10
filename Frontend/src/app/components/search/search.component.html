@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="left">
+        <mat-card class="map">
+            <div class="image">
+                <button mat-button class="map-button"></button>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <h2>Filters</h2>
+
+            <div class="negative-margin line"></div>
+
+            <div>
+                <h4>Cuisines:</h4>
+
+                <div *ngFor="let cuisine of cuisines">
+                    <mat-checkbox>{{ cuisine }}</mat-checkbox>
+                </div>
+            </div>
+
+            <div>
+                <h4>Types:</h4>
+
+                <div *ngFor="let type of types">
+                    <mat-checkbox>{{ type }}</mat-checkbox>
+                </div>
+            </div>
+
+            <div>
+                <h4>Price:</h4>
+
+                <span class="text-small">1</span><mat-slider value="2" min="1" max="3" step="1" tickInterval="1"></mat-slider><span class="text-small">3</span>
+            </div>
+
+            <div>
+                <h4>Review rating:</h4>
+
+                <span class="text-small">1</span><mat-slider value="5" min="1" max="5" step="1" tickInterval="1"></mat-slider><span class="text-small">5</span>
+            </div>
+
+            <div class="filter-buttons">
+                <button mat-flat-button color="primary" class="reset-filters">Reset filters</button>
+                <button mat-flat-button color="primary">Apply filters</button>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="right">
+        <form [formGroup]="restaurantForm">
+            <mat-form-field appearance="outline" class="input">
+                <input matInput type="text" formControlName="people" placeholder="Cuisine or restaurant name">
+            </mat-form-field>
+
+            <button mat-button>
+                <mat-icon>search</mat-icon>
+            </button>
+
+            <div>
+                <mat-form-field appearance="outline" >
+                    <mat-label>People:</mat-label>
+                    <input matInput type="text" formControlName="people"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="input">
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" >
+                    <mat-label>Time</mat-label>
+                    <input matInput type="text" formControlName="time"/>
+                </mat-form-field>
+            </div>
+        </form>
+
+        <div class="line"></div>
+
+        <div class="discover">
+            <h3>Discover top results</h3>
+
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle value="Top">Top</mat-button-toggle>
+                <mat-button-toggle value="New">New</mat-button-toggle>
+                <mat-button-toggle value="Recommended">Recommended</mat-button-toggle>
+            </mat-button-toggle-group>
+    
+            <div class="restaurant-card" *ngFor="let restaurant of restaurants">
+                <app-restaurant-card
+                    [restaurant]="restaurant">
+                </app-restaurant-card>
+            </div>
+    
+            <div class="discover-more">
+                <button mat-flat-button color="primary">Discover more</button>
+            </div>
+        </div>
+    </div>
+</div>

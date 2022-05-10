@@ -19,11 +19,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    RestaurantCardComponent
+    RestaurantCardComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +57,8 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
     MatButtonToggleModule,
     MatCardModule,
     MatChipsModule,
+    MatCheckboxModule,
+    MatSliderModule,
   ],
 
   providers: [],
