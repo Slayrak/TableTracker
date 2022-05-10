@@ -8,10 +8,13 @@ namespace TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsB
 {
     public class GetAllReservationsByDateQuery : IRequest<ReservationDTO[]>
     {
-        public GetAllReservationsByDateQuery(DateTime date)
+        public GetAllReservationsByDateQuery(long restaurantId, DateTime date)
         {
+            RestaurantId = restaurantId;
             Date = date;
         }
+
+        public long RestaurantId { get; set; }
 
         public DateTime Date { get; set; }
     }

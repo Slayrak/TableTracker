@@ -29,7 +29,7 @@ namespace TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsB
         {
             var result = await _unitOfWork
                 .GetRepository<IReservationRepository>()
-                .GetAllReservationsByDateAndTime(request.Date);
+                .GetAllReservationsByDateAndTime(request.RestaurantId, request.Date);
 
             return result
                 .Select(x => _mapper.Map<ReservationDTO>(x))

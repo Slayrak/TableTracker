@@ -17,23 +17,23 @@ namespace TableTracker.Infrastructure.Repositories
         {
         }
 
-        public async Task<ICollection<Reservation>> GetAllReservationsByDateAndTime(DateTime date)
+        public async Task<ICollection<Reservation>> GetAllReservationsByDateAndTime(long restaurantId, DateTime date)
         {
             return await _context
                 .Set<Reservation>()
                 .Include(x => x.Visitors)
                 .Include(x => x.Table)
-                .Where(x => x.Date == date)
+                .Where(x => x.Table.RestaurantId == restaurantId && x.Date == date)
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Reservation>> GetAllReservationsByDate(DateTime date)
+        public async Task<ICollection<Reservation>> GetAllReservationsByDate(long restaurantId, DateTime date)
         {
             return await _context
                 .Set<Reservation>()
                 .Include(x => x.Visitors)
                 .Include(x => x.Table)
-                .Where(x => x.Date.Date == date.Date)
+                .Where(x => x.Table.RestaurantId == restaurantId && x.Date.Date == date.Date)
                 .ToListAsync();
         }
 
@@ -44,6 +44,15 @@ namespace TableTracker.Infrastructure.Repositories
                 .Include(x => x.Table)
                 .Where(x => x.TableId == table.Id)
                 .Where(x => !date.HasValue || x.Date == date)
+                .ToListAsync();
+        }
+
+        public async Task<ICollection<Reservation>> GetAllReservations(long restaurantId)
+        {
+            return await _context.Set<Reservation>()
+                .Include(x => x.Visitors)
+                .Include(x => x.Table)
+                .Where(x => x.Table.RestaurantId == restaurantId)
                 .ToListAsync();
         }
     }
