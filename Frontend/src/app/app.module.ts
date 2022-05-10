@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule}  from '@angular/material/datepicker';
@@ -13,9 +22,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -25,6 +31,7 @@ import { SearchComponent } from './components/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     HomeComponent,
     HeaderComponent,
     FooterComponent,
@@ -34,10 +41,14 @@ import { SearchComponent } from './components/search/search.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
+
+    MatFormFieldModule,
+    MatIconModule,
     BrowserAnimationsModule,
+
+    ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
     MatInputModule,
@@ -49,7 +60,18 @@ import { SearchComponent } from './components/search/search.component';
     MatCheckboxModule,
     MatSliderModule,
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  constructor(iconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon(
+      'googleIcon',
+      domSanitizer.bypassSecurityTrustResourceUrl('./assets/google-color.svg')
+    );
+  }
+
+
+}
