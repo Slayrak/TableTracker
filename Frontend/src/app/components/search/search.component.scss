@@ -1,17 +1,42 @@
 .container {
     background-color: #f6f6f6;
+    display: flex;
 }
 
 .map {
-    
+    height: 100px;
+    margin: 0 0 10px 0;
+    padding: 10px;
 }
 
-.filters {
+.image {
+    background-image: url("../../../assets/map-with-pin.png");
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;    
+    height: 100%;
+}
 
+.map-button {
+    height: 100%;
+}
+
+.left {
+    margin: 15px 30px 0px 160px;
+    flex: 0 0 12%;
+}
+
+.right {
+    margin: 15px 160px 0px 30px;
 }
 
 .discover {
-    margin: 45px 30px 30px 30px;
+    margin: 0 0 30px 0;
+}
+
+.discover-more {
+    display: flex;
+    justify-content: center;
 }
 
 .restaurant-card {
@@ -21,3 +46,30 @@
 .text-small {
     font-size: small;
 }
+
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.reset-filters {
+    margin: 0 0 10px 0;
+}
+
+h2 {
+    margin: 0;
+}
+
+h4 {
+    margin: 15px 0 0 0;
+}
+
+.negative-margin {
+    margin: 0 0 0 -16px;
+}
+
+.line {
+    display: inline-block;
+    width: 116%;
+    border-top: 0.2px solid lightgray;
+  }

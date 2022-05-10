@@ -1,14 +1,18 @@
 <div class="container">
     <div class="left">
         <mat-card class="map">
-            View map
+            <div class="image">
+                <button mat-button class="map-button"></button>
+            </div>
         </mat-card>
 
-        <mat-card class="filters">
+        <mat-card>
             <h2>Filters</h2>
 
+            <div class="negative-margin line"></div>
+
             <div>
-                <h3>Cuisines:</h3>
+                <h4>Cuisines:</h4>
 
                 <div *ngFor="let cuisine of cuisines">
                     <mat-checkbox>{{ cuisine }}</mat-checkbox>
@@ -16,7 +20,7 @@
             </div>
 
             <div>
-                <h3>Types:</h3>
+                <h4>Types:</h4>
 
                 <div *ngFor="let type of types">
                     <mat-checkbox>{{ type }}</mat-checkbox>
@@ -24,20 +28,20 @@
             </div>
 
             <div>
-                <h3>Price:</h3>
+                <h4>Price:</h4>
 
                 <span class="text-small">1</span><mat-slider value="2" min="1" max="3" step="1" tickInterval="1"></mat-slider><span class="text-small">3</span>
             </div>
 
             <div>
-                <h3>Review rating:</h3>
+                <h4>Review rating:</h4>
 
                 <span class="text-small">1</span><mat-slider value="5" min="1" max="5" step="1" tickInterval="1"></mat-slider><span class="text-small">5</span>
             </div>
 
-            <div>
-                <button mat-flat-button color="primary">Reset filters</button>
-                <button mat-flat-button color="primary">Apply filters</button>            
+            <div class="filter-buttons">
+                <button mat-flat-button color="primary" class="reset-filters">Reset filters</button>
+                <button mat-flat-button color="primary">Apply filters</button>
             </div>
         </mat-card>
     </div>
@@ -73,6 +77,8 @@
                 </mat-form-field>
             </div>
         </form>
+
+        <div class="line"></div>
 
         <div class="discover">
             <h3>Discover top results</h3>
