@@ -28,6 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 import { SearchComponent } from './components/search/search.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SigninComponent } from './components/signin/signin.component';
     FooterComponent,
     RestaurantCardComponent,
     SearchComponent,
-    SigninComponent
+    SigninComponent,
+    ReserpasswordComponent
   ],
   imports: [
     BrowserModule,
