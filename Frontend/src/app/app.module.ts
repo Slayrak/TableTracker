@@ -27,6 +27,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 import { SearchComponent } from './components/search/search.component';
+import { SigninComponent } from './components/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SearchComponent } from './components/search/search.component';
     HeaderComponent,
     FooterComponent,
     RestaurantCardComponent,
-    SearchComponent
+    SearchComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
