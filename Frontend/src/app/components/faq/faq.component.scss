@@ -1,6 +1,9 @@
+@import "src/styles.scss";
+
 .page {
     width: 100%;
     min-height: 72vh;
+    background-color: $background-color;
 }
 
 .faqcontaner {
