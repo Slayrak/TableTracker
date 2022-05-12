@@ -6,8 +6,12 @@ import { LoginComponent } from './components/login/login.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ManagerProfileComponent } from './components/manager-profile/manager-profile.component';
 
 const routes: Routes = [
+  { path: 'user/profile', component: UserProfileComponent },
+  { path: 'manager/profile', component: ManagerProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
