@@ -5,6 +5,7 @@ import { SearchComponent } from './components/search/search.component';
 import { LoginComponent } from './components/login/login.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'resetpassword', component: ReserpasswordComponent },
+  { path: 'faq', component: FaqComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', redirectTo: '' },
 ];
