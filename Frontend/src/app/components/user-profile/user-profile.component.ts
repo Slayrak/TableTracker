@@ -56,6 +56,7 @@ export class UserProfileComponent implements OnInit {
       }
     ],
     favourites: this.restaurants,
+    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG1lbnxlbnwwfHwwfHw%3D&w=1000&q=80",
   };
 
   constructor() { }

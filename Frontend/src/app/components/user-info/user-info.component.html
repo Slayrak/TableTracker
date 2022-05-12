@@ -1,0 +1,33 @@
+<div class="main-info">
+    <div class="user-info">
+        <button mat-button>
+            <img class="avatar" [src]="avatar">
+        </button>
+
+        <mat-list>
+            <mat-list-item>
+                <h3>{{ fullName }}</h3>
+            </mat-list-item>
+
+            <mat-list-item>
+                <h3 matLine>E-mail address</h3>
+                <p matLine>{{ email }}</p>
+            </mat-list-item>
+            
+            <mat-list-item>
+                <h3 matLine>Date of birth</h3>
+                <p matLine>{{ dateOfBirth }}</p>
+            </mat-list-item>
+                
+            <mat-list-item>
+                <h3 matLine>Location</h3>
+                <p matLine>{{ location }}</p>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <div class="buttons">
+        <button class="button m-bottom-5" mat-flat-button color="primary">Edit Profile</button>
+        <button class="button" mat-flat-button color="primary">Reset Password</button>
+    </div>
+</div>

@@ -22,6 +22,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { HomeComponent } from './components/home/home.component';
@@ -32,6 +34,9 @@ import { SearchComponent } from './components/search/search.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ManagerProfileComponent } from './components/manager-profile/manager-profile.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,10 @@ import { FaqComponent } from './components/faq/faq.component';
     SearchComponent,
     SigninComponent,
     ReserpasswordComponent,
-    FaqComponent
+    FaqComponent,
+    UserProfileComponent,
+    ManagerProfileComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +76,8 @@ import { FaqComponent } from './components/faq/faq.component';
     MatCheckboxModule,
     MatSliderModule,
     MatExpansionModule,
+    MatDividerModule,
+    MatListModule,
     TextFieldModule
   ],
 
