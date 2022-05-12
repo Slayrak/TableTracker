@@ -21,6 +21,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatExpansionModule } from '@angular/material/expansion'
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -29,6 +31,7 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
 import { SearchComponent } from './components/search/search.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { ReserpasswordComponent } from './components/reserpassword/reserpassword
     RestaurantCardComponent,
     SearchComponent,
     SigninComponent,
-    ReserpasswordComponent
+    ReserpasswordComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +67,8 @@ import { ReserpasswordComponent } from './components/reserpassword/reserpassword
     MatChipsModule,
     MatCheckboxModule,
     MatSliderModule,
+    MatExpansionModule,
+    TextFieldModule
   ],
 
   providers: [],
