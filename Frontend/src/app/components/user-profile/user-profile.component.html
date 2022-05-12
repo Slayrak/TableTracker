@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="main-info">
+        <div class="user-info">
+            <button mat-button>
+                <img class="avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG1lbnxlbnwwfHwwfHw%3D&w=1000&q=80">
+            </button>
+    
+            <mat-list>
+                <mat-list-item>
+                    <h3>{{ user.fullName }}</h3>
+                </mat-list-item>
+    
+                <mat-list-item>
+                    <h3 matLine>E-mail address</h3>
+                    <p matLine>{{ user.email }}</p>
+                </mat-list-item>
+                
+                <mat-list-item>
+                    <h3 matLine>Date of birth</h3>
+                    <p matLine>{{ user.dateOfBirth.toDateString() }}</p>
+                </mat-list-item>
+                    
+                <mat-list-item>
+                    <h3 matLine>Location</h3>
+                    <p matLine>{{ user.location }}</p>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="buttons">
+            <button class="button m-bottom-5" mat-flat-button color="primary">Edit Profile</button>
+            <button class="button" mat-flat-button color="primary">Reset Password</button>
+        </div>
+    </div>
+
+    <div class="m-top-30">
+        <h2>User Bookings</h2>
+
+        <mat-card *ngFor="let booking of user.userBookings" class="booking-card">
+            <div class="booking-info">
+                <div class="image">
+                    <img [src]="booking.image" class="booking-image"/>
+                </div>
+            
+                <div class="date">
+                    <h2>{{ booking.restaurantName }}</h2>
+                
+                    <div>
+                        <small class="gray" matLine>Date of the booking:</small>
+                        <p matLine>{{ booking.bookingDate.toDateString() }}</p>
+                    </div>
+                    
+                    <div>
+                        <small class="gray" matLine>Time:</small>
+                        <p matLine>{{ booking.bookingDate.toLocaleTimeString('ua-UA') }}</p>
+                    </div>
+                </div>
+            </div>            
+        
+            <div class="ratings">
+                <div class="flex">
+                    <mat-icon [ngClass]="booking.rating >= 1 ? '' : 'star-gray'">star_border</mat-icon>
+                    <mat-icon [ngClass]="booking.rating >= 2 ? '' : 'star-gray'">star_border</mat-icon>
+                    <mat-icon [ngClass]="booking.rating >= 3 ? '' : 'star-gray'">star_border</mat-icon>
+                    <mat-icon [ngClass]="booking.rating >= 4 ? '' : 'star-gray'">star_border</mat-icon>
+                    <mat-icon [ngClass]="booking.rating >= 5 ? '' : 'star-gray'">star_border</mat-icon>
+                </div>
+        
+                <div class="flex">
+                    <mat-icon [ngClass]="booking.priceRating >= 1 ? '' : 'euro-gray'">euro</mat-icon>
+                    <mat-icon [ngClass]="booking.priceRating >= 2 ? '' : 'euro-gray'">euro</mat-icon>
+                    <mat-icon [ngClass]="booking.priceRating >= 3 ? '' : 'euro-gray'">euro</mat-icon>
+                </div>
+        
+                <div class="flex">
+                    <button mat-flat-button color="primary" (click)="discover(booking.id)">Discover</button>
+                </div>
+            </div>
+        </mat-card>
+
+        <div class="flex m-top-30">
+            <button mat-flat-button color="primary">Show previous</button>
+        </div>
+    </div>
+
+    <div class="m-top-30">
+        <h2>User favourite restaurants</h2>
+
+        <div class="restaurant-card" *ngFor="let restaurant of user.favourites">
+            <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
+        </div>
+
+        <div class="flex m-top-30">
+            <button mat-flat-button color="primary">Show more</button>
+        </div>
+    </div>
+</div>

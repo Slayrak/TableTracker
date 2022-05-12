@@ -1,5 +1,7 @@
+@import "src/styles.scss";
+
 .container {
-    background-color: #f6f6f6;
+    background-color: $background-color;
     display: flex;
 }
 
@@ -72,4 +74,12 @@ h4 {
     display: inline-block;
     width: 116%;
     border-top: 0.2px solid lightgray;
-  }
+}
+
+.divider {
+    margin: 20px 0 20px 0;
+}
+
+.divider-for-filters {
+    margin: 0 0 10px 0;
+}
