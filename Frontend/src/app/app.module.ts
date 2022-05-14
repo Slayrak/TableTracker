@@ -24,6 +24,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { HomeComponent } from './components/home/home.component';
@@ -37,6 +38,8 @@ import { FaqComponent } from './components/faq/faq.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ManagerProfileComponent } from './components/manager-profile/manager-profile.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,9 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
     FaqComponent,
     UserProfileComponent,
     ManagerProfileComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    RestaurantPageComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +70,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
     BrowserAnimationsModule,
 
     ReactiveFormsModule,
-    MatIconModule,
+    MatGridListModule,
     MatButtonModule,
     MatInputModule,
     MatDatepickerModule,

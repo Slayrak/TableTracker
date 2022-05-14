@@ -1,7 +1,9 @@
+@import "src/styles.scss";
+
 .footer {
     width: 100%;
     height: 125px;
-    background: #262626;
+    background: $header-footer-color;
     color: white;
 
     display: flex;

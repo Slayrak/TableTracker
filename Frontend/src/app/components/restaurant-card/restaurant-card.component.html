@@ -7,7 +7,7 @@
         <div class="description">
             <mat-card-title>{{ restaurant.name }}</mat-card-title>
         
-            <mat-chip-list aria-label="Fish selection">
+            <mat-chip-list>
                 <mat-chip *ngFor="let tag of restaurant.tags">{{ tag }}</mat-chip>
             </mat-chip-list>
         
