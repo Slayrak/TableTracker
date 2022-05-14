@@ -9,7 +9,7 @@ import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 })
 export class RestaurantPageComponent implements OnInit {
 
-  //@ViewChild(MatCalendar) _datePicker!: MatCalendar<Date>
+  public isManagedRestaurant: boolean = false;
 
   public peopleNumber: number;
   public selectedDate: Date;

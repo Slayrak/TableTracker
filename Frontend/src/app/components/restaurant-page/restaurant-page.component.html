@@ -39,6 +39,15 @@
         </div>
 
         <div class="margin-10">
+            <div class="edit-restaurant" *ngIf="isManagedRestaurant">
+                <button mat-flat-button color="secondary">
+                    Edit restaurant page
+                    <span class="icon">
+                        <mat-icon>edit</mat-icon>
+                    </span>
+                </button>
+            </div>
+
             <mat-card class="flex people-card card">
                 <h4 class="people-head">People:</h4>
 
