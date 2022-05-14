@@ -32,6 +32,10 @@ import { SearchComponent } from './components/search/search.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { ContactreviewComponent } from './components/contactreview/contactreview.component';
+
+import { AgmCoreModule } from '@agm/core';
+import { RestaurantMapCardComponent } from './components/restaurant-map-card/restaurant-map-card.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,9 @@ import { FaqComponent } from './components/faq/faq.component';
     SearchComponent,
     SigninComponent,
     ReserpasswordComponent,
-    FaqComponent
+    FaqComponent,
+    ContactreviewComponent,
+    RestaurantMapCardComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +74,12 @@ import { FaqComponent } from './components/faq/faq.component';
     MatCheckboxModule,
     MatSliderModule,
     MatExpansionModule,
-    TextFieldModule
+    TextFieldModule,
+
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBWfjzOxb-2roNizfHJah-t4P3oNffgoJA',
+      libraries: ['places']
+    })
   ],
 
   providers: [],
@@ -80,6 +91,11 @@ export class AppModule {
     iconRegistry.addSvgIcon(
       'googleIcon',
       domSanitizer.bypassSecurityTrustResourceUrl('./assets/google-color.svg')
+    );
+
+    iconRegistry.addSvgIcon(
+      'locationIcon',
+      domSanitizer.bypassSecurityTrustResourceUrl('./assets/location-sign-svgrepo-com.svg')
     );
   }
 

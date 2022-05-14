@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { ContactreviewComponent } from './components/contactreview/contactreview.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'resetpassword', component: ReserpasswordComponent },
   { path: 'faq', component: FaqComponent },
+  { path: 'comp', component: ContactreviewComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', redirectTo: '' },
 ];
