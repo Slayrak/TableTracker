@@ -1,0 +1,72 @@
+<div class="componentPage">
+    <mat-button-toggle-group name="swapper" aria-label="Swapper" class="swapButton" value="Contacts" #group="matButtonToggleGroup" [value]="selectedVal" (change)="onValChange(group.value)">
+        <mat-button-toggle value="Contacts" class="contactButton">Contacts</mat-button-toggle>
+        <mat-button-toggle value="Reviews" class="reviewsButton">Reviews</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <div *ngIf="selectedVal === 'Contacts'; else reviews" class="contactsContainer">
+        <div class="mapContainer">
+            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="20" (mapReady)="giveLatLong()">
+                <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="$any(icon)" (markerClick)="openWindow(0)" >
+                    <agm-info-window 
+                        [isOpen]="isInfoWindowOpen(0)"
+                        [latitude]="longitude" 
+                        [longitude]="latitude">
+
+                        <app-restaurant-map-card
+                            [restaurant]="restaurant">
+                        </app-restaurant-map-card>
+
+                    </agm-info-window>
+
+                </agm-marker>
+            </agm-map>
+        </div>
+
+        <div class="infoContainer">
+            <p class="headerIGuess">Address: </p>
+            <div>
+                Lviv, Kryva Lypa ave 6
+            </div>
+        </div>
+
+        <div class="infoContainer">
+            <p class="headerIGuess">Phone: </p>
+            <div>
+                +38 (067) 006 1111
+            </div>
+        </div>
+
+        <div class="infoContainer">
+            <p class="headerIGuess">Mail: </p>
+            <div>
+                b.reserve@kumpelgroup.com
+            </div>
+        </div>
+
+        <div class="infoContainer">
+            <a href="default.asp" target="_blank" class="headerIGuess">Reset password</a>
+        </div>
+
+        <div class="infoContainer">
+            <p class="headerIGuess">Schedule: </p>
+            <div>
+                Monday-Thursday: 08:00 - 24:00
+                Friday-Sunday: 08:00 - 02:00
+            </div>
+        </div>
+
+    </div>
+
+    <ng-template #reviews>
+        <div class="reviewsContainer">
+            <div class="ratingCont">
+                <div>Overall rating</div>
+                <div class="stars">
+
+                </div>
+            </div>
+        </div>
+      </ng-template>
+
+</div>

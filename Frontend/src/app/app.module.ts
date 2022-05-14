@@ -35,6 +35,10 @@ import { SearchComponent } from './components/search/search.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { ContactreviewComponent } from './components/contactreview/contactreview.component';
+
+import { AgmCoreModule } from '@agm/core';
+import { RestaurantMapCardComponent } from './components/restaurant-map-card/restaurant-map-card.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ManagerProfileComponent } from './components/manager-profile/manager-profile.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
@@ -53,6 +57,8 @@ import { MenuComponent } from './components/menu/menu.component';
     SigninComponent,
     ReserpasswordComponent,
     FaqComponent,
+    ContactreviewComponent,
+    RestaurantMapCardComponent,
     UserProfileComponent,
     ManagerProfileComponent,
     UserInfoComponent,
@@ -81,6 +87,12 @@ import { MenuComponent } from './components/menu/menu.component';
     MatCheckboxModule,
     MatSliderModule,
     MatExpansionModule,
+    TextFieldModule,
+
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBWfjzOxb-2roNizfHJah-t4P3oNffgoJA',
+      libraries: ['places']
+    }),
     MatDividerModule,
     MatListModule,
     TextFieldModule
@@ -95,6 +107,11 @@ export class AppModule {
     iconRegistry.addSvgIcon(
       'googleIcon',
       domSanitizer.bypassSecurityTrustResourceUrl('./assets/google-color.svg')
+    );
+
+    iconRegistry.addSvgIcon(
+      'locationIcon',
+      domSanitizer.bypassSecurityTrustResourceUrl('./assets/location-sign-svgrepo-com.svg')
     );
   }
 
