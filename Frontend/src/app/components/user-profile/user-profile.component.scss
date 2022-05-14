@@ -1,18 +1,20 @@
-.restaurant-image {
-    height: 120px;
-    width: 120px;
-    border-radius: 7px;
-    margin: 0 20px 0 0;
+@import "src/styles.scss";
+
+.container {
+    background-color: $background-color;
+    padding: 60px;
 }
 
-.restaurant-card {
+.booking-image {
+    height: 150px;
+    width: 150px;
+    border-radius: 7px;
+}
+
+.booking-card {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.restaurant-info {
-    display: flex;
 }
 
 .star-gray {
@@ -32,16 +34,18 @@
     display: flex;
 }
 
-.description {
+.date {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     
     width: 74%;
+
+    margin-left: 20px;
 }
 
-mat-card-content {
-    margin: 0 !important;
+.booking-info {
+    display: flex;
 }
 
 .ratings {
@@ -50,4 +54,16 @@ mat-card-content {
     justify-content: space-between;
 
     width: 120px;
+}
+
+.m-top-30 {
+    margin-top: 30px;
+}
+
+.gray {
+    color: gray;
+}
+
+.restaurant-card {
+    margin: 20px 0px 20px 0px;
 }

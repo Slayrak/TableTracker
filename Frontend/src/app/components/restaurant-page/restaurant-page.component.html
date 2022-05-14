@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="flex">
+        <div class="restaurant-info">
+            <div class="margin-10">
+                <div class="main-info">
+                    <h2>{{ restaurant.name }}</h2>
+    
+                    <div class="rating">
+                        <mat-icon [ngClass]="restaurant.rating >= 1 ? '' : 'star-gray'">star_border</mat-icon>
+                        <mat-icon [ngClass]="restaurant.rating >= 2 ? '' : 'star-gray'">star_border</mat-icon>
+                        <mat-icon [ngClass]="restaurant.rating >= 3 ? '' : 'star-gray'">star_border</mat-icon>
+                        <mat-icon [ngClass]="restaurant.rating >= 4 ? '' : 'star-gray'">star_border</mat-icon>
+                        <mat-icon [ngClass]="restaurant.rating >= 5 ? '' : 'star-gray'">star_border</mat-icon>
+                    </div>
+                </div>
+    
+                <div class="main-info">
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let tag of restaurant.tags">{{ tag }}</mat-chip>
+                    </mat-chip-list>
+    
+                    <div class="rating">
+                        <mat-icon [ngClass]="restaurant.priceRating >= 1 ? '' : 'euro-gray'">euro</mat-icon>
+                        <mat-icon [ngClass]="restaurant.priceRating >= 2 ? '' : 'euro-gray'">euro</mat-icon>
+                        <mat-icon [ngClass]="restaurant.priceRating >= 3 ? '' : 'euro-gray'">euro</mat-icon>
+                    </div>
+                </div>
+            </div>
+
+            <div class="margin-10">
+                <div>
+                    <img class="image" [src]="restaurant.image">
+                </div>
+    
+                <div>
+                    <p>{{ restaurant.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="margin-10">
+            <div class="edit-restaurant" *ngIf="isManagedRestaurant">
+                <button mat-flat-button color="secondary">
+                    Edit restaurant page
+                    <span class="icon">
+                        <mat-icon>edit</mat-icon>
+                    </span>
+                </button>
+            </div>
+
+            <mat-card class="flex people-card card">
+                <h4 class="people-head">People:</h4>
+
+                <button mat-mini-fab color="secondary" class="people-button">
+                    <mat-icon class="icon">remove</mat-icon>
+                </button>
+
+                <span class="people-number">{{ peopleNumber }}</span>
+
+                <button mat-mini-fab color="secondary" class="people-button">
+                    <mat-icon class="icon">add</mat-icon>
+                </button>
+            </mat-card>
+
+            <mat-card class="card">
+                <h4 class="d-inline">Date: </h4>
+                <span>{{ selectedDate.toDateString() }}</span>
+                <mat-divider></mat-divider>
+
+                <mat-calendar [selected]="selectedDate" (selectedChange)="selectedDate = $event"></mat-calendar>
+            </mat-card>
+
+            <mat-card class="card flex">
+                <h4 class="d-inline">Time: </h4>
+                <input class="d-inline time-input" type="time">
+            </mat-card>
+
+            <div class="buttons">
+                <button mat-flat-button color="secondary">
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+
+                <button mat-flat-button color="primary" class="right">Book</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu">
+        <app-menu [restaurantId]="restaurant.id"></app-menu>
+    </div>
+</div>

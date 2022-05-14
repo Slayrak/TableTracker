@@ -7,8 +7,13 @@ import { SigninComponent } from './components/signin/signin.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ContactreviewComponent } from './components/contactreview/contactreview.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ManagerProfileComponent } from './components/manager-profile/manager-profile.component';
+import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
 
 const routes: Routes = [
+  { path: 'user/profile', component: UserProfileComponent },
+  { path: 'manager/profile', component: ManagerProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
@@ -16,6 +21,7 @@ const routes: Routes = [
   { path: 'resetpassword', component: ReserpasswordComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'comp', component: ContactreviewComponent },
+  { path: 'restaurant-page', component: RestaurantPageComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', redirectTo: '' },
 ];

@@ -22,6 +22,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { HomeComponent } from './components/home/home.component';
@@ -36,6 +39,11 @@ import { ContactreviewComponent } from './components/contactreview/contactreview
 
 import { AgmCoreModule } from '@agm/core';
 import { RestaurantMapCardComponent } from './components/restaurant-map-card/restaurant-map-card.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ManagerProfileComponent } from './components/manager-profile/manager-profile.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +58,12 @@ import { RestaurantMapCardComponent } from './components/restaurant-map-card/res
     ReserpasswordComponent,
     FaqComponent,
     ContactreviewComponent,
-    RestaurantMapCardComponent
+    RestaurantMapCardComponent,
+    UserProfileComponent,
+    ManagerProfileComponent,
+    UserInfoComponent,
+    RestaurantPageComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +76,7 @@ import { RestaurantMapCardComponent } from './components/restaurant-map-card/res
     BrowserAnimationsModule,
 
     ReactiveFormsModule,
-    MatIconModule,
+    MatGridListModule,
     MatButtonModule,
     MatInputModule,
     MatDatepickerModule,
@@ -79,7 +92,10 @@ import { RestaurantMapCardComponent } from './components/restaurant-map-card/res
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBWfjzOxb-2roNizfHJah-t4P3oNffgoJA',
       libraries: ['places']
-    })
+    }),
+    MatDividerModule,
+    MatListModule,
+    TextFieldModule
   ],
 
   providers: [],

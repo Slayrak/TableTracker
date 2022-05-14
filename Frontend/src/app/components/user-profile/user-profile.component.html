@@ -1,0 +1,70 @@
+<div class="container">
+    <app-user-info
+        [fullName]="user.fullName"
+        [avatar]="user.avatar"
+        [location]="user.location"
+        [email]="user.email"
+        [dateOfBirth]="user.dateOfBirth.toDateString()"></app-user-info>
+
+    <div class="m-top-30">
+        <h2>User Bookings</h2>
+
+        <mat-card *ngFor="let booking of user.userBookings" class="booking-card">
+            <div class="booking-info">
+                <div class="image">
+                    <img [src]="booking.image" class="booking-image"/>
+                </div>
+            
+                <div class="date">
+                    <h2>{{ booking.restaurantName }}</h2>
+                
+                    <div>
+                        <small class="gray" matLine>Date of the booking:</small>
+                        <p matLine>{{ booking.bookingDate.toDateString() }}</p>
+                    </div>
+                    
+                    <div>
+                        <small class="gray" matLine>Time:</small>
+                        <p matLine>{{ booking.bookingDate.toLocaleTimeString('ua-UA') }}</p>
+                    </div>
+                </div>
+            </div>            
+        
+            <div class="ratings">
+                <div class="flex">
+                    <mat-icon [ngClass]="booking.rating >= 1 ? '' : 'star-gray'">star_border</mat-icon>
+                    <mat-icon [ngClass]="booking.rating >= 2 ? '' : 'star-gray'">star_border</mat-icon>
+                    <mat-icon [ngClass]="booking.rating >= 3 ? '' : 'star-gray'">star_border</mat-icon>
+                    <mat-icon [ngClass]="booking.rating >= 4 ? '' : 'star-gray'">star_border</mat-icon>
+                    <mat-icon [ngClass]="booking.rating >= 5 ? '' : 'star-gray'">star_border</mat-icon>
+                </div>
+        
+                <div class="flex">
+                    <mat-icon [ngClass]="booking.priceRating >= 1 ? '' : 'euro-gray'">euro</mat-icon>
+                    <mat-icon [ngClass]="booking.priceRating >= 2 ? '' : 'euro-gray'">euro</mat-icon>
+                    <mat-icon [ngClass]="booking.priceRating >= 3 ? '' : 'euro-gray'">euro</mat-icon>
+                </div>
+        
+                <div class="flex">
+                    <button mat-flat-button color="primary" (click)="discover(booking.id)">Discover</button>
+                </div>
+            </div>
+        </mat-card>
+
+        <div class="flex m-top-30">
+            <button mat-flat-button color="primary">Show previous</button>
+        </div>
+    </div>
+
+    <div class="m-top-30">
+        <h2>User favourite restaurants</h2>
+
+        <div class="restaurant-card" *ngFor="let restaurant of user.favourites">
+            <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
+        </div>
+
+        <div class="flex m-top-30">
+            <button mat-flat-button color="primary">Show more</button>
+        </div>
+    </div>
+</div>

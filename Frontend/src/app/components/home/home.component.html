@@ -18,7 +18,7 @@
                 
                 <mat-form-field appearance="outline" class="input">
                     <mat-label>Time</mat-label>
-                    <input matInput type="text" formControlName="time">
+                    <input matInput type="time" formControlName="time">
                 </mat-form-field>
         
                 <mat-form-field appearance="outline" class="input">
@@ -43,9 +43,7 @@
         </mat-button-toggle-group>
 
         <div class="restaurant-card" *ngFor="let restaurant of restaurants">
-            <app-restaurant-card
-                [restaurant]="restaurant">
-            </app-restaurant-card>
+            <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
         </div>
 
         <div class="discover-more">

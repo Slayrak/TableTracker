@@ -1,3 +1,5 @@
+@import "src/styles.scss";
+
 .header {
     top: 0;
     width: 100%;
@@ -8,7 +10,7 @@
     justify-content: space-between;
     align-items: center;
     
-    background: #262626;
+    background: $header-footer-color;
     vertical-align: middle;
     color: white;
 }

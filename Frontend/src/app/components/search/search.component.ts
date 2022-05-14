@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
       priceRating: 3,
       rating: 5,
       image: "https://crestins.com/wp-content/uploads/2021/04/nick-karvounis-Ciqxn7FE4vE-unsplash.jpg",
-      description: "The Bachevsky family has known all over Europe and the world since 1782, when they opened a factory for mass production of vodka. Now the legendary vodka has returned to Lviv...",
+      description: "The Baczewski family has known all over Europe and the world since 1782, when they opened a factory for mass production of vodka. Now the legendary vodka has returned to Lviv...",
     },
     {
       id: 2,
