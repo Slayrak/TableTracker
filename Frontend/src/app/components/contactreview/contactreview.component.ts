@@ -1,6 +1,7 @@
 import { AgmInfoWindow } from '@agm/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 
 @Component({
@@ -11,88 +12,23 @@ import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 
 export class ContactreviewComponent implements OnInit {
 
-  infoWindowOpened: AgmInfoWindow|null
-  previous_info_window: AgmInfoWindow|null
+  @Input() address!: string;
+  @Input() restaurant!: RestaurantDTO;
 
+  restaurantForMap!: RestaurantDTO[];
 
   constructor() {
-    this.infoWindowOpened = null;
-    this.previous_info_window = null;
+    this.address = "Shevska St, 8, Lviv, Lviv Oblast, 79000";
+
    }
 
   selectedVal = "Contacts";
 
-  latitude = 0;
-  longitude = 0;
-
   ngOnInit(): void {
-    
+    this.restaurantForMap = [this.restaurant];
   }
 
   public onValChange(val: string) {
     this.selectedVal = val;
   }
-
-  public giveLatLong() {
-    let address = "Shevska St, 8, Lviv, Lviv Oblast, 79000";
-
-    let geocoder = new google.maps.Geocoder();
-
-    let result = "";
-  
-    geocoder.geocode({ 'address': address }, (results, status) => {
-      this.latitude = results[0].geometry.location.lat();
-      this.longitude = results[0].geometry.location.lng();
-      console.log("lat: " + this.latitude + ", long: " + this.longitude);
-      });
-  }
-
-  icon = {
-    url: './assets/location-sign-svgrepo-com.svg',
-    scaledSize: {
-      width: 40,
-      height: 60
-    }
-    
-  }
-
-  public restaurant: RestaurantInfo =
-  {
-    id: 1,
-    name: "WA Restaurant",
-    tags: ["Japanese", "Seafood", "Asian"],
-    priceRating: 3,
-    rating: 5,
-    image: "https://crestins.com/wp-content/uploads/2021/04/nick-karvounis-Ciqxn7FE4vE-unsplash.jpg",
-    description: "WA restaurant started a smart fusion cousine. It's a new approach to gastronomy, presentation and food combination. WA took base of Asian cuisine with a taste of modern European traditions. We promote a harmony of quality, taste and aesthetic. We offer to taste bowls...",
-  };
-
-  close_window(){
-    if (this.previous_info_window != null ) {
-      this.previous_info_window.close()
-      }    
-    }
-    
-    select_marker(infoWindow){
-     if (this.previous_info_window == null)
-      this.previous_info_window = infoWindow;
-     else{
-      this.infoWindowOpened = infoWindow
-      this.previous_info_window.close()
-     }
-     this.previous_info_window = infoWindow
-    }
-
-  // address = "1045 mission street san francisco";
-
-  // geocoder = new google.maps.Geocoder();
-
-  // result = "";
-  
-  // geocoder.geocode({ 'address': address }, (results, status) => {
-  //   var latitude = results[0].geometry.location.lat();
-  //   var longitude = results[0].geometry.location.lng();
-  //   console.log("lat: " + latitude + ", long: " + longitude);
-  //   });
-
 }

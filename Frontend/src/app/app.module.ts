@@ -44,6 +44,7 @@ import { ManagerProfileComponent } from './components/manager-profile/manager-pr
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { MenuComponent } from './components/menu/menu.component';
     ManagerProfileComponent,
     UserInfoComponent,
     RestaurantPageComponent,
-    MenuComponent
+    MenuComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

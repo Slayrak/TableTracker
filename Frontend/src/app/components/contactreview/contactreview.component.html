@@ -1,4 +1,4 @@
-<!-- <div class="componentPage">
+<div class="componentPage">
     <mat-button-toggle-group name="swapper" aria-label="Swapper" class="swapButton" value="Contacts" #group="matButtonToggleGroup" [value]="selectedVal" (change)="onValChange(group.value)">
         <mat-button-toggle value="Contacts" class="contactButton">Contacts</mat-button-toggle>
         <mat-button-toggle value="Reviews" class="reviewsButton">Reviews</mat-button-toggle>
@@ -6,20 +6,7 @@
 
     <div *ngIf="selectedVal === 'Contacts'; else reviews" class="contactsContainer">
         <div class="mapContainer">
-            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="20" (mapReady)="giveLatLong()" (mapClick)="close_window()">
-                <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="$any(icon)" (markerClick)=select_marker(infoWindow) >
-                    <agm-info-window #infoWindow
-                        [latitude]="longitude" 
-                        [longitude]="latitude">
-
-                        <app-restaurant-map-card
-                            [restaurant]="restaurant">
-                        </app-restaurant-map-card>
-
-                    </agm-info-window>
-
-                </agm-marker>
-            </agm-map>
+            <app-map [address]="'Shevska St, 8, Lviv, Lviv Oblast, 79000'" [restaurants]="restaurantForMap"></app-map>
         </div>
 
         <div class="infoContainer">
@@ -68,4 +55,4 @@
         </div>
       </ng-template>
 
-</div> -->
+</div>
