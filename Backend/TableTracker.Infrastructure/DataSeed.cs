@@ -36,12 +36,12 @@ namespace TableTracker.Infrastructure
             var managers = new List<Manager>();
             var layouts = new List<Layout>();
             var visitors = new List<Visitor>();
-            var waiters = new List<Waiter>();
             var tables = new List<Table>();
             var reservations = new List<Reservation>();
             var restVisitor = new List<RestaurantVisitor>();
             var favourites = new List<VisitorFavourite>();
             var history = new List<VisitorHistory>();
+            var images = new List<Image>();
 
             foreach (var roleName in roleNames)
             {
@@ -133,6 +133,7 @@ namespace TableTracker.Infrastructure
                 cuisines.Add(new Cuisine { CuisineName = "Georgian" });
                 cuisines.Add(new Cuisine { CuisineName = "Japanese" });
                 cuisines.Add(new Cuisine { CuisineName = "Swedish" });
+                cuisines.Add(new Cuisine { CuisineName = "European" });
 
                 await context.AddRangeAsync(cuisines);
             }
@@ -153,29 +154,119 @@ namespace TableTracker.Infrastructure
 
             #endregion
 
+            #region Images
+
+            images.Add(new Image { Name = "63f686a1-b0ae-47e7-adbd-4e06708e5294.jpg" });
+            images.Add(new Image { Name = "8c9eda00-d482-4a34-9d35-98a7fef67d1f.jpg" });
+            images.Add(new Image { Name = "70937ef2-dd49-4c52-b648-9ad422b04699.jpg" });
+            images.Add(new Image { Name = "951e2e2b-0b55-4928-a8a5-9f8710d873c7.jpg" });
+            images.Add(new Image { Name = "fb3c5bac-2e27-4c21-8ac7-3034d3a139ef.jpg" });
+            images.Add(new Image { Name = "f479f4cb-4c2e-43cd-b957-ee9f81677851.jpg" });
+            images.Add(new Image { Name = "6efb8a54-8bf8-4d02-9a0d-3ec812c0363a.jpg" });
+
+            await context.AddRangeAsync(images);
+
+            #endregion
+
             #region Restaurant
 
             if (!context.Restaurants.Any())
             {
-
-                for (int i = 0; i < 10; i++)
+                restaurants.Add(new Restaurant
                 {
-                    restaurants.Add(new Restaurant
+                    Name = "Baczewski Restaurant",
+                    Description = "The Baczewski family has known all over Europe and the world since 1782, when they opened a factory for mass production of vodka. Now the legendary vodka has returned to Lviv...",
+                    Discount = Discount.NoDiscount,
+                    Franchise = franchises[0],
+                    NumberOfTables = 10,
+                    PriceRange = 3,
+                    Rating = 5,
+                    Address = "Shevska St, 8, Lviv, Lviv Oblast, 79000",
+                    Type = RestaurantType.Restaurant,
+                    Cuisines = new[]
                     {
-                        CoordX = i + 1,
-                        CoordY = i,
-                        Discount = Discount.NoDiscount,
-                        Franchise = franchises[i],
-                        NumberOfTables = 10 + i,
-                        PriceRange = "$$",
-                        Rating = 5,
-                        Type = RestaurantType.Cafe,
-                        Cuisines = cuisines,
-                    });
-                }
+                        cuisines[2],
+                        cuisines[11],
+                    },
+                    MainImage = images[0],
+                });
+
+                restaurants.Add(new Restaurant
+                {
+                    Name = "Edison Pub",
+                    Description = "Best place for a good evening, good music, nice drinks or deliciuos food! Also good shots.",
+                    Discount = Discount.NoDiscount,
+                    Franchise = franchises[0],
+                    NumberOfTables = 10,
+                    PriceRange = 2,
+                    Rating = 5,
+                    Address = "Valova St, 23, Lviv, Lviv Oblast, 79000",
+                    Type = RestaurantType.Restaurant,
+                    Cuisines = new[]
+                    {
+                        cuisines[11],
+                    },
+                    MainImage = images[1],
+                });
+
+                restaurants.Add(new Restaurant
+                {
+                    Name = "Teddy Restaurant",
+                    Description = "Great and cozy place with open kitchen. Very tasty pasta and big pizza. Delicious meals and really cute teddy bear sitting next to you.",
+                    Discount = Discount.NoDiscount,
+                    Franchise = franchises[0],
+                    NumberOfTables = 10,
+                    PriceRange = 3,
+                    Rating = 5,
+                    Address = "Chaikovs'koho St, 20, Lviv, Lviv Oblast, 79000",
+                    Type = RestaurantType.Restaurant,
+                    Cuisines = new[]
+                    {
+                        cuisines[4],
+                    },
+                    MainImage = images[2],
+                });
+
+                restaurants.Add(new Restaurant
+                {
+                    Name = "Sowa",
+                    Description = "One of the best places in Lviv to visit. Very tasty food complemented by the cute interior of the cafe.",
+                    Discount = Discount.NoDiscount,
+                    Franchise = franchises[0],
+                    NumberOfTables = 10,
+                    PriceRange = 2,
+                    Rating = 5,
+                    Address = "Staroievreiska St, 40, Lviv, Lviv Oblast, 79000",
+                    Type = RestaurantType.Restaurant,
+                    Cuisines = new[]
+                    {
+                        cuisines[0],
+                        cuisines[11],
+                    },
+                    MainImage = images[3],
+                });
+
+                restaurants.Add(new Restaurant
+                {
+                    Name = "Culinary Studio Kryva Lypa",
+                    Description = "All in all fantastic food, great service, very friendly and helpful. Food came on time and timed with each other. Would recommend this restaurant to everyone coming to lviv...",
+                    Discount = Discount.NoDiscount,
+                    Franchise = franchises[0],
+                    NumberOfTables = 10,
+                    PriceRange = 3,
+                    Rating = 5,
+                    Address = "Kryva Lypa Passage, 8, Lviv, Lviv Oblast, 79000",
+                    Type = RestaurantType.Restaurant,
+                    Cuisines = new[]
+                    {
+                        cuisines[2],
+                        cuisines[4],
+                        cuisines[11],
+                    },
+                    MainImage = images[4],
+                });
 
                 await context.AddRangeAsync(restaurants);
-
             }
 
             #endregion
@@ -184,16 +275,14 @@ namespace TableTracker.Infrastructure
 
             if (!context.Managers.Any())
             {
-
                 //TODO: Define Rest find 
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < restaurants.Count; i++)
                 {
                     managers.Add(new Manager
                     {
                         Restaurant = restaurants[i],
                         ManagerState = ManagerState.Unocupied,
-                        Avatar = "RandomStr",
                         Email = $"exampleEmail{i+1}@service.domain",
                         FullName = $"Generic Boy {i + 1}",
                     });
@@ -203,8 +292,9 @@ namespace TableTracker.Infrastructure
 
                 }
 
-                await context.AddRangeAsync(managers);
+                managers[0].Avatar = images[5];
 
+                await context.AddRangeAsync(managers);
             }
 
             #endregion
@@ -215,7 +305,7 @@ namespace TableTracker.Infrastructure
             {
                 //TODO: Define Rest find
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < restaurants.Count; i++)
                 {
                     layouts.Add(new Layout { LayoutData = 0, Restaurant = restaurants[i] });
 
@@ -240,38 +330,15 @@ namespace TableTracker.Infrastructure
                 {
                     visitors.Add(new Visitor
                     {
-                        Avatar = "Random string",
                         Email = $"MehBruh{i + 1}@service.domain",
                         FullName = $"Juan{i + 1}",
                         GeneralTrustFactor = 2,
                     });
                 }
 
+                visitors[0].Avatar = images[6];
+
                 await context.AddRangeAsync(visitors);
-            }
-
-            #endregion
-
-            #region Waiter
-
-            if (!context.Waiters.Any())
-            {
-                //TODO: link IdentityUsers
-
-                for (int i = 0; i < 10; i++)
-                {
-                    waiters.Add(new Waiter
-                    {
-                        FullName = $"DefaultChad{i + 1}",
-                        NumberOfServingTables = i + 1,
-                        WaiterState = WaiterState.Unoccupied,
-                        Avatar = "Random str",
-                        Email = $"WaiterClone{i + 1}@idk.com",
-                        Restaurant = restaurants[i],
-                    });
-                }
-
-                await context.AddRangeAsync(waiters);
             }
 
             #endregion
@@ -281,19 +348,16 @@ namespace TableTracker.Infrastructure
             if (!context.Tables.Any())
             {
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < restaurants.Count; i++)
                 {
                     tables.Add(new Table
                     {
-                        CoordX = i + 1,
-                        CoordY = i,
                         Floor = i + 1,
                         State = TableState.Unoccupied,
                         NumberOfSeats = 4,
                         TableSize = 10,
                         Number = 1,
                         Restaurant = restaurants[i],
-                        Waiter = waiters[i],
                     });
                 }
 
@@ -306,7 +370,7 @@ namespace TableTracker.Infrastructure
 
             if (!context.Reservations.Any())
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < restaurants.Count; i++)
                 {
                     reservations.Add(new Reservation
                     {
@@ -326,7 +390,7 @@ namespace TableTracker.Infrastructure
             if (!context.RestaurantVisitors.Any())
             {
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < restaurants.Count; i++)
                 {
                     restVisitor.Add(new RestaurantVisitor
                     {
@@ -347,8 +411,7 @@ namespace TableTracker.Infrastructure
 
             if (!context.VisitorFavourites.Any())
             {
-
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < restaurants.Count; i++)
                 {
                     favourites.Add(new VisitorFavourite { Restaurant = restaurants[i], Visitor = visitors[i] });
                 }
@@ -362,8 +425,7 @@ namespace TableTracker.Infrastructure
 
             if (!context.VisitorHistorys.Any())
             {
-
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < restaurants.Count; i++)
                 {
                     history.Add(new VisitorHistory
                     {

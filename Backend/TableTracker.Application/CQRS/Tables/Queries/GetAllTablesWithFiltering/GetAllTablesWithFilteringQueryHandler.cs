@@ -32,7 +32,6 @@ namespace TableTracker.Application.CQRS.Tables.Queries.GetAllTablesWithFiltering
                 .GetRepository<ITableRepository>()
                 .GetAllTablesWithFiltering(
                     restaurant: _mapper.Map<Restaurant>(request.FilterModel.Restaurant),
-                    waiter: _mapper.Map<Waiter>(request.FilterModel.Waiter),
                     numberOfSeats: request.FilterModel.NumberOfSeats,
                     tableSize: request.FilterModel.TableSize,
                     floor: request.FilterModel.Floor,

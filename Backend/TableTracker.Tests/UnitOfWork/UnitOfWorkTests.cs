@@ -30,7 +30,6 @@ namespace TableTracker.Tests.UnitOfWork
             var repo9 = _fixture.UnitOfWork.GetRepository<IVisitorFavouriteRepository>();
             var repo10 = _fixture.UnitOfWork.GetRepository<IVisitorHistoryRepository>();
             var repo11 = _fixture.UnitOfWork.GetRepository<IVisitorRepository>();
-            var repo12 = _fixture.UnitOfWork.GetRepository<IWaiterRepository>();
 
             Assert.IsType<FranchiseRepository>(repo1);
             Assert.IsType<LayoutRepository>(repo2);
@@ -43,7 +42,6 @@ namespace TableTracker.Tests.UnitOfWork
             Assert.IsType<VisitorFavouriteRepository>(repo9);
             Assert.IsType<VisitorHistoryRepository>(repo10);
             Assert.IsType<VisitorRepository>(repo11);
-            Assert.IsType<WaiterRepository>(repo12);
         }
 
         [Fact]

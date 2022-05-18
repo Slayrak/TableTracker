@@ -11,7 +11,6 @@ namespace TableTracker.Domain.Interfaces.Repositories
     {
         Task<ICollection<Table>> GetAllTablesWithFiltering(
             Restaurant restaurant,
-            Waiter waiter = null,
             int? numberOfSeats = null,
             double? tableSize = null,
             int? floor = null,

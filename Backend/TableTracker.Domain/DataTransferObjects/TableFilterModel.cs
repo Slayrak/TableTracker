@@ -7,8 +7,6 @@ namespace TableTracker.Domain.DataTransferObjects
     public class TableFilterModel
     {
         public RestaurantDTO Restaurant { get; set; }
-        
-        public WaiterDTO Waiter { get; set; }
          
         public int? NumberOfSeats { get; set; }
          
