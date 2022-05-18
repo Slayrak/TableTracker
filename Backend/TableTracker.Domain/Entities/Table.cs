@@ -11,12 +11,8 @@ namespace TableTracker.Domain.Entities
         public TableState State { get; set; }
         public int NumberOfSeats { get; set; }
         public int Floor { get; set; }
-        public double CoordX { get; set; }
-        public double CoordY { get; set; }
         public double TableSize { get; set; }
 
-        public long? WaiterId { get; set; }
-        public Waiter Waiter { get; set; }
         public long RestaurantId { get; set; }
         public Restaurant Restaurant { get; set; }
 

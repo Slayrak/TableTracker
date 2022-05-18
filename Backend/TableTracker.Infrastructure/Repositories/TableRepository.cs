@@ -20,7 +20,6 @@ namespace TableTracker.Infrastructure.Repositories
 
         public async Task<ICollection<Table>> GetAllTablesWithFiltering(
             Restaurant restaurant,
-            Waiter waiter = null,
             int? numberOfSeats = null,
             double? tableSize = null,
             int? floor = null,
@@ -31,10 +30,8 @@ namespace TableTracker.Infrastructure.Repositories
                 .Set<Table>()
                 .Include(x => x.Reservations)
                 .Include(x => x.Restaurant)
-                .Include(x => x.Waiter)
                 .Where(x => x.RestaurantId == restaurant.Id)
                 .Where(x => !numberOfSeats.HasValue || x.NumberOfSeats == numberOfSeats)
-                .Where(x => waiter == null || x.Waiter.Id == waiter.Id)
                 .Where(x => !tableSize.HasValue || x.TableSize - tableSize < 0.00001)
                 .Where(x => !floor.HasValue || x.Floor == floor)
                 //.Where(x => !reserveDate.HasValue || x.ReserveDate == reserveDate) треба видалити думаю

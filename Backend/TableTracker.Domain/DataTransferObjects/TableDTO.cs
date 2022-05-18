@@ -16,13 +16,7 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public int Floor { get; set; }
 
-        public double CoordX { get; set; }
-
-        public double CoordY { get; set; }
-
         public double TableSize { get; set; }
-
-        public WaiterDTO Waiter { get; set; }
 
         public RestaurantDTO Restaurant { get; set; }
 

@@ -54,16 +54,16 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetAllUsersByFullName([FromRoute] string name)
+        [HttpGet("name")]
+        public async Task<IActionResult> GetAllUsersByFullName([FromQuery] string name)
         {
             var response = await _mediator.Send(new GetAllUsersByFullNameQuery(name));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("{email}")]
-        public async Task<IActionResult> GetUserByEmail([FromRoute] string email)
+        [HttpGet("email")]
+        public async Task<IActionResult> GetUserByEmail([FromQuery] string email)
         {
             var response = await _mediator.Send(new GetUserByEmailQuery(email));
 
