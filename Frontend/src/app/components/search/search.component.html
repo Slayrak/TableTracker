@@ -1,9 +1,9 @@
 <div class="container">
     <div class="left">
         <mat-card class="map">
-            <div class="image">
-                <button mat-button class="map-button"></button>
-            </div>
+            <button mat-button class="map-button" (click)="toggleMap()">
+                <div class="image"></div>
+            </button>
         </mat-card>
 
         <mat-card>
@@ -73,7 +73,7 @@
 
                 <mat-form-field appearance="outline" >
                     <mat-label>Time</mat-label>
-                    <input matInput type="text" formControlName="time"/>
+                    <input matInput type="time" formControlName="time"/>
                 </mat-form-field>
             </div>
         </form>
@@ -89,6 +89,24 @@
                 <mat-button-toggle value="Recommended">Recommended</mat-button-toggle>
             </mat-button-toggle-group>
     
+            <div *ngIf="showMap" class="map-container">
+                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="20" (mapReady)="giveLatLong('Shevska St, 8, Lviv, Lviv Oblast, 79000')" (mapClick)="close_window()">
+                    <agm-marker [latitude]="object.latitude" [longitude]="object.longitude" [iconUrl]="$any(icon)" (markerClick)=select_marker(infoWindow)
+                        *ngFor="let object of restaurantsForMap">
+                        <agm-info-window #infoWindow
+                            [latitude]="object.latitude" 
+                            [longitude]="object.longitude">
+    
+                            <app-restaurant-map-card
+                                [restaurant]="object.restaurant">
+                            </app-restaurant-map-card>
+    
+                        </agm-info-window>
+    
+                    </agm-marker>
+                </agm-map>
+            </div>
+
             <div class="restaurant-card" *ngFor="let restaurant of restaurants">
                 <app-restaurant-card
                     [restaurant]="restaurant">

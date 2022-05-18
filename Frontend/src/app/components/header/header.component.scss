@@ -28,3 +28,8 @@ h1 {
     justify-self: flex-end;
     margin-left: auto;
 }
+
+.title, .title:hover, .title:focus, .title:active {
+    text-decoration: none;
+    color: inherit;
+}

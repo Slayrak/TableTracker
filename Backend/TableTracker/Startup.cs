@@ -42,6 +42,7 @@ namespace TableTracker
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TableTracker v1"));
             }
 
+            app.UseStaticFiles();
             app.UseCustomMiddlewares();
             app.UseHttpsRedirection();
             app.UseRouting();

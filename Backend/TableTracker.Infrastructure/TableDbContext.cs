@@ -39,8 +39,6 @@ namespace TableTracker.Infrastructure
 
         public DbSet<VisitorHistory> VisitorHistorys { get; set; }
 
-        public DbSet<Waiter> Waiters { get; set; }
-
         public DbSet<Cuisine> Cuisines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,34 +46,42 @@ namespace TableTracker.Infrastructure
             modelBuilder.Entity<Restaurant>()
                 .HasOne(x => x.Franchise)
                 .WithMany(x => x.Restaurants)
-                .HasForeignKey(x => x.FranchiseId);
+                .HasForeignKey(x => x.FranchiseId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Restaurant>()
                 .HasOne(x => x.Layout)
                 .WithOne(x => x.Restaurant)
-                .HasForeignKey<Layout>(x => x.RestaurantId);
+                .HasForeignKey<Layout>(x => x.RestaurantId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Restaurant>()
                 .HasOne(x => x.Manager)
                 .WithOne(x => x.Restaurant)
-                .HasForeignKey<Manager>(x => x.RestaurantId);
+                .HasForeignKey<Manager>(x => x.RestaurantId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Restaurant>()
+                .HasMany(x => x.Images)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Restaurant>()
+                .HasOne(x => x.MainImage)
+                .WithOne()
+                .HasForeignKey<Restaurant>(x => x.MainImageId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+                .HasOne(x => x.Avatar)
+                .WithOne()
+                .HasForeignKey<User>(x => x.AvatarId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Reservation>()
                 .HasOne(x => x.Table)
                 .WithMany(x => x.Reservations)
                 .HasForeignKey(x => x.TableId);
-
-            modelBuilder.Entity<Table>()
-                .HasOne(x => x.Waiter)
-                .WithMany(x => x.Tables)
-                .HasForeignKey(x => x.WaiterId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Waiter>()
-                .HasMany(x => x.Tables)
-                .WithOne(x => x.Waiter)
-                .OnDelete(DeleteBehavior.Restrict);
-
 
             #region Cuisine
 

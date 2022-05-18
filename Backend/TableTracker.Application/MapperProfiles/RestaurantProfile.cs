@@ -12,7 +12,6 @@ namespace TableTracker.Application.MapperProfiles
             CreateMap<Restaurant, RestaurantDTO>()
                .ForMember(dest => dest.Franchise, opt => opt.MapFrom(src => src.Franchise))
                .ForMember(dest => dest.Layout, opt => opt.MapFrom(src => src.Layout))
-               .ForMember(dest => dest.Waiters, opt => opt.MapFrom(src => src.Waiters))
                .ForMember(dest => dest.Cuisines, opt => opt.MapFrom(src => src.Cuisines))
                .ForMember(dest => dest.Tables, opt => opt.MapFrom(src => src.Tables));
 
@@ -21,8 +20,8 @@ namespace TableTracker.Application.MapperProfiles
                 .ForMember(dest => dest.FranchiseId, opt => opt.MapFrom(src => src.Franchise.Id))
                 .ForMember(dest => dest.Layout, opt => opt.MapFrom(src => src.Layout))
                 .ForMember(dest => dest.LayoutId, opt => opt.MapFrom(src => src.Layout.Id))
-                .ForMember(dest => dest.Waiters, opt => opt.MapFrom(src => src.Waiters))
                 .ForMember(dest => dest.Cuisines, opt => opt.MapFrom(src => src.Cuisines))
+                .ForMember(dest => dest.MainImage, opt => opt.MapFrom(src => src.MainImage))
                 .ForMember(dest => dest.Tables, opt => opt.MapFrom(src => src.Tables));
         }
     }

@@ -8,9 +8,11 @@ namespace TableTracker.Domain.DataTransferObjects
     {
         public long Id { get; set; }
 
-        public double CoordX { get; set; }
+        public string Address { get; set; }
 
-        public double CoordY { get; set; }
+        public string Name { get; set; }
+
+        public string Description { get; set; }
 
         public float Rating { get; set; }
 
@@ -24,9 +26,11 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public ICollection<TableDTO> Tables { get; set; }
 
-        public ICollection<WaiterDTO> Waiters { get; set; }
+        public ICollection<CuisineDTO> Cuisines { get; set; }
 
-        public ICollection<CuisineDTO> Cuisines { get; set; } 
+        public ICollection<ImageDTO> Images { get; set; }
+
+        public ImageDTO MainImage { get; set; }
 
         public FranchiseDTO Franchise { get; set; }
 

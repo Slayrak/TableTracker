@@ -7,18 +7,21 @@ namespace TableTracker.Domain.Entities
     public class Restaurant : IEntity<long>
     {
         public long Id { get; set; }
-        public double CoordX { get; set; }
-        public double CoordY { get; set; }
+        public string Address { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public float Rating { get; set; }
-        public string PriceRange { get; set; }
+        public int PriceRange { get; set; }
         public int NumberOfTables { get; set; }
         public RestaurantType Type { get; set; }
         public Discount Discount { get; set; }
 
         public ICollection<Table> Tables { get; set; }
-        public ICollection<Waiter> Waiters { get; set; }
         public ICollection<Cuisine> Cuisines { get; set; }
+        public ICollection<Image> Images { get; set; }
 
+        public long? MainImageId { get; set; }
+        public Image MainImage { get; set; }
         public long FranchiseId { get; set; }
         public Franchise Franchise { get; set; }
         public long? LayoutId { get; set; }

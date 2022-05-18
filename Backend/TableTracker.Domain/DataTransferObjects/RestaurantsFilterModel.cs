@@ -10,7 +10,7 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public IEnumerable<CuisineDTO> Cuisines { get; set; }
 
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         public RestaurantType? Type { get; set; }
 

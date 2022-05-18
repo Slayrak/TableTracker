@@ -8,6 +8,8 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public ICollection<RestaurantDTO> Restaurants { get; set; }
     }
 }

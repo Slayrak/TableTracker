@@ -75,6 +75,9 @@ namespace TableTracker.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -85,6 +88,26 @@ namespace TableTracker.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Franchises");
+                });
+
+            modelBuilder.Entity("TableTracker.Domain.Entities.Image", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("RestaurantId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("TableTracker.Domain.Entities.Layout", b =>
@@ -108,36 +131,6 @@ namespace TableTracker.Infrastructure.Migrations
                     b.ToTable("Layouts");
                 });
 
-            modelBuilder.Entity("TableTracker.Domain.Entities.Manager", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ManagerState")
-                        .HasColumnType("int");
-
-                    b.Property<long>("RestaurantId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RestaurantId")
-                        .IsUnique();
-
-                    b.ToTable("Managers");
-                });
-
             modelBuilder.Entity("TableTracker.Domain.Entities.Reservation", b =>
                 {
                     b.Property<long>("Id")
@@ -151,14 +144,9 @@ namespace TableTracker.Infrastructure.Migrations
                     b.Property<long>("TableId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("WaiterId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TableId");
-
-                    b.HasIndex("WaiterId");
 
                     b.ToTable("Reservations");
                 });
@@ -170,11 +158,11 @@ namespace TableTracker.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("CoordX")
-                        .HasColumnType("float");
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("CoordY")
-                        .HasColumnType("float");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Discount")
                         .HasColumnType("int");
@@ -185,14 +173,20 @@ namespace TableTracker.Infrastructure.Migrations
                     b.Property<long?>("LayoutId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("MainImageId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("ManagerId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfTables")
                         .HasColumnType("int");
 
-                    b.Property<string>("PriceRange")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PriceRange")
+                        .HasColumnType("int");
 
                     b.Property<float>("Rating")
                         .HasColumnType("real");
@@ -203,6 +197,10 @@ namespace TableTracker.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FranchiseId");
+
+                    b.HasIndex("MainImageId")
+                        .IsUnique()
+                        .HasFilter("[MainImageId] IS NOT NULL");
 
                     b.ToTable("Restaurants");
                 });
@@ -245,12 +243,6 @@ namespace TableTracker.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("CoordX")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CoordY")
-                        .HasColumnType("float");
-
                     b.Property<int>("Floor")
                         .HasColumnType("int");
 
@@ -269,26 +261,28 @@ namespace TableTracker.Infrastructure.Migrations
                     b.Property<double>("TableSize")
                         .HasColumnType("float");
 
-                    b.Property<long?>("WaiterId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RestaurantId");
 
-                    b.HasIndex("WaiterId");
-
                     b.ToTable("Tables");
                 });
 
-            modelBuilder.Entity("TableTracker.Domain.Entities.Visitor", b =>
+            modelBuilder.Entity("TableTracker.Domain.Entities.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Avatar")
+                    b.Property<long?>("AvatarId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -297,12 +291,18 @@ namespace TableTracker.Infrastructure.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("GeneralTrustFactor")
-                        .HasColumnType("real");
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Visitors");
+                    b.HasIndex("AvatarId")
+                        .IsUnique()
+                        .HasFilter("[AvatarId] IS NOT NULL");
+
+                    b.ToTable("User");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
                 });
 
             modelBuilder.Entity("TableTracker.Domain.Entities.VisitorFavourite", b =>
@@ -352,36 +352,31 @@ namespace TableTracker.Infrastructure.Migrations
                     b.ToTable("VisitorHistorys");
                 });
 
-            modelBuilder.Entity("TableTracker.Domain.Entities.Waiter", b =>
+            modelBuilder.Entity("TableTracker.Domain.Entities.Manager", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasBaseType("TableTracker.Domain.Entities.User");
 
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfServingTables")
+                    b.Property<int>("ManagerState")
                         .HasColumnType("int");
 
                     b.Property<long>("RestaurantId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("WaiterState")
-                        .HasColumnType("int");
+                    b.HasIndex("RestaurantId")
+                        .IsUnique()
+                        .HasFilter("[RestaurantId] IS NOT NULL");
 
-                    b.HasKey("Id");
+                    b.HasDiscriminator().HasValue("Manager");
+                });
 
-                    b.HasIndex("RestaurantId");
+            modelBuilder.Entity("TableTracker.Domain.Entities.Visitor", b =>
+                {
+                    b.HasBaseType("TableTracker.Domain.Entities.User");
 
-                    b.ToTable("Waiters");
+                    b.Property<float>("GeneralTrustFactor")
+                        .HasColumnType("real");
+
+                    b.HasDiscriminator().HasValue("Visitor");
                 });
 
             modelBuilder.Entity("CuisineRestaurant", b =>
@@ -414,23 +409,20 @@ namespace TableTracker.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TableTracker.Domain.Entities.Image", b =>
+                {
+                    b.HasOne("TableTracker.Domain.Entities.Restaurant", null)
+                        .WithMany("Images")
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("TableTracker.Domain.Entities.Layout", b =>
                 {
                     b.HasOne("TableTracker.Domain.Entities.Restaurant", "Restaurant")
                         .WithOne("Layout")
                         .HasForeignKey("TableTracker.Domain.Entities.Layout", "RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
-                });
-
-            modelBuilder.Entity("TableTracker.Domain.Entities.Manager", b =>
-                {
-                    b.HasOne("TableTracker.Domain.Entities.Restaurant", "Restaurant")
-                        .WithOne("Manager")
-                        .HasForeignKey("TableTracker.Domain.Entities.Manager", "RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Restaurant");
@@ -444,10 +436,6 @@ namespace TableTracker.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TableTracker.Domain.Entities.Waiter", null)
-                        .WithMany("Reservations")
-                        .HasForeignKey("WaiterId");
-
                     b.Navigation("Table");
                 });
 
@@ -456,10 +444,17 @@ namespace TableTracker.Infrastructure.Migrations
                     b.HasOne("TableTracker.Domain.Entities.Franchise", "Franchise")
                         .WithMany("Restaurants")
                         .HasForeignKey("FranchiseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("TableTracker.Domain.Entities.Image", "MainImage")
+                        .WithOne()
+                        .HasForeignKey("TableTracker.Domain.Entities.Restaurant", "MainImageId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Franchise");
+
+                    b.Navigation("MainImage");
                 });
 
             modelBuilder.Entity("TableTracker.Domain.Entities.RestaurantVisitor", b =>
@@ -489,14 +484,17 @@ namespace TableTracker.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TableTracker.Domain.Entities.Waiter", "Waiter")
-                        .WithMany("Tables")
-                        .HasForeignKey("WaiterId")
+                    b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("TableTracker.Domain.Entities.User", b =>
+                {
+                    b.HasOne("TableTracker.Domain.Entities.Image", "Avatar")
+                        .WithOne()
+                        .HasForeignKey("TableTracker.Domain.Entities.User", "AvatarId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Restaurant");
-
-                    b.Navigation("Waiter");
+                    b.Navigation("Avatar");
                 });
 
             modelBuilder.Entity("TableTracker.Domain.Entities.VisitorFavourite", b =>
@@ -537,12 +535,12 @@ namespace TableTracker.Infrastructure.Migrations
                     b.Navigation("Visitor");
                 });
 
-            modelBuilder.Entity("TableTracker.Domain.Entities.Waiter", b =>
+            modelBuilder.Entity("TableTracker.Domain.Entities.Manager", b =>
                 {
                     b.HasOne("TableTracker.Domain.Entities.Restaurant", "Restaurant")
-                        .WithMany("Waiters")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Manager")
+                        .HasForeignKey("TableTracker.Domain.Entities.Manager", "RestaurantId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Restaurant");
@@ -555,25 +553,18 @@ namespace TableTracker.Infrastructure.Migrations
 
             modelBuilder.Entity("TableTracker.Domain.Entities.Restaurant", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("Layout");
 
                     b.Navigation("Manager");
 
                     b.Navigation("Tables");
-
-                    b.Navigation("Waiters");
                 });
 
             modelBuilder.Entity("TableTracker.Domain.Entities.Table", b =>
                 {
                     b.Navigation("Reservations");
-                });
-
-            modelBuilder.Entity("TableTracker.Domain.Entities.Waiter", b =>
-                {
-                    b.Navigation("Reservations");
-
-                    b.Navigation("Tables");
                 });
 #pragma warning restore 612, 618
         }
