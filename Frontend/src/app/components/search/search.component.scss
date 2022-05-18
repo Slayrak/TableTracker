@@ -15,12 +15,13 @@
     background-image: url("../../../assets/map-with-pin.png");
     background-position: center;
     background-size: cover;
-    border-radius: 5px;    
+    border-radius: 5px;
     height: 100%;
 }
 
 .map-button {
     height: 100%;
+    width: 100%;
 }
 
 .left {
@@ -82,4 +83,9 @@ h4 {
 
 .divider-for-filters {
     margin: 0 0 10px 0;
+}
+
+agm-map {
+    height: 300px !important;
+    width: 100%;
 }

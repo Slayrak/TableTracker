@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
+import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 
 @Component({
   selector: 'app-restaurant-map-card',
@@ -8,14 +8,12 @@ import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 })
 export class RestaurantMapCardComponent implements OnInit {
 
-  @Input() restaurant!: RestaurantInfo;
+  @Input() restaurant!: RestaurantDTO;
+  image!: string;
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  discover(): void {
-    console.log(this.restaurant);
+    this.image = `https://localhost:5001/images/${this.restaurant.mainImage.name}`;
   }
 }

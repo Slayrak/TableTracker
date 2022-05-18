@@ -28,6 +28,11 @@
 
     <div class="buttons">
         <button class="button m-bottom-5" mat-flat-button color="primary">Edit Profile</button>
-        <button class="button" mat-flat-button color="primary">Reset Password</button>
+        <a class="button"
+           mat-flat-button
+           color="primary"
+           [routerLink]="['/resetpassword']">
+            Reset Password
+        </a>
     </div>
 </div>

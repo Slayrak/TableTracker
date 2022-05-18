@@ -35,3 +35,8 @@ h1 {
 .no-margin-bottom {
     margin-bottom: 0px;
 }
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
