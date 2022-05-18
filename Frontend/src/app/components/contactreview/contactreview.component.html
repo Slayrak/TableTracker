@@ -6,10 +6,9 @@
 
     <div *ngIf="selectedVal === 'Contacts'; else reviews" class="contactsContainer">
         <div class="mapContainer">
-            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="20" (mapReady)="giveLatLong()">
-                <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="$any(icon)" (markerClick)="openWindow(0)" >
-                    <agm-info-window 
-                        [isOpen]="isInfoWindowOpen(0)"
+            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="20" (mapReady)="giveLatLong()" (mapClick)="close_window()">
+                <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="$any(icon)" (markerClick)=select_marker(infoWindow) >
+                    <agm-info-window #infoWindow
                         [latitude]="longitude" 
                         [longitude]="latitude">
 

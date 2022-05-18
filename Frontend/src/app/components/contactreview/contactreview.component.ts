@@ -1,3 +1,4 @@
+import { AgmInfoWindow } from '@agm/core';
 import { Component, OnInit } from '@angular/core';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
@@ -7,9 +8,17 @@ import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
   templateUrl: './contactreview.component.html',
   styleUrls: ['./contactreview.component.scss']
 })
+
 export class ContactreviewComponent implements OnInit {
 
-  constructor() { }
+  infoWindowOpened: AgmInfoWindow|null
+  previous_info_window: AgmInfoWindow|null
+
+
+  constructor() {
+    this.infoWindowOpened = null;
+    this.previous_info_window = null;
+   }
 
   selectedVal = "Contacts";
 
@@ -58,16 +67,21 @@ export class ContactreviewComponent implements OnInit {
     description: "WA restaurant started a smart fusion cousine. It's a new approach to gastronomy, presentation and food combination. WA took base of Asian cuisine with a taste of modern European traditions. We promote a harmony of quality, taste and aesthetic. We offer to taste bowls...",
   };
 
-
-  openedWindow : number = 0; // alternative: array of numbers
-
-openWindow(id) {
-    this.openedWindow = id; // alternative: push to array of numbers
-}
-
-isInfoWindowOpen(id) {
-    return this.openedWindow == id; // alternative: check if id is in array
-}
+  close_window(){
+    if (this.previous_info_window != null ) {
+      this.previous_info_window.close()
+      }    
+    }
+    
+    select_marker(infoWindow){
+     if (this.previous_info_window == null)
+      this.previous_info_window = infoWindow;
+     else{
+      this.infoWindowOpened = infoWindow
+      this.previous_info_window.close()
+     }
+     this.previous_info_window = infoWindow
+    }
 
   // address = "1045 mission street san francisco";
 
