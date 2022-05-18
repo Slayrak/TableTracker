@@ -12,8 +12,8 @@ import { ManagerProfileComponent } from './components/manager-profile/manager-pr
 import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
 
 const routes: Routes = [
-  { path: 'user/profile', component: UserProfileComponent },
-  { path: 'manager/profile', component: ManagerProfileComponent },
+  { path: 'user/profile/:id', component: UserProfileComponent },
+  { path: 'manager/profile/:id', component: ManagerProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
@@ -21,9 +21,9 @@ const routes: Routes = [
   { path: 'resetpassword', component: ReserpasswordComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'comp', component: ContactreviewComponent },
-  { path: 'restaurant-page', component: RestaurantPageComponent },
+  { path: 'restaurant-page/:id', component: RestaurantPageComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

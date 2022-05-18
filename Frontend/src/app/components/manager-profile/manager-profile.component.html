@@ -1,20 +1,16 @@
 <div class="container">
     <app-user-info
         [fullName]="user.fullName"
-        [avatar]="user.avatar"
+        [avatar]="user.avatar.name"
         [location]="user.location"
         [email]="user.email"
         [dateOfBirth]="user.dateOfBirth.toDateString()"></app-user-info>
 
     <div class="m-top-30">
-        <h2>User restaurants</h2>
+        <h2>User restaurant</h2>
 
-        <div class="restaurant-card" *ngFor="let restaurant of user.restaurants">
-            <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
-        </div>
-
-        <div class="flex m-top-30">
-            <button mat-flat-button color="primary">Add another one</button>
+        <div class="restaurant-card">
+            <app-restaurant-card [restaurant]="user.restaurant"></app-restaurant-card>
         </div>
     </div>
 </div>
