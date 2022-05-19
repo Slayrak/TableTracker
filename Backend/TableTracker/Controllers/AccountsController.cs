@@ -82,7 +82,7 @@ namespace TableTracker.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return NoContent();
         }
     }
 }

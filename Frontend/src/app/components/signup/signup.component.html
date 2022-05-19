@@ -1,6 +1,6 @@
 <div class="page">
     <p style="text-align: center; font-size:30px; padding-top:3vh" id="ForFont">Please sign up</p>
-    <form [formGroup]="signinformgroup" style="margin-top: 7vh; min-height: 60%;">
+    <form [formGroup]="signinformgroup" style="margin-top: 7vh; min-height: 60%;" (ngSubmit)="signup(signinformgroup.value)">
         <div class="form-group" style="display: flex; width: 100%; height: 100%; flex-flow: column wrap; align-content: center;">
             
             <div class="container" style="display: flex; flex-flow:row wrap; justify-content: space-between;">

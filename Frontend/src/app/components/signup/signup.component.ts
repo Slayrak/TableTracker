@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import {
@@ -8,6 +9,10 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthResponseDTO } from 'src/app/models/dtos/auth-response.dto';
+import { UserForSignupDTO } from 'src/app/models/dtos/user-for-signup.dto';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +21,9 @@ import {
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
@@ -33,4 +40,26 @@ export class SignupComponent implements OnInit {
     confirmPassword: new FormControl('', Validators.required)
   });
 
+  signup(signupFormValue) {
+    const signup = {... signupFormValue };
+    const userForAuth: UserForSignupDTO = {
+      firstName: signup.name,
+      lastName: signup.surname,
+      email: signup.email,
+      password: signup.password
+    }
+
+    this.authService.signUpUser(userForAuth)
+      .subscribe(() => {
+        this.authService.loginUser(userForAuth)
+          .subscribe({
+            next: (res: AuthResponseDTO) => {
+              localStorage.setItem("token", res.token);
+              this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
+              
+              this.router.navigate(['/home']);
+            }
+          })
+      })
+  }
 }
