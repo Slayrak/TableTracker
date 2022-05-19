@@ -29,7 +29,7 @@ namespace TableTracker
             services.AddDataAccess(Configuration);
             services.AddMediator();
             services.AddValidaton();
-            services.AddCustomAuthorization();
+            services.AddCustomAuthorization(Configuration);
             services.AddApiControllers();
         }
 
@@ -46,7 +46,10 @@ namespace TableTracker
             app.UseCustomMiddlewares();
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseCrossOriginResourceSharing();
 
             app.UseEndpoints(endpoints =>

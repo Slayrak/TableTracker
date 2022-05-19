@@ -6,13 +6,13 @@
     <div class="align-end">
         <button mat-button>Restaurants family</button>
 
-        <button mat-button>Sign up</button>
+        <button mat-button *ngIf="!isUserAuthenticated">Sign up</button>
 
-        <button mat-button>Log in</button>
+        <button mat-button *ngIf="!isUserAuthenticated">Log in</button>
 
         <div id="avatar"></div>
 
-        <button mat-button>
+        <button mat-button *ngIf="isUserAuthenticated" (click)="logout()">
             <mat-icon aria-hidden="false">logout</mat-icon>
         </button>
     </div>

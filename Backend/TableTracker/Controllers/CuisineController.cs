@@ -17,7 +17,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/cuisines")]
     public class CuisineController : ControllerBase
@@ -30,6 +30,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllCuisines()
         {
             var response = await _mediator.Send(new GetAllCuisinesQuery());
