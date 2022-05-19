@@ -1,13 +1,13 @@
 <div class="componentPage">
     <mat-button-toggle-group name="swapper" aria-label="Swapper" class="swapButton" value="Contacts" #group="matButtonToggleGroup" [value]="selectedVal" (change)="onValChange(group.value)">
         <mat-button-toggle value="Contacts" class="contactButton">Contacts</mat-button-toggle>
-        <mat-button-toggle value="Reviews" class="reviewsButton">Reviews</mat-button-toggle>
+        <mat-button-toggle value="Reviews" class="reviewsButton" (click)="calculateRatingRatio()">Reviews</mat-button-toggle>
     </mat-button-toggle-group>
 
     <div *ngIf="selectedVal === 'Contacts'; else reviews" class="contactsContainer">
-        <div class="mapContainer">
+        <!-- <div class="mapContainer">
             <app-map [address]="'Shevska St, 8, Lviv, Lviv Oblast, 79000'" [restaurants]="restaurantForMap"></app-map>
-        </div>
+        </div> -->
 
         <div class="infoContainer">
             <p class="headerIGuess">Address: </p>
@@ -49,9 +49,48 @@
             <div class="ratingCont">
                 <div>Overall rating</div>
                 <div class="stars">
-
+                    <div class="flex">
+                        <mat-icon [ngClass]="overall >= 1 ? '' : 'star-gray'">star_border</mat-icon>
+                        <mat-icon [ngClass]="overall >= 2 ? '' : 'star-gray'">star_border</mat-icon>
+                        <mat-icon [ngClass]="overall >= 3 ? '' : 'star-gray'">star_border</mat-icon>
+                        <mat-icon [ngClass]="overall >= 4 ? '' : 'star-gray'">star_border</mat-icon>
+                        <mat-icon [ngClass]="overall == 5 ? '' : 'star-gray'">star_border</mat-icon>
+                    </div>
                 </div>
             </div>
+            <div class="progressbarsCont">
+                <div class="progressbarCont">
+                    <div>1</div>
+                    <div class="w3-light-grey">
+                        <div class="w3-grey" style="height:24px;width:45%"></div>
+                    </div><br>
+                </div>
+                <div class="progressbarCont">
+                    <div>1</div>
+                    <div class="w3-light-grey">
+                        <div class="w3-grey" style="height:24px;width:45%"></div>
+                    </div><br>
+                </div>
+                <div class="progressbarCont">
+                    <div>1</div>
+                    <div class="w3-light-grey">
+                        <div class="w3-grey" style="height:24px;width:45%"></div>
+                    </div><br>
+                </div>
+                <div class="progressbarCont">
+                    <div>1</div>
+                    <div class="w3-light-grey">
+                        <div class="w3-grey" style="height:24px;width:45%"></div>
+                    </div><br>
+                </div>
+                <div class="progressbarCont">
+                    <div>1</div>
+                    <div class="w3-light-grey">
+                        <div class="w3-grey" style="height:24px;width:45%"></div>
+                    </div><br>
+                </div>
+            </div>
+            <p>Reviews:</p>
         </div>
       </ng-template>
 

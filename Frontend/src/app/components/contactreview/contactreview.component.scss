@@ -42,6 +42,12 @@ agm-map {
     width: 100%;  /* This is really important*/
   }
 
+  .flex {
+    display: flex;
+    justify-content: center;
+}
+
+
 .mapContainer {
     width: 100%;
     display: flex;
@@ -90,3 +96,16 @@ agm-map {
     background-color: black;
     color: white;
   }
+
+.progressbarsCont {
+    display: flex;
+    flex-flow: column wrap;
+    width:100%;
+}
+
+.progressbarCont {
+    height: 50%;
+    width:25%;
+    display: flex;
+    flex-flow: row wrap;
+}
