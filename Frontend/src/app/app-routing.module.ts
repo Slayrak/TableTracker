@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'resetpassword', component: ReserpasswordComponent },
   { path: 'faq', component: FaqComponent },
+  {path: 'comp', component: ContactreviewComponent},
   { path: 'restaurant-page/:id', component: RestaurantPageComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', redirectTo: 'home' },
