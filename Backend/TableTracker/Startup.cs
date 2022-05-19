@@ -20,11 +20,7 @@ namespace TableTracker
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TableTracker", Version = "v1" });
-            });
-
+            services.AddSwagger();
             services.AddMapper();
             services.AddDataAccess(Configuration);
             services.AddMediator();

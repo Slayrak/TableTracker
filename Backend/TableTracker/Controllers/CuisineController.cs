@@ -2,7 +2,6 @@
 
 using MediatR;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TableTracker.Application.CQRS.Cuisines.Commands.AddCuisine;
@@ -12,12 +11,10 @@ using TableTracker.Application.CQRS.Cuisines.Queries.FindCuisineById;
 using TableTracker.Application.CQRS.Cuisines.Queries.GetAllCuisines;
 using TableTracker.Application.CQRS.Cuisines.Queries.GetCuisineByName;
 using TableTracker.Domain.DataTransferObjects;
-using TableTracker.Domain.Enums;
 using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/cuisines")]
     public class CuisineController : ControllerBase
@@ -30,7 +27,6 @@ namespace TableTracker.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAllCuisines()
         {
             var response = await _mediator.Send(new GetAllCuisinesQuery());

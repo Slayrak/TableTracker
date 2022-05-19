@@ -32,7 +32,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 import { SearchComponent } from './components/search/search.component';
-import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ContactreviewComponent } from './components/contactreview/contactreview.component';
@@ -57,7 +57,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     FooterComponent,
     RestaurantCardComponent,
     SearchComponent,
-    SigninComponent,
+    SignupComponent,
     ReserpasswordComponent,
     FaqComponent,
     ContactreviewComponent,

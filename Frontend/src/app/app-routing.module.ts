@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { LoginComponent } from './components/login/login.component';
-import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ContactreviewComponent } from './components/contactreview/contactreview.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'resetpassword', component: ReserpasswordComponent },
   { path: 'faq', component: FaqComponent },
   {path: 'comp', component: ContactreviewComponent},
