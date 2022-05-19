@@ -46,6 +46,8 @@ import { RestaurantPageComponent } from './components/restaurant-page/restaurant
 import { MenuComponent } from './components/menu/menu.component';
 import { MapComponent } from './components/map/map.component';
 
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +78,8 @@ import { MapComponent } from './components/map/map.component';
     MatFormFieldModule,
     MatIconModule,
     BrowserAnimationsModule,
+    
+    NgxSliderModule,
 
     ReactiveFormsModule,
     MatGridListModule,

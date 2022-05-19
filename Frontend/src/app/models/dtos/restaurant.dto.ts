@@ -1,5 +1,5 @@
 import { Discount } from "../enums/discount.enum"
-import { RestaurantType } from "../enums/restaurant.enum"
+import { RestaurantType } from "../enums/restaurant-type.enum"
 import { CuisineDTO } from "./cuisine.dto"
 import { ImageDTO } from "./image.dto"
 
