@@ -13,7 +13,6 @@ import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 
 export class ContactreviewComponent implements OnInit {
 
-  @Input() address!: string;
   @Input() restaurant!: RestaurantDTO;
 
   fives!: number;
@@ -40,7 +39,6 @@ export class ContactreviewComponent implements OnInit {
   restaurantForMap!: RestaurantDTO[];
 
   constructor() {
-    this.address = "Shevska St, 8, Lviv, Lviv Oblast, 79000";
     this.fives = 0;
     this.fourths = 0;
     this.threes = 0;

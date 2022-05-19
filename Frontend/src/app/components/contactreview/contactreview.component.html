@@ -1,47 +1,54 @@
 <div class="componentPage">
     <mat-button-toggle-group name="swapper" aria-label="Swapper" class="swapButton" value="Contacts" #group="matButtonToggleGroup" [value]="selectedVal" (change)="onValChange(group.value)">
-        <mat-button-toggle value="Contacts" class="contactButton">Contacts</mat-button-toggle>
-        <mat-button-toggle value="Reviews" class="reviewsButton" (click)="calculateRatingRatio()">Reviews</mat-button-toggle>
+        <mat-button-toggle value="Contacts">Contacts</mat-button-toggle>
+        <mat-button-toggle value="Reviews">Reviews</mat-button-toggle>
     </mat-button-toggle-group>
 
     <div *ngIf="selectedVal === 'Contacts'; else reviews" class="contactsContainer">
-        <!-- <div class="mapContainer">
-            <app-map [address]="'Shevska St, 8, Lviv, Lviv Oblast, 79000'" [restaurants]="restaurantForMap"></app-map>
-        </div> -->
+        <div class="mapContainer">
+            <app-map class="map" [address]="restaurant.address" [restaurants]="restaurantForMap"></app-map>
+        </div>
 
-        <div class="infoContainer">
-            <p class="headerIGuess">Address: </p>
-            <div>
-                Lviv, Kryva Lypa ave 6
+        <div class="infoSuperContainer">
+            <div class="infoContainer">
+                <h4 class="header">Address: </h4>
+
+                <div>
+                    <p>Lviv, Kryva Lypa ave 6</p>
+                </div>
+            </div>
+
+            <div class="infoContainer">
+                <h4 class="header">Phone: </h4>
+
+                <div>
+                    <p>+38 (067) 006 1111</p>
+                </div>
+            </div>
+
+            <div class="infoContainer">
+                <h4 class="header">Mail: </h4>
+
+                <div>
+                    <p>b.reserve@kumpelgroup.com</p>
+                </div>
+            </div>
+
+            <div class="infoContainer">
+                <a href="default.asp" target="_blank" class="header">Reset password</a>
+            </div>
+
+            <div class="infoContainer">
+                <h4 class="header">Schedule: </h4>
+                <div>
+                    <p>
+                        Monday-Thursday: 08:00 - 24:00
+                        <br/>
+                        Friday-Sunday: 08:00 - 02:00
+                    </p>
+                </div>
             </div>
         </div>
-
-        <div class="infoContainer">
-            <p class="headerIGuess">Phone: </p>
-            <div>
-                +38 (067) 006 1111
-            </div>
-        </div>
-
-        <div class="infoContainer">
-            <p class="headerIGuess">Mail: </p>
-            <div>
-                b.reserve@kumpelgroup.com
-            </div>
-        </div>
-
-        <div class="infoContainer">
-            <a href="default.asp" target="_blank" class="headerIGuess">Reset password</a>
-        </div>
-
-        <div class="infoContainer">
-            <p class="headerIGuess">Schedule: </p>
-            <div>
-                Monday-Thursday: 08:00 - 24:00
-                Friday-Sunday: 08:00 - 02:00
-            </div>
-        </div>
-
     </div>
 
     <ng-template #reviews>
@@ -89,9 +96,10 @@
                         <div class="w3-grey" style="height:24px;width:45%"></div>
                     </div><br>
                 </div>
+
+                <div class="stars"></div>
             </div>
             <p>Reviews:</p>
         </div>
-      </ng-template>
-
+    </ng-template>
 </div>
