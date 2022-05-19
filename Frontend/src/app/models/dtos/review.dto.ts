@@ -4,5 +4,7 @@ export interface ReviewDTO {
     id: number,
     review: string,
     rating: number,
-    visitorImg: string
+    visitorImg: string,
+    visitorName: string,
+    header: string,
 }

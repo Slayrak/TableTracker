@@ -25,15 +25,21 @@ export class ContactreviewComponent implements OnInit {
 
   overall!: number;
 
+  show = 3;
+
+  increaseShow() {
+    this.show += 3; 
+  }
+
   public mySentences:Array<ReviewDTO> = [
-    {id: 1, review: "cool story Bob", rating: 4, visitorImg: "str"},
-    {id: 2, review: "cool story Bob", rating: 5, visitorImg: "str"},
-    {id: 3, review: "cool story Bob", rating: 2, visitorImg: "str"},
-    {id: 4, review: "cool story Bob", rating: 3, visitorImg: "str"},
-    {id: 5, review: "cool story Bob", rating: 4, visitorImg: "str"},
-    {id: 6, review: "cool story Bob", rating: 4, visitorImg: "str"},
-    {id: 7, review: "cool story Bob", rating: 4, visitorImg: "str"},
-    {id: 8, review: "cool story Bob", rating: 4, visitorImg: "str"}
+    {id: 1, review: "Kitchen is great, drinks are perfectly selected, atmosphere is so authentic, and live piano makes it even better. Worth all the money (which is cheap, btw) and time waiting if there’s a queue.", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
+    {id: 2, review: "cool story Bob", rating: 5, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
+    {id: 3, review: "cool story Bob", rating: 2, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
+    {id: 4, review: "cool story Bob", rating: 3, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
+    {id: 5, review: "cool story Bob", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
+    {id: 6, review: "cool story Bob", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
+    {id: 7, review: "cool story Bob", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
+    {id: 8, review: "cool story Bob", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"}
 ];
 
   restaurantForMap!: RestaurantDTO[];
@@ -56,6 +62,7 @@ export class ContactreviewComponent implements OnInit {
 
   public onValChange(val: string) {
     this.selectedVal = val;
+    this.show = 3;
   }
 
   public calculateRatingRatio() {
