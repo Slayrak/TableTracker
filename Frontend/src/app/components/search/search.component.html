@@ -14,34 +14,34 @@
             <div>
                 <h4>Cuisines:</h4>
 
-                <div *ngFor="let cuisine of cuisines">
-                    <mat-checkbox>{{ cuisine }}</mat-checkbox>
+                <div *ngFor="let cuisine of cuisines; index as i; ">
+                    <mat-checkbox (change)="cuisineFilterChange(cuisine.id)" [(ngModel)]="cuisinecheckedarray[i]">{{ cuisine.cuisine }}</mat-checkbox>
                 </div>
             </div>
 
             <div>
                 <h4>Types:</h4>
 
-                <div *ngFor="let type of types">
-                    <mat-checkbox>{{ type }}</mat-checkbox>
+                <div *ngFor="let type of types; index as i; ">
+                    <mat-checkbox (change)="typeFilterChange(type.number)" [(ngModel)]="typecheckedarray[i]">{{ type.name }}</mat-checkbox>
                 </div>
             </div>
 
             <div>
                 <h4>Price:</h4>
 
-                <span class="text-small">1</span><mat-slider value="2" min="1" max="3" step="1" tickInterval="1"></mat-slider><span class="text-small">3</span>
+                <ngx-slider [(value)]="priceLowValue" [(highValue)]="priceHighValue" [options]="priceOptions"></ngx-slider>
             </div>
 
             <div>
                 <h4>Review rating:</h4>
 
-                <span class="text-small">1</span><mat-slider value="5" min="1" max="5" step="1" tickInterval="1"></mat-slider><span class="text-small">5</span>
+                <ngx-slider [(value)]="ratingLowValue" [(highValue)]="ratingHighValue" [options]="ratingOptions"></ngx-slider>
             </div>
 
             <div class="filter-buttons">
-                <button mat-flat-button color="primary" class="reset-filters">Reset filters</button>
-                <button mat-flat-button color="primary">Apply filters</button>
+                <button mat-flat-button color="primary" class="reset-filters" (click)="resetFilters()">Reset filters</button>
+                <button mat-flat-button color="primary" (click)="applyFilters()">Apply filters</button>
             </div>
         </mat-card>
     </div>
@@ -95,7 +95,7 @@
                 </app-map>
             </div>
 
-            <div class="restaurant-card" *ngFor="let restaurant of restaurants">
+            <div class="restaurant-card" *ngFor="let restaurant of actualRestaurants">
                 <app-restaurant-card
                     [restaurant]="restaurant">
                 </app-restaurant-card>
