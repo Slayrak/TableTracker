@@ -20,16 +20,12 @@ namespace TableTracker
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TableTracker", Version = "v1" });
-            });
-
+            services.AddSwagger();
             services.AddMapper();
             services.AddDataAccess(Configuration);
             services.AddMediator();
             services.AddValidaton();
-            services.AddCustomAuthorization();
+            services.AddCustomAuthorization(Configuration);
             services.AddApiControllers();
         }
 
@@ -46,7 +42,10 @@ namespace TableTracker
             app.UseCustomMiddlewares();
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseCrossOriginResourceSharing();
 
             app.UseEndpoints(endpoints =>

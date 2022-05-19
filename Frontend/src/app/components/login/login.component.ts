@@ -12,6 +12,12 @@ import {
   Validators
 } from '@angular/forms';
 
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserForAuthenticationDTO } from 'src/app/models/dtos/user-for-authentication.dto';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthResponseDTO } from 'src/app/models/dtos/auth-response.dto';
+
 
 @Component({
   selector: 'app-login',
@@ -20,7 +26,13 @@ import {
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  errorMessage: string = '';
+  showError!: boolean;
+
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -32,6 +44,33 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
+  loginUser = (loginFormValue) => {
+    this.showError = false;
+    const login = {... loginFormValue };
+    const userForAuth: UserForAuthenticationDTO = {
+      email: login.email,
+      password: login.password
+    }
+    this.authService.loginUser(userForAuth)
+    .subscribe({
+      next: (res: AuthResponseDTO) => {
+       localStorage.setItem("token", res.token);
+       this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
+       
+       this.router.navigate(['/home']);
+    },
+    error: (err: HttpErrorResponse) => {
+      this.errorMessage = err.message;
+      this.showError = true;
+    }})
+  }
+
+  validateControl = (controlName: string) => {
+    return this.loginformgroup.get(controlName)!.invalid && this.loginformgroup.get(controlName)!.touched;
+  }
+
+  hasError = (controlName: string, errorName: string) => {
+    return this.loginformgroup.get(controlName)!.hasError(errorName);
+  }
+
 }
-
-

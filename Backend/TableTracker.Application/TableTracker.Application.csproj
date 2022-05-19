@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\Images\Queries\" />
     <Folder Include="Validators\Restaurants\Queries\" />
   </ItemGroup>
 
