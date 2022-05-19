@@ -12,14 +12,11 @@ import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 
 export class ContactreviewComponent implements OnInit {
 
-  @Input() address!: string;
   @Input() restaurant!: RestaurantDTO;
 
   restaurantForMap!: RestaurantDTO[];
 
   constructor() {
-    this.address = "Shevska St, 8, Lviv, Lviv Oblast, 79000";
-
    }
 
   selectedVal = "Contacts";
