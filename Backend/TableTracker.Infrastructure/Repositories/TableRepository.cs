@@ -38,5 +38,15 @@ namespace TableTracker.Infrastructure.Repositories
                 .Where(x => !state.HasValue || x.State == state)
                 .ToListAsync();
         }
+
+        public async Task<ICollection<Table>> GetAllTablesByRestaurant(long restaurantId)
+        {
+            return await _context
+                .Set<Table>()
+                .Include(x => x.Reservations)
+                .Include(x => x.Restaurant)
+                .Where(x => x.RestaurantId == restaurantId)
+                .ToListAsync();
+        }
     }
 }

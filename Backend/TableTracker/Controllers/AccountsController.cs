@@ -76,6 +76,8 @@ namespace TableTracker.Controllers
                     Email = user.Email,
                     FullName = user.FirstName + " " + user.LastName,
                 });
+
+                await _unitOfWork.Save();
             }
             else
             {

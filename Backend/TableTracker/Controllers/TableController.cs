@@ -9,6 +9,7 @@ using TableTracker.Application.CQRS.Tables.Commands.AddTable;
 using TableTracker.Application.CQRS.Tables.Commands.DeleteTable;
 using TableTracker.Application.CQRS.Tables.Commands.UpdateTable;
 using TableTracker.Application.CQRS.Tables.Queries.FindTableById;
+using TableTracker.Application.CQRS.Tables.Queries.GetAllTablesByRestaurant;
 using TableTracker.Application.CQRS.Tables.Queries.GetAllTablesWithFiltering;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Helpers;
@@ -57,6 +58,14 @@ namespace TableTracker.Controllers
             var response = await _mediator.Send(new DeleteTableCommand(id));
 
             return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpGet("restaurant/{id}")]
+        public async Task<IActionResult> FindTableByRestaurantId([FromRoute] long id)
+        {
+            var response = await _mediator.Send(new GetAllTablesByRestaurantQuery(id));
+
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         //[HttpGet]
