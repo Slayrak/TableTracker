@@ -200,7 +200,7 @@ namespace TableTracker.Infrastructure
                     Franchise = franchises[0],
                     NumberOfTables = 10,
                     PriceRange = 2,
-                    Rating = 5,
+                    Rating = 3,
                     Address = "Valova St, 23, Lviv, Lviv Oblast, 79000",
                     Type = RestaurantType.Restaurant,
                     Cuisines = new[]
@@ -238,7 +238,7 @@ namespace TableTracker.Infrastructure
                     Franchise = franchises[0],
                     NumberOfTables = 10,
                     PriceRange = 2,
-                    Rating = 5,
+                    Rating = 4,
                     Address = "Staroievreiska St, 40, Lviv, Lviv Oblast, 79000",
                     Type = RestaurantType.Restaurant,
                     Cuisines = new[]
@@ -258,7 +258,7 @@ namespace TableTracker.Infrastructure
                     Franchise = franchises[0],
                     NumberOfTables = 10,
                     PriceRange = 3,
-                    Rating = 5,
+                    Rating = 3,
                     Address = "Kryva Lypa Passage, 8, Lviv, Lviv Oblast, 79000",
                     Type = RestaurantType.Restaurant,
                     Cuisines = new[]

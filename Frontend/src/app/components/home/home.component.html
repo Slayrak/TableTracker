@@ -29,11 +29,11 @@
             <mat-button-toggle [checked]="buttonToggle === 'Recommended'" value="Recommended">Recommended</mat-button-toggle>
         </mat-button-toggle-group>
 
-        <div class="restaurant-card" *ngFor="let restaurant of actualRestaurants">
+        <div class="restaurant-card" *ngFor="let restaurant of shownRestaurants">
             <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
         </div>
 
-        <div class="discover-more" *ngIf="actualRestaurants.length !== restaurants.length">
+        <div class="discover-more" *ngIf="shownRestaurants.length !== restaurants.length">
             <button mat-flat-button color="primary" (click)="showMore()">Show more</button>
         </div>
     </div>    

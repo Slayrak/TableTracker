@@ -21,8 +21,11 @@ export class SearchComponent implements OnInit {
 
   public restaurants!: RestaurantDTO[];
   public actualRestaurants!: RestaurantDTO[];
+  public shownRestaurants!: RestaurantDTO[];
+
   public restaurantQuery: string = '';
   public locationQuery: string = '';
+  public buttonToggle: string = 'Top';
 
   public types: {name: string, number: number}[] = [
     {name: "Restaurant", number: 0 },
@@ -94,7 +97,7 @@ export class SearchComponent implements OnInit {
   restaurantForm!: FormGroup;
 
   applyFilters() {
-    this.actualRestaurants = this.restaurants;
+    this.actualRestaurants = this.restaurants.sort(this.compareStars);
 
     if (this.checkedCuisines.length > 0) {
       this.actualRestaurants = this.actualRestaurants
@@ -113,10 +116,14 @@ export class SearchComponent implements OnInit {
       x.priceRange >= this.priceLowValue && x.priceRange <= this.priceHighValue &&
       x.rating >= this.ratingLowValue && x.rating <= this.ratingHighValue &&
       (this.restaurantQuery.length === 0 || x.name.toLocaleLowerCase().includes(this.restaurantQuery.toLocaleLowerCase())));
+
+    this.shownRestaurants = this.actualRestaurants.slice(0, 3);
   }
 
   resetFilters() {
     this.actualRestaurants = this.restaurants;
+    this.shownRestaurants = this.restaurants.slice(0, 3);
+    this.buttonToggle = 'Top';
     this.checkedCuisines = [];
     this.checkedTypes = [];
     this.priceLowValue = this.priceOptions.floor as number;
@@ -173,5 +180,50 @@ export class SearchComponent implements OnInit {
     }
 
     this.router.navigate(['/search'], { queryParams: params });
+  }
+  
+
+  compareStars(left: RestaurantDTO, right: RestaurantDTO): number {
+    return right.rating - left.rating;
+  }
+
+  compareDates(left: RestaurantDTO, right: RestaurantDTO): number {
+    return left.dateOfOpening > right.dateOfOpening ? -1 : left.dateOfOpening < right.dateOfOpening ? 1 : 0;
+  }
+
+  showMore() {
+    const length = this.shownRestaurants.length + 3 > this.actualRestaurants.length ? this.actualRestaurants.length : this.shownRestaurants.length + 3;
+    this.shownRestaurants = this.actualRestaurants.slice(0, length);
+  }
+
+  shuffle(array: RestaurantDTO[]) {
+    let currentIndex = array.length, randomIndex: number;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
+
+  buttonToggleChanged() {
+    if (this.buttonToggle === 'New') {
+      this.actualRestaurants = this.actualRestaurants.sort(this.compareDates);
+      this.shownRestaurants = this.actualRestaurants.slice(0, 3);
+    } else if (this.buttonToggle === 'Top') {
+      this.actualRestaurants = this.actualRestaurants.sort(this.compareStars);
+      this.shownRestaurants = this.actualRestaurants.slice(0, 3);
+    } else {
+      this.shuffle(this.actualRestaurants);
+      this.shownRestaurants = this.actualRestaurants.slice(0, 3);
+    }
   }
 }

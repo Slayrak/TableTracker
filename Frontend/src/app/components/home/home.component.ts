@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   public buttonToggle: string = 'Top';
 
   public restaurants!: RestaurantDTO[];
-  public actualRestaurants!: RestaurantDTO[];
+  public shownRestaurants!: RestaurantDTO[];
 
   constructor(
     private restaurantService: RestaurantService,
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     this.restaurantService.getAllRestaurants()
       .subscribe((data: RestaurantDTO[]) => {
         this.restaurants = data.sort(this.compareStars);
-        this.actualRestaurants = this.restaurants.slice(0, 3);
+        this.shownRestaurants = this.restaurants.slice(0, 3);
       });
   }
 
@@ -51,16 +51,16 @@ export class HomeComponent implements OnInit {
   }
 
   compareStars(left: RestaurantDTO, right: RestaurantDTO): number {
-    return left.rating - right.rating;
+    return right.rating - left.rating;
   }
 
   compareDates(left: RestaurantDTO, right: RestaurantDTO): number {
-    return left.dateOfOpening > right.dateOfOpening ? 1 : left.dateOfOpening < right.dateOfOpening ? -1 : 0;
+    return left.dateOfOpening > right.dateOfOpening ? -1 : left.dateOfOpening < right.dateOfOpening ? 1 : 0;
   }
 
   showMore() {
-    const length = this.actualRestaurants.length + 3 > this.restaurants.length ? this.restaurants.length : this.actualRestaurants.length + 3;
-    this.actualRestaurants = this.restaurants.slice(0, length);
+    const length = this.shownRestaurants.length + 3 > this.restaurants.length ? this.restaurants.length : this.shownRestaurants.length + 3;
+    this.shownRestaurants = this.restaurants.slice(0, length);
   }
 
   shuffle(array: RestaurantDTO[]) {
@@ -84,13 +84,13 @@ export class HomeComponent implements OnInit {
   buttonToggleChanged() {
     if (this.buttonToggle === 'New') {
       this.restaurants = this.restaurants.sort(this.compareDates);
-      this.actualRestaurants = this.restaurants.slice(0, 3);
+      this.shownRestaurants = this.restaurants.slice(0, 3);
     } else if (this.buttonToggle === 'Top') {
       this.restaurants = this.restaurants.sort(this.compareStars);
-      this.actualRestaurants = this.restaurants.slice(0, 3);
+      this.shownRestaurants = this.restaurants.slice(0, 3);
     } else {
       this.shuffle(this.restaurants);
-      this.actualRestaurants = this.restaurants.slice(0, 3);
+      this.shownRestaurants = this.restaurants.slice(0, 3);
     }
   }
 
