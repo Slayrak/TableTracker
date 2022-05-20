@@ -5,12 +5,12 @@ import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 import { ReviewDTO } from 'src/app/models/dtos/review.dto';
 
 @Component({
-  selector: 'app-contactreview',
-  templateUrl: './contactreview.component.html',
-  styleUrls: ['./contactreview.component.scss']
+  selector: 'app-contact-review',
+  templateUrl: './contact-review.component.html',
+  styleUrls: ['./contact-review.component.scss']
 })
 
-export class ContactreviewComponent implements OnInit {
+export class ContactReviewComponent implements OnInit {
 
   @Input() restaurant!: RestaurantDTO;
 

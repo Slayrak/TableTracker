@@ -20,6 +20,17 @@ namespace TableTracker.Helpers
             };
         }
 
+        public static IActionResult ReturnCommandResult(CommandResponse response)
+        {
+            return response.Result switch
+            {
+                CommandResult.Success => new OkObjectResult(response),
+                CommandResult.Failure => new BadRequestObjectResult(new { Object = response, response.ErrorMessage }),
+                CommandResult.NotFound => new NotFoundObjectResult(new { Object = response, response.ErrorMessage }),
+                _ => throw new NotSupportedException(),
+            };
+        }
+
         public static IActionResult ReturnQueryResult<T>(T response) where T : class
         {
             return response switch

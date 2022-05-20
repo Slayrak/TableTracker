@@ -20,4 +20,19 @@ namespace TableTracker.Application.CQRS
 
         public string ErrorMessage { get; set; }
     }
+
+    public class CommandResponse
+    {
+        public CommandResponse(
+            CommandResult result = CommandResult.Success,
+            string errorMessage = "")
+        {
+            Result = result;
+            ErrorMessage = errorMessage;
+        }
+
+        public CommandResult Result { get; set; }
+
+        public string ErrorMessage { get; set; }
+    }
 }

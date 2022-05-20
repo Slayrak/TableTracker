@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
@@ -55,6 +56,9 @@ namespace TableTracker.Controllers
             {
                 IsAuthSuccessful = true,
                 Token = token,
+                User = _mapper.Map<VisitorDTO>((await _unitOfWork
+                    .GetRepository<IVisitorRepository>()
+                    .FilterVisitors(userForAuthentication.Email)).FirstOrDefault())
             });
         }
 
@@ -71,7 +75,7 @@ namespace TableTracker.Controllers
 
             if (result.Succeeded)
             {
-                await _unitOfWork.GetRepository<IUserRepository>().Insert(new User
+                await _unitOfWork.GetRepository<IVisitorRepository>().Insert(new Visitor
                 {
                     Email = user.Email,
                     FullName = user.FirstName + " " + user.LastName,
