@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using MediatR;
@@ -21,9 +20,10 @@ namespace TableTracker.Application.CQRS.Notifications.Commands.SendFAQEmail
         public async Task<CommandResponse<EmailDTO>> Handle(SendFAQEmailCommand request, CancellationToken cancellationToken)
         {
             request.Email.Subject = "FAQ Question";
-            request.Email.To = new List<string> { "placeholder" };
+            request.Email.Body = "Thank you for your question. We will get to you as soon as possible!";
+            await _emailHandler.SendEmail(request.Email);
 
-            _emailHandler.SendEmail(request.Email);
+            return new CommandResponse<EmailDTO>();
         }
     }
 }

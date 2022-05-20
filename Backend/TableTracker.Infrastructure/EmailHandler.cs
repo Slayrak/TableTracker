@@ -27,14 +27,25 @@ namespace TableTracker.Infrastructure
         {
             using var mailMessage = new MailMessage
             {
-                Sender = new MailAddress(email.From),
                 Subject = email.Subject,
                 Body = email.Body,
+                From = new MailAddress(_emailConfig.Address),
             };
 
-            mailMessage.CC.Add(email.Cc.Aggregate((x, y) => x + "," + y));
-            mailMessage.Bcc.Add(email.Bcc.Aggregate((x, y) => x + "," + y));
-            mailMessage.To.Add(email.To.Aggregate((x, y) => x + "," + y));
+            if (email.Cc.Any())
+            {
+                mailMessage.CC.Add(email.Cc.Aggregate((x, y) => x + "," + y));
+            }
+
+            if (email.Bcc.Any())
+            {
+                mailMessage.Bcc.Add(email.Bcc.Aggregate((x, y) => x + "," + y));
+            }
+
+            if (email.To.Any())
+            {
+                mailMessage.To.Add(email.To.Aggregate((x, y) => x + "," + y));
+            }
 
             var smtp = new SmtpClient(_emailConfig.Host, _emailConfig.Port)
             {

@@ -7,5 +7,7 @@ namespace TableTracker.Domain.Entities
         public float GeneralTrustFactor { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }
+
+        public ICollection<Restaurant> Favourites { get; set; }
     }
 }

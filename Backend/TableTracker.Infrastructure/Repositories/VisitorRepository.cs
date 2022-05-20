@@ -16,11 +16,21 @@ namespace TableTracker.Infrastructure.Repositories
         {
         }
 
+        public override async Task<Visitor> FindById(long id)
+        {
+            return await _context
+                .Set<Visitor>()
+                .Include(x => x.Reservations)
+                .Include(x => x.Favourites)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<ICollection<Visitor>> FilterVisitors(string filter)
         {
             return await _context
                 .Set<Visitor>()
                 .Include(x => x.Reservations)
+                .Include(x => x.Favourites)
                 .Where(x => x.FullName.Contains(filter) || x.Email.Contains(filter))
                 .ToListAsync();
         }
@@ -30,8 +40,19 @@ namespace TableTracker.Infrastructure.Repositories
             return await _context
                 .Set<Visitor>()
                 .Include(x => x.Reservations)
+                .Include(x => x.Favourites)
                 .Where(x => x.GeneralTrustFactor == trustFactor)
                 .ToListAsync();
+        }
+
+        public async Task<ICollection<Restaurant>> FindVisitorFavouritesByVisitorId(long visitorId)
+        {
+            var visitor = await _context
+                .Set<Visitor>()
+                .Include(x => x.Favourites)
+                .FirstOrDefaultAsync(x => x.Id == visitorId);
+
+            return visitor.Favourites;
         }
     }
 }

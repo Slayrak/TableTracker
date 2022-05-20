@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using TableTracker.Domain.Interfaces;
+using TableTracker.Domain.Settings;
 using TableTracker.Infrastructure;
 using TableTracker.ServiceConfigurations;
 
@@ -30,6 +31,8 @@ namespace TableTracker
             services.AddApiControllers();
 
             services.AddScoped<IEmailHandler, EmailHandler>();
+            services.AddOptions();
+            services.Configure<EmailConfig>(Configuration.GetSection(nameof(EmailConfig)));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

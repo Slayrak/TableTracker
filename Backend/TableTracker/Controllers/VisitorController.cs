@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TableTracker.Application.CQRS.Visitors.Commands.AddVisitor;
+using TableTracker.Application.CQRS.Visitors.Commands.AddVisitorFavourite;
+using TableTracker.Application.CQRS.Visitors.Commands.DeleteVisitorFavourite;
 using TableTracker.Application.CQRS.Visitors.Commands.UpdateVisitor;
 using TableTracker.Application.CQRS.Visitors.Queries.FindVisitorByFind;
+using TableTracker.Application.CQRS.Visitors.Queries.FindVisitorFavouritesByVisitorId;
 using TableTracker.Application.CQRS.Visitors.Queries.GetAllVisitors;
 using TableTracker.Application.CQRS.Visitors.Queries.GetAllVisitorsByTrustFactor;
 using TableTracker.Domain.DataTransferObjects;
@@ -71,6 +74,30 @@ namespace TableTracker.Controllers
         public async Task<IActionResult> DeleteVisitor([FromBody] VisitorDTO visitor)
         {
             var response = await _mediator.Send(new AddVisitorCommand(visitor));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpGet("{id}/favourites")]
+        public async Task<IActionResult> FindVisitorFavouriteByVisitorId([FromRoute] long id)
+        {
+            var response = await _mediator.Send(new FindVisitorFavouritesByVisitorIdQuery(id));
+
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpPost("{id}/favourites")]
+        public async Task<IActionResult> AddVisitorFavourite([FromRoute] long id, long restaurantId)
+        {
+            var response = await _mediator.Send(new AddVisitorFavouriteCommand(id, restaurantId));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpDelete("{id}/favourites")]
+        public async Task<IActionResult> DeleteVisitorFavourite([FromRoute] long id, long restaurantId)
+        {
+            var response = await _mediator.Send(new DeleteVisitorFavouriteCommand(id, restaurantId));
 
             return ReturnResultHelper.ReturnCommandResult(response);
         }

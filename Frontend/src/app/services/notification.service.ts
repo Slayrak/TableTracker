@@ -10,6 +10,6 @@ export class NotificationService {
   constructor(private http: HttpClient) { }
 
   public sendEmail = (email: EmailDTO) => {
-    return this.http.post('https://localhost:5001/api/notifications/faq-email', { body: email });
+    return this.http.post('https://localhost:5001/api/notifications/faq-email', email);
   }
 }

@@ -4,6 +4,7 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
+using TableTracker.Application.CQRS.Notifications.Commands.SendFAQEmail;
 using TableTracker.Domain.DataTransferObjects;
 
 namespace TableTracker.Controllers
@@ -22,7 +23,8 @@ namespace TableTracker.Controllers
         [HttpPost("faq-email")]
         public async Task<IActionResult> SendFAQEmail([FromBody] EmailDTO email)
         {
-            var response = _mediator.Send(new )
+            var response = await _mediator.Send(new SendFAQEmailCommand(email));
+            return Ok(response);
         }
     }
 }
