@@ -189,6 +189,7 @@ namespace TableTracker.Infrastructure
                         cuisines[11],
                     },
                     MainImage = images[0],
+                    DateOfOpening = new DateTime(2022, 01, 01),
                 });
 
                 restaurants.Add(new Restaurant
@@ -207,6 +208,7 @@ namespace TableTracker.Infrastructure
                         cuisines[11],
                     },
                     MainImage = images[1],
+                    DateOfOpening = new DateTime(2022, 03, 01),
                 });
 
                 restaurants.Add(new Restaurant
@@ -225,6 +227,7 @@ namespace TableTracker.Infrastructure
                         cuisines[4],
                     },
                     MainImage = images[2],
+                    DateOfOpening = new DateTime(2022, 02, 01),
                 });
 
                 restaurants.Add(new Restaurant
@@ -244,6 +247,7 @@ namespace TableTracker.Infrastructure
                         cuisines[11],
                     },
                     MainImage = images[3],
+                    DateOfOpening = new DateTime(2022, 01, 02),
                 });
 
                 restaurants.Add(new Restaurant
@@ -264,6 +268,7 @@ namespace TableTracker.Infrastructure
                         cuisines[11],
                     },
                     MainImage = images[4],
+                    DateOfOpening = new DateTime(2022, 02, 02),
                 });
 
                 await context.AddRangeAsync(restaurants);

@@ -3,10 +3,11 @@ import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular
 import { FormControl, FormGroup } from '@angular/forms';
 import { CuisineDTO } from 'src/app/models/dtos/cuisine.dto';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
-import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 import { CuisineService } from 'src/app/services/cuisine.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { Options } from '@angular-slider/ngx-slider';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-search',
@@ -20,6 +21,8 @@ export class SearchComponent implements OnInit {
 
   public restaurants!: RestaurantDTO[];
   public actualRestaurants!: RestaurantDTO[];
+  public restaurantQuery: string = '';
+  public locationQuery: string = '';
 
   public types: {name: string, number: number}[] = [
     {name: "Restaurant", number: 0 },
@@ -53,24 +56,29 @@ export class SearchComponent implements OnInit {
   showMap: boolean = false;
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private cuisineService: CuisineService) {
+
       this.cuisinecheckedarray = [];
       this.typecheckedarray = [];
   }
 
   ngOnInit(): void {
     this.restaurantForm = new FormGroup({
-      name: new FormControl(''),
-      people: new FormControl(''),
-      date: new FormControl(''),
-      time: new FormControl(''),
+      restaurant: new FormControl(''),
     })
 
     this.restaurantService.getAllRestaurants()
       .subscribe((data: RestaurantDTO[]) => {
         this.restaurants = data;
-        this.applyFilters();
+
+        this.route.queryParams.subscribe(params => {
+          this.restaurantQuery = params['restaurant'] === undefined ? '' : params['restaurant'];
+          this.locationQuery = params['location'] === undefined ? '' : params['location'];
+          this.applyFilters();
+        })
       });
 
     this.cuisineService.getAllCuisines()
@@ -103,7 +111,8 @@ export class SearchComponent implements OnInit {
 
     this.actualRestaurants = this.actualRestaurants.filter(x =>
       x.priceRange >= this.priceLowValue && x.priceRange <= this.priceHighValue &&
-      x.rating >= this.ratingLowValue && x.rating <= this.ratingHighValue);
+      x.rating >= this.ratingLowValue && x.rating <= this.ratingHighValue &&
+      (this.restaurantQuery.length === 0 || x.name.toLocaleLowerCase().includes(this.restaurantQuery.toLocaleLowerCase())));
   }
 
   resetFilters() {
@@ -117,6 +126,10 @@ export class SearchComponent implements OnInit {
 
     this.cuisinecheckedarray = [];
     this.typecheckedarray = [];
+    this.restaurantQuery = '';
+    this.locationQuery = '';
+
+    this.router.navigate(['/search']);
   }
 
   cuisineFilterChange(id: number) {
@@ -145,5 +158,20 @@ export class SearchComponent implements OnInit {
     }
 
     return 0;
+  }
+
+  search(restaurantFormValue) {
+    const values = {... restaurantFormValue };
+    let params: Params = new HttpParams();
+    params['encoder'] = null;
+    if (!(!values.restaurant || values.restaurant == undefined || values.restaurant == "" || values.restaurant.length == 0)) {
+      params['restaurant'] = values.restaurant
+    }
+
+    if (!(!this.locationQuery || this.locationQuery == undefined || this.locationQuery == "" || this.locationQuery.length == 0)) {
+      params['location'] = this.locationQuery
+    }
+
+    this.router.navigate(['/search'], { queryParams: params });
   }
 }

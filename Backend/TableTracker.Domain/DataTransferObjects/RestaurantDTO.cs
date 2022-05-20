@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using TableTracker.Domain.Enums;
 
@@ -24,11 +25,15 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public Discount Discount { get; set; }
 
+        public DateTime DateOfOpening { get; set; }
+
+
         public ICollection<TableDTO> Tables { get; set; }
 
         public ICollection<CuisineDTO> Cuisines { get; set; }
 
         public ICollection<ImageDTO> Images { get; set; }
+
 
         public ImageDTO MainImage { get; set; }
 

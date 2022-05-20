@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatCalendar } from '@angular/material/datepicker';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
-import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 
 @Component({

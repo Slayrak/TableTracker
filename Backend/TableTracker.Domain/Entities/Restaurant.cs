@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using TableTracker.Domain.Enums;
 
@@ -15,6 +16,7 @@ namespace TableTracker.Domain.Entities
         public int NumberOfTables { get; set; }
         public RestaurantType Type { get; set; }
         public Discount Discount { get; set; }
+        public DateTime DateOfOpening { get; set; }
 
         public ICollection<Table> Tables { get; set; }
         public ICollection<Cuisine> Cuisines { get; set; }
