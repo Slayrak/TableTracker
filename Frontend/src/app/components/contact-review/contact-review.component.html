@@ -103,9 +103,10 @@
             <div class="reviewsThemSelves" *ngFor="let review of mySentences | slice:0:show;">
                 <div class="review">
                     <div class="visitorImage">
-                            <img [src]="review.visitorImg" >
+                        <img [src]="review.visitorImg">
                         <div>{{review.visitorName}}</div>
                     </div>
+
                     <div class="reviewMainBody">
                         <div style="width:50%; height: 15%;">
                             <b>

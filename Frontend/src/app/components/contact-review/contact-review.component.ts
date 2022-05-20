@@ -30,7 +30,7 @@ export class ContactReviewComponent implements OnInit {
     this.show += 3; 
   }
 
-  public mySentences:Array<ReviewDTO> = [
+  public mySentences: ReviewDTO[] = [
     {id: 1, review: "Kitchen is great, drinks are perfectly selected, atmosphere is so authentic, and live piano makes it even better. Worth all the money (which is cheap, btw) and time waiting if there’s a queue.", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
     {id: 2, review: "cool story Bob", rating: 5, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
     {id: 3, review: "cool story Bob", rating: 2, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
@@ -39,7 +39,7 @@ export class ContactReviewComponent implements OnInit {
     {id: 6, review: "cool story Bob", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
     {id: 7, review: "cool story Bob", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"},
     {id: 8, review: "cool story Bob", rating: 4, visitorImg: "../../../assets/human.jpg", visitorName: "Bob", header: "Cool"}
-];
+  ];
 
   restaurantForMap!: RestaurantDTO[];
 
@@ -51,7 +51,7 @@ export class ContactReviewComponent implements OnInit {
     this.ones = 0;
     this.count = 0;
     this.sum = 0;
-   }
+  }
 
   selectedVal = "Contacts";
 
@@ -72,33 +72,45 @@ export class ContactReviewComponent implements OnInit {
             this.count += 1;
             this.sum += 1;
             break;
+
           case 2:
             this.twos += 1;
             this.count += 1;
             this.sum += 2;
             break;
+
           case 3:
             this.threes += 1;
             this.count += 1;
             this.sum += 3;
             break;
+
           case 4: 
             this.fourths += 1;
             this.count += 1;
             this.sum += 4;
             break;
+
           case 5:
             this.fives += 1;
             this.count += 1;
             this.sum += 5;
             break;
+
           default:
             break;
-
-        }
-        
+        }        
       }
+
     this.overall = Math.round( this.sum/this.count );
     console.log(this.overall);
+  }
+
+  isNullOrEmpty(value: string | undefined): boolean {
+    return !value || value === undefined || value === "" || value.length === 0;
+  }
+
+  getImagePath(image: string): string {
+    return `https://localhost:5001/images/${image}`;
   }
 }

@@ -53,9 +53,9 @@ export class SignupComponent implements OnInit {
       .subscribe(() => {
         this.authService.loginUser(userForAuth)
           .subscribe({
-            next: (res: AuthResponseDTO) => {
-              localStorage.setItem("token", res.token);
-              this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
+            next: (response: AuthResponseDTO) => {
+              localStorage.setItem("token", response.token);
+              localStorage.setItem('user', JSON.stringify(response.user));
               
               this.router.navigate(['/home']);
             }

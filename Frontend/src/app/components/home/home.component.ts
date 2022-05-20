@@ -11,7 +11,7 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  
   public myFormGroup!: FormGroup;
   public buttonToggle: string = 'Top';
 

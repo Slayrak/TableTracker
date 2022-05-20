@@ -53,14 +53,16 @@ export class LoginComponent implements OnInit {
     }
     this.authService.loginUser(userForAuth)
     .subscribe({
-      next: (res: AuthResponseDTO) => {
-       localStorage.setItem("token", res.token);
-       this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
+      next: (response: AuthResponseDTO) => {
+        if (response.isAuthSuccessful) {
+          localStorage.setItem("token", response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+        }
        
-       this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
     },
     error: (err: HttpErrorResponse) => {
-      this.errorMessage = err.message;
+      this.errorMessage = this.handleUnauthorized(err);
       this.showError = true;
     }})
   }
@@ -71,6 +73,10 @@ export class LoginComponent implements OnInit {
 
   hasError = (controlName: string, errorName: string) => {
     return this.loginformgroup.get(controlName)!.hasError(errorName);
+  }
+
+  private handleUnauthorized = (error: HttpErrorResponse) => {
+    return 'Authentication failed. Wrong Username or Password';
   }
 
 }
