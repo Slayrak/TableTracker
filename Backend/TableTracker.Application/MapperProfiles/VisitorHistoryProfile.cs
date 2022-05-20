@@ -13,7 +13,7 @@ namespace TableTracker.Application.MapperProfiles
                 .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))
                 .ForMember(dest => dest.Visitor, opt => opt.MapFrom(src => src.Visitor));
 
-            CreateMap<VisitorFavouriteDTO, VisitorFavourite>()
+            CreateMap<VisitorHistoryDTO, VisitorHistory>()
                 .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))
                 .ForMember(dest => dest.RestaurantId, opt => opt.MapFrom(src => src.Restaurant.Id))
                 .ForMember(dest => dest.Visitor, opt => opt.MapFrom(src => src.Visitor))

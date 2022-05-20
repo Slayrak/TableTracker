@@ -39,7 +39,6 @@ namespace TableTracker.Infrastructure
             var tables = new List<Table>();
             var reservations = new List<Reservation>();
             var restVisitor = new List<RestaurantVisitor>();
-            var favourites = new List<VisitorFavourite>();
             var history = new List<VisitorHistory>();
             var images = new List<Image>();
 
@@ -408,20 +407,6 @@ namespace TableTracker.Infrastructure
                 }
 
                 await context.AddRangeAsync(restVisitor);
-            }
-
-            #endregion
-
-            #region VisitorFavourites
-
-            if (!context.VisitorFavourites.Any())
-            {
-                for (int i = 0; i < restaurants.Count; i++)
-                {
-                    favourites.Add(new VisitorFavourite { Restaurant = restaurants[i], Visitor = visitors[i] });
-                }
-
-                await context.AddRangeAsync(favourites);
             }
 
             #endregion

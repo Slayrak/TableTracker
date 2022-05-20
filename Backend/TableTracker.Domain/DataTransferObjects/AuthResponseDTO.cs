@@ -7,5 +7,7 @@
         public string ErrorMessage { get; set; }
 
         public string Token { get; set; }
+
+        public VisitorDTO User { get; set; }
     }
 }

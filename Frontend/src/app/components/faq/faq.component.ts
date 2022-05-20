@@ -8,6 +8,7 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-faq',
@@ -16,7 +17,7 @@ import {
 })
 export class FaqComponent implements OnInit {
 
-  constructor() { }
+  constructor(private notificationService: NotificationService) { }
 
   ngOnInit(): void {
   }
@@ -32,4 +33,16 @@ export class FaqComponent implements OnInit {
     question: new FormControl('', Validators.required)
   });
 
+  sendEmail(emailFormValue) {
+    const values = {... emailFormValue };
+    this.notificationService.sendEmail({
+      to: [values.email],
+      from: '',
+      bcc: [],
+      cc: [],
+      subject: '',
+      body: '',
+    }).subscribe(_response => console.log("Your question has been added and will be answered ASAP"));
+  }
+  
 }

@@ -10,5 +10,7 @@ namespace TableTracker.Domain.Interfaces.Repositories
         Task<ICollection<Visitor>> GetAllVisitorsByTrustFactor(float trustFactor);
 
         Task<ICollection<Visitor>> FilterVisitors(string filter);
+
+        Task<ICollection<Restaurant>> FindVisitorFavouritesByVisitorId(long visitorId);
     }
 }

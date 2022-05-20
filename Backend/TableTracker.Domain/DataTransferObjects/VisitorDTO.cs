@@ -15,5 +15,7 @@ namespace TableTracker.Domain.DataTransferObjects
         public float GeneralTrustFactor { get; set; }
 
         public ICollection<ReservationDTO> Reservations { get; set; }
+
+        public ICollection<RestaurantDTO> Favourites { get; set; }
     }
 }

@@ -10,11 +10,11 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-reserpassword',
-  templateUrl: './reserpassword.component.html',
-  styleUrls: ['./reserpassword.component.scss']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss']
 })
-export class ReserpasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit {
 
   constructor() { }
 
