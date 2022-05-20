@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ManagerDTO } from 'src/app/models/dtos/manager.dto';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
-import { Manager } from 'src/app/models/manager.model';
-import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

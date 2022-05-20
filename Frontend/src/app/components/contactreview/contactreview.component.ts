@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 import { ReviewDTO } from 'src/app/models/dtos/review.dto';
-import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
 
 @Component({
   selector: 'app-contactreview',

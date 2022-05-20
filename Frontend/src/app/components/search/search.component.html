@@ -47,35 +47,14 @@
     </div>
 
     <div class="right">
-        <form [formGroup]="restaurantForm">
-            <mat-form-field appearance="outline" class="input">
-                <input matInput type="text" formControlName="people" placeholder="Cuisine or restaurant name">
+        <form [formGroup]="restaurantForm" (ngSubmit)="search(restaurantForm.value)">
+            <mat-form-field appearance="outline">
+                <input matInput type="text" formControlName="restaurant" placeholder="Cuisine or restaurant name" [value]="restaurantQuery">
             </mat-form-field>
 
-            <button mat-button>
+            <button mat-button type="submit">
                 <mat-icon>search</mat-icon>
             </button>
-
-            <div>
-                <mat-form-field appearance="outline" >
-                    <mat-label>People:</mat-label>
-                    <input matInput type="text" formControlName="people"/>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="input">
-                    <mat-label>Date</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="date">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" >
-                    <mat-label>Time</mat-label>
-                    <input matInput type="time" formControlName="time"/>
-                </mat-form-field>
-            </div>
         </form>
 
         <mat-divider class="divider"></mat-divider>
@@ -83,10 +62,10 @@
         <div class="discover">
             <h3>Discover top results</h3>
 
-            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                <mat-button-toggle value="Top">Top</mat-button-toggle>
-                <mat-button-toggle value="New">New</mat-button-toggle>
-                <mat-button-toggle value="Recommended">Recommended</mat-button-toggle>
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="buttonToggle" (change)="buttonToggleChanged()">
+                <mat-button-toggle [checked]="buttonToggle === 'Top'" value="Top" >Top</mat-button-toggle>
+                <mat-button-toggle [checked]="buttonToggle === 'New'" value="New">New</mat-button-toggle>
+                <mat-button-toggle [checked]="buttonToggle === 'Recommended'" value="Recommended">Recommended</mat-button-toggle>
             </mat-button-toggle-group>
     
             <div *ngIf="showMap" class="map-container">
@@ -95,14 +74,14 @@
                 </app-map>
             </div>
 
-            <div class="restaurant-card" *ngFor="let restaurant of actualRestaurants">
+            <div class="restaurant-card" *ngFor="let restaurant of shownRestaurants">
                 <app-restaurant-card
                     [restaurant]="restaurant">
                 </app-restaurant-card>
             </div>
-    
-            <div class="discover-more">
-                <button mat-flat-button color="primary">Discover more</button>
+            
+            <div class="discover-more" *ngIf="shownRestaurants.length !== actualRestaurants.length">
+                <button mat-flat-button color="primary" (click)="showMore()">Show more</button>
             </div>
         </div>
     </div>

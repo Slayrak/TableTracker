@@ -3,8 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 import { UserDTO } from 'src/app/models/dtos/user.dto';
 import { VisitorDTO } from 'src/app/models/dtos/visitor.dto';
-import { RestaurantInfo } from 'src/app/models/restaurant-info.model';
-import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

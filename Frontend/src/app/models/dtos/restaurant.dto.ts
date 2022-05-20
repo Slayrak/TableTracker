@@ -15,4 +15,5 @@ export interface RestaurantDTO {
     discount: Discount,
     mainImage: ImageDTO,
     cuisines: CuisineDTO[],
+    dateOfOpening: Date,
 }

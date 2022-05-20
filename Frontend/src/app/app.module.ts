@@ -26,6 +26,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -93,6 +94,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     MatCheckboxModule,
     MatSliderModule,
     MatExpansionModule,
+    MatSelectModule,
     TextFieldModule,
 
     AgmCoreModule.forRoot({

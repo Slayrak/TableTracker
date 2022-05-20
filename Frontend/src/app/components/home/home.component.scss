@@ -4,16 +4,20 @@
     background-color: $background-color;
 }
 
-.input {
-    padding-bottom: 0 !important;
-}
-
 .search {
     position: absolute;
     top: 45%;
-    left: 26.5%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35vw;
+
     background-color: white;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .picture {
@@ -71,4 +75,20 @@ h3 {
 
 .restaurant-card {
     margin: 20px 0px 20px 0px;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    padding: 0;
+}
+
+::ng-deep .mat-form-field-appearance-outline {
+    margin: 0.25em;
+}
+
+.restaurant-input {
+    width: 20vw;
+}
+
+.location-input {
+    width: 10vw;
 }
