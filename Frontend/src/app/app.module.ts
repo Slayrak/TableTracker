@@ -121,6 +121,11 @@ export class AppModule {
       'locationIcon',
       domSanitizer.bypassSecurityTrustResourceUrl('./assets/location-sign-svgrepo-com.svg')
     );
+
+    iconRegistry.addSvgIcon(
+      'filledHeartIcon',
+      domSanitizer.bypassSecurityTrustResourceUrl('./assets/heart.svg')
+    );
   }
 
 

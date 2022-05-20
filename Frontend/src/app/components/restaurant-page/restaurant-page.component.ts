@@ -11,10 +11,16 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 })
 export class RestaurantPageComponent implements OnInit {
 
+  minDate!: Date;
+
+  isChecked!: number;
+
   image!: string;
   public isManagedRestaurant: boolean = false;
 
   public peopleNumber: number;
+  public maxPeopleNumber: number;
+  public minPeopleNumber: number;
   public selectedDate: Date;
 
   public restaurant!: RestaurantDTO;
@@ -23,8 +29,12 @@ export class RestaurantPageComponent implements OnInit {
     private route: ActivatedRoute,
     private restaurantService: RestaurantService) {
 
-    this.peopleNumber = 0;
-    this.selectedDate = new Date('0001-01-01');
+    this.peopleNumber = 1;
+    this.maxPeopleNumber = 4;
+    this.minPeopleNumber = 1;
+    this.selectedDate = new Date();
+    this.isChecked = 0;
+    this.minDate = new Date();
   }
 
   ngOnInit(): void {
@@ -35,6 +45,26 @@ export class RestaurantPageComponent implements OnInit {
         this.restaurant = data;
         this.image = `https://localhost:5001/images/${this.restaurant.mainImage.name}`;
       });
+  }
+
+  increasePeople() {
+    if(this.peopleNumber < this.maxPeopleNumber) {
+      this.peopleNumber += 1;
+    }
+  }
+
+  decreasePeople() {
+    if(this.peopleNumber > this.minPeopleNumber) {
+      this.peopleNumber -= 1;
+    }
+  }
+  
+  changeHeart() {
+    if(this.isChecked == 0){
+      this.isChecked = 1;
+    } else {
+      this.isChecked = 0;
+    }
   }
 
 }

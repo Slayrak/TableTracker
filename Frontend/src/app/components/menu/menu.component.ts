@@ -10,6 +10,12 @@ export class MenuComponent implements OnInit {
 
   @Input() restaurantId!: number;
 
+  show = 8;
+
+  increaseShow() {
+    this.show += 8; 
+  }
+
   menuItems: Array<MenuItem> = [
     {
       id: 1,

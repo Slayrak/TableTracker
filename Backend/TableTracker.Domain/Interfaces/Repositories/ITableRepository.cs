@@ -17,6 +17,6 @@ namespace TableTracker.Domain.Interfaces.Repositories
             DateTime? reserveDate = null,
             TableState? state = null);
 
-        Task<ICollection<Table>> GetAllTablesByRestaurant(long restaurantId)
+        Task<ICollection<Table>> GetAllTablesByRestaurant(long restaurantId);
     }
 }

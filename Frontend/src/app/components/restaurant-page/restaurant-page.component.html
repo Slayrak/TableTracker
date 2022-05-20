@@ -52,12 +52,12 @@
                 <h4 class="people-head">People:</h4>
 
                 <button mat-mini-fab color="secondary" class="people-button">
-                    <mat-icon class="icon">remove</mat-icon>
+                    <mat-icon class="icon" (click)="decreasePeople()">remove</mat-icon>
                 </button>
 
                 <span class="people-number">{{ peopleNumber }}</span>
 
-                <button mat-mini-fab color="secondary" class="people-button">
+                <button mat-mini-fab color="secondary" class="people-button" (click)="increasePeople()">
                     <mat-icon class="icon">add</mat-icon>
                 </button>
             </mat-card>
@@ -67,7 +67,7 @@
                 <span>{{ selectedDate.toDateString() }}</span>
                 <mat-divider></mat-divider>
 
-                <mat-calendar [selected]="selectedDate" (selectedChange)="selectedDate = $event"></mat-calendar>
+                <mat-calendar [selected]="selectedDate" (selectedChange)="selectedDate = $event" [minDate]="minDate"></mat-calendar>
             </mat-card>
 
             <mat-card class="card flex">
@@ -76,19 +76,23 @@
             </mat-card>
 
             <div class="buttons">
-                <button mat-flat-button color="secondary">
-                    <mat-icon>favorite_border</mat-icon>
+                <button mat-flat-button color="secondary" (click)="changeHeart()">
+                    <mat-icon *ngIf="isChecked == 0">favorite_border</mat-icon>
+                    <mat-icon *ngIf="isChecked == 1" svgIcon="filledHeartIcon"></mat-icon>
                 </button>
 
                 <button mat-flat-button color="primary" class="right">Book</button>
             </div>
         </div>
     </div>
-    <div class="menu">
-        <app-menu [restaurantId]="restaurant.id"></app-menu>
-    </div>
 
-    <div class="contact-review">
-        <app-contact-review [restaurant]="restaurant"></app-contact-review>
+    <div class="menuContactReview">
+        <div class="menu">
+            <app-menu [restaurantId]="restaurant.id"></app-menu>
+        </div>
+    
+        <div class="contact-review">
+            <app-contact-review [restaurant]="restaurant"></app-contact-review>
+        </div>
     </div>
 </div>

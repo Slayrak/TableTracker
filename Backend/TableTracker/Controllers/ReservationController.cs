@@ -86,5 +86,7 @@ namespace TableTracker.Controllers
 
             return ReturnResultHelper.ReturnCommandResult(response);
         }
+
+        //[HttpGet("{tableId}/date")]
     }
 }
