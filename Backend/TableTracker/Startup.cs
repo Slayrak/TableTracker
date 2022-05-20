@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
+using TableTracker.Domain.Interfaces;
+using TableTracker.Infrastructure;
 using TableTracker.ServiceConfigurations;
 
 namespace TableTracker
@@ -27,6 +28,8 @@ namespace TableTracker
             services.AddValidaton();
             services.AddCustomAuthorization(Configuration);
             services.AddApiControllers();
+
+            services.AddScoped<IEmailHandler, EmailHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

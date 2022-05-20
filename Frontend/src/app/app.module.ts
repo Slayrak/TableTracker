@@ -34,9 +34,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 import { SearchComponent } from './components/search/search.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { ReserpasswordComponent } from './components/reserpassword/reserpassword.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { FaqComponent } from './components/faq/faq.component';
-import { ContactreviewComponent } from './components/contactreview/contactreview.component';
+import { ContactReviewComponent } from './components/contact-review/contact-review.component';
 
 import { AgmCoreModule } from '@agm/core';
 import { RestaurantMapCardComponent } from './components/restaurant-map-card/restaurant-map-card.component';
@@ -59,9 +59,9 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     RestaurantCardComponent,
     SearchComponent,
     SignupComponent,
-    ReserpasswordComponent,
+    ResetPasswordComponent,
     FaqComponent,
-    ContactreviewComponent,
+    ContactReviewComponent,
     RestaurantMapCardComponent,
     UserProfileComponent,
     ManagerProfileComponent,

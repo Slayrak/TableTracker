@@ -72,7 +72,7 @@
     <p style="font-size: 38px; font-family: Inter; text-align: center; margin-top: 5vh; margin-bottom: 5vh; ">Email us!</p>
 
     <div class="formContainer">
-        <form [formGroup]="emailForm">
+        <form [formGroup]="emailForm" (ngSubmit)="sendEmail(emailForm.value)">
 
             <div class="container">
                 <div id="inputContainer" style="width:100%">
@@ -98,7 +98,7 @@
             
             
             <div style="display: flex; justify-content: center; margin-bottom: 8vh;">
-                <button mat-raised-button color=primary id="myFormButtons">Send</button>
+                <button mat-raised-button color=primary id="myFormButtons" type="submit">Send</button>
             </div>
 
         </form>

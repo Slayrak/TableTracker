@@ -32,4 +32,8 @@ export class FaqComponent implements OnInit {
     question: new FormControl('', Validators.required)
   });
 
+  sendEmail(emailFormValue) {
+    
+  }
+  
 }
