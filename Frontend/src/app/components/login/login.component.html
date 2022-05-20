@@ -1,5 +1,10 @@
 <div class="page">
     <p style="text-align: center; font-size:30px; padding-top:3vh" id="ForFont">Please log in</p>
+
+    <div *ngIf="showError" class="error">
+        {{ errorMessage }}
+    </div>
+
     <form [formGroup]="loginformgroup" style="margin-top: 7vh; height: 60%;" (ngSubmit)="loginUser(loginformgroup.value)">
         <div class="form-group" style="display: flex; width: 100%; height: 100%; flex-flow: column wrap; align-content: center;">
             

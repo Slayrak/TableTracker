@@ -11,7 +11,7 @@ import { ManagerProfileComponent } from './components/manager-profile/manager-pr
 import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
 
 const routes: Routes = [
-  { path: 'user/profile/:id', component: UserProfileComponent },
+  { path: 'user/:id/profile', component: UserProfileComponent },
   { path: 'manager/profile/:id', component: ManagerProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },

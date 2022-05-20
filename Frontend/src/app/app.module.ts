@@ -48,6 +48,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { MapComponent } from './components/map/map.component';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { InitialsPipe } from './pipes/initials.pipe';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     UserInfoComponent,
     RestaurantPageComponent,
     MenuComponent,
-    MapComponent
+    MapComponent,
+    InitialsPipe,
   ],
   imports: [
     BrowserModule,
