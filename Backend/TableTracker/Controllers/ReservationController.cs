@@ -66,6 +66,8 @@ namespace TableTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReservation([FromBody] ReservationDTO reservation)
         {
+            reservation.Date = reservation.Date.AddHours(3);
+
             var response = await _mediator.Send(new AddReservationCommand(reservation));
 
             return ReturnResultHelper.ReturnCommandResult(response);
@@ -86,7 +88,5 @@ namespace TableTracker.Controllers
 
             return ReturnResultHelper.ReturnCommandResult(response);
         }
-
-        //[HttpGet("{tableId}/date")]
     }
 }

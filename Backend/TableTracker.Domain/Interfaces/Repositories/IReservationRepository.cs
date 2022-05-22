@@ -14,6 +14,6 @@ namespace TableTracker.Domain.Interfaces.Repositories
 
         Task<ICollection<Reservation>> GetAllReservationsByDateAndTime(long restaurantId, DateTime date);
 
-        Task<ICollection<Reservation>> GetAllReservationsForTable(Table table, DateTime? date = null);
+        Task<ICollection<Reservation>> GetAllReservationsForTable(long tableId, DateTime? date = null);
     }
 }

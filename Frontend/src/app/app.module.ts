@@ -50,6 +50,7 @@ import { MapComponent } from './components/map/map.component';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { InitialsPipe } from './pipes/initials.pipe';
+import { TimeFormatPipe } from './pipes/time-format.pipe';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 
@@ -74,6 +75,7 @@ import { NewPasswordComponent } from './components/new-password/new-password.com
     MenuComponent,
     MapComponent,
     InitialsPipe,
+    TimeFormatPipe,
     ForgotPasswordComponent,
     NewPasswordComponent,
   ],

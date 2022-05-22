@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsForTable;
 using TableTracker.Application.CQRS.Tables.Commands.AddTable;
 using TableTracker.Application.CQRS.Tables.Commands.DeleteTable;
 using TableTracker.Application.CQRS.Tables.Commands.UpdateTable;
@@ -64,6 +66,14 @@ namespace TableTracker.Controllers
         public async Task<IActionResult> FindTableByRestaurantId([FromRoute] long id)
         {
             var response = await _mediator.Send(new GetAllTablesByRestaurantQuery(id));
+
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpGet("{id}/reservations/")]
+        public async Task<IActionResult> GetAllReservationsForTable([FromRoute] long id, [FromQuery] DateTime date)
+        {
+            var response = await _mediator.Send(new GetAllReservationsForTableQuery(id, date.AddHours(3)));
 
             return ReturnResultHelper.ReturnQueryResult(response);
         }

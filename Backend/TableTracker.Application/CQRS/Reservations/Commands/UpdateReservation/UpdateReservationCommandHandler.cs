@@ -33,7 +33,7 @@ namespace TableTracker.Application.CQRS.Reservations.Commands.UpdateReservation
             if (await repository.Contains(entity))
             {
                 entity.Table = null;
-                entity.Visitors = null;
+                entity.Visitor = null;
 
                 repository.Update(entity);
                 await _unitOfWork.Save();

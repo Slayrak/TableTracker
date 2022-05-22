@@ -352,17 +352,137 @@ namespace TableTracker.Infrastructure
             if (!context.Tables.Any())
             {
 
-                for (int i = 0; i < restaurants.Count; i++)
+                for (int i = 0; i < restaurants.Count * 10; i++)
                 {
-                    tables.Add(new Table
+
+                    switch (i/restaurants.Count*10)
                     {
-                        Floor = i + 1,
-                        State = TableState.Unoccupied,
-                        NumberOfSeats = 4,
-                        TableSize = 10,
-                        Number = 1,
-                        Restaurant = restaurants[i],
-                    });
+                        case 0:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[0],
+                            });
+                            break;
+
+                        case 1:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[1],
+                            });
+                            break;
+
+                        case 2:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[2],
+                            });
+                            break;
+
+                        case 3:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[3],
+                            });
+                            break;
+
+                        case 4:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[4],
+                            });
+                            break;
+
+                        case 5:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[5],
+                            });
+                            break;
+
+                        case 6:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[6],
+                            });
+                            break;
+
+                        case 7:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[7],
+                            });
+                            break;
+
+                        case 8:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[8],
+                            });
+                            break;
+
+                        case 9:
+                            tables.Add(new Table
+                            {
+                                Floor = i + 1,
+                                State = TableState.Unoccupied,
+                                NumberOfSeats = 4,
+                                TableSize = 10,
+                                Number = 1,
+                                Restaurant = restaurants[9],
+                            });
+                            break;
+
+                        default:
+                            break;
+                    }
+
+
+                    
                 }
 
                 await context.AddRangeAsync(tables);
@@ -376,11 +496,15 @@ namespace TableTracker.Infrastructure
             {
                 for (int i = 0; i < restaurants.Count; i++)
                 {
+                    var dateToPush = DateTime.Today.AddDays(1);
+                    TimeSpan ts = new TimeSpan(11, 0, 0);
+                    dateToPush = dateToPush.Date + ts;
+
                     reservations.Add(new Reservation
                     {
-                        Date = DateTime.Now,
+                        Date = dateToPush,
                         Table = tables[i],
-                        Visitors = visitors,
+                        Visitor = visitors[0],
                     });
                 }
 
@@ -398,7 +522,7 @@ namespace TableTracker.Infrastructure
                 {
                     restVisitor.Add(new RestaurantVisitor
                     {
-                        Restaurant = restaurants[i],
+                        Restaurant = restaurants[0],
                         AverageMoneySpent = 10,
                         RestaurantRate = 5,
                         TimesVisited = i + 1,
@@ -420,7 +544,7 @@ namespace TableTracker.Infrastructure
                     history.Add(new VisitorHistory
                     {
                         DateTime = DateTime.Now,
-                        Restaurant = restaurants[i],
+                        Restaurant = restaurants[0],
                         Visitor = visitors[i],
                     });
                 }
