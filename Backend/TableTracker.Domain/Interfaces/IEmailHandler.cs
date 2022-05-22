@@ -6,6 +6,6 @@ namespace TableTracker.Domain.Interfaces
 {
     public interface IEmailHandler
     {
-        Task SendEmail(EmailDTO email);
+        Task SendEmail(EmailDTO email, bool html = false);
     }
 }
