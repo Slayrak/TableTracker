@@ -49,6 +49,7 @@ import { MapComponent } from './components/map/map.component';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { InitialsPipe } from './pipes/initials.pipe';
+import { TimeFormatPipe } from './pipes/time-format.pipe';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { InitialsPipe } from './pipes/initials.pipe';
     MenuComponent,
     MapComponent,
     InitialsPipe,
+    TimeFormatPipe,
   ],
   imports: [
     BrowserModule,

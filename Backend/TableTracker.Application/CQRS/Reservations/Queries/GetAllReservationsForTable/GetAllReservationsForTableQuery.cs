@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System;
+
+using MediatR;
 
 using TableTracker.Domain.DataTransferObjects;
 
@@ -6,11 +8,13 @@ namespace TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsF
 {
     public class GetAllReservationsForTableQuery : IRequest<ReservationDTO[]>
     {
-        public GetAllReservationsForTableQuery(ReservationFilterModel model)
+        public GetAllReservationsForTableQuery(long id, DateTime date)
         {
-            Model = model;
+            Date = date;
+            Id = id;
         }
 
-        public ReservationFilterModel Model { get; set; }
+        public DateTime Date { get; set; }
+        public long Id { get; set; }
     }
 }

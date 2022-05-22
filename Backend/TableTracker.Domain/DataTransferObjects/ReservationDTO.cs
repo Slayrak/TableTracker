@@ -11,6 +11,6 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public TableDTO Table { get; set; }
 
-        public ICollection<VisitorDTO> Visitors { get; set; }
+        public VisitorDTO Visitor { get; set; }
     }
 }

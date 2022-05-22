@@ -39,7 +39,7 @@ namespace TableTracker.Application.CQRS.Reservations.Commands.AddReservation
             }
 
             entity.Table = null;
-            entity.Visitors = null;
+            entity.Visitor = null;
 
             await _unitOfWork.GetRepository<IReservationRepository>().Insert(entity);
             await _unitOfWork.Save();

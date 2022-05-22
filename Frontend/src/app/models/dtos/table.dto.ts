@@ -9,11 +9,7 @@ export interface TableDTO {
     state: TableState,
     numberOfSeats: number,
     floor: number,
-    CoordX: number,
-    CoordY: number,
     TableSize: number,
-
-    waiter: UserDTO,
     restaurant: RestaurantDTO,
     reservations: ReservationDTO[],
 }

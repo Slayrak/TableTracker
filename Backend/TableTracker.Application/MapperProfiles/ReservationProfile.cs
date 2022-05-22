@@ -10,11 +10,12 @@ namespace TableTracker.Application.MapperProfiles
         public ReservationProfile()
         {
             CreateMap<Reservation, ReservationDTO>()
-                .ForMember(dest => dest.Visitors, opt => opt.MapFrom(src => src.Visitors))
+                .ForMember(dest => dest.Visitor, opt => opt.MapFrom(src => src.Visitor))
                 .ForMember(dest => dest.Table, opt => opt.MapFrom(src => src.Table));
 
             CreateMap<ReservationDTO, Reservation>()
-                .ForMember(dest => dest.Visitors, opt => opt.MapFrom(src => src.Visitors))
+                .ForMember(dest => dest.Visitor, opt => opt.MapFrom(src => src.Visitor))
+                .ForMember(dest => dest.VisitorId, opt => opt.MapFrom(src => src.Visitor.Id))
                 .ForMember(dest => dest.Table, opt => opt.MapFrom(src => src.Table))
                 .ForMember(dest => dest.TableId, opt => opt.MapFrom(src => src.Table.Id));
         }
