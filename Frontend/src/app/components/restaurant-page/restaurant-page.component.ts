@@ -64,12 +64,14 @@ export class RestaurantPageComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const idFromRoute = Number(routeParams.get('id'));
     let elem = Array<ReservationDTO>();
-
     if(localStorage["userId"] !== undefined && localStorage["userId"] !== null)
     {
       this.userService.getVisitor(localStorage["userId"])
       .subscribe((data: VisitorDTO) => {
         this.visitor = data;
+
+        this.isChecked = this.visitor.favourites.some(x => x.id === idFromRoute) ? 1 : 0;
+
       })
     }
     this.currentSelected = null;
@@ -142,10 +144,19 @@ export class RestaurantPageComponent implements OnInit {
   }
   
   changeHeart() {
-    if(this.isChecked == 0){
-      this.isChecked = 1;
+    if(this.isChecked === 0){
+      this.userService.addFavourite(this.visitor.id, this.restaurant.id)
+      .subscribe(() => {
+        this.isChecked = 1;
+      })
+
+
     } else {
-      this.isChecked = 0;
+
+      this.userService.deleteFavourite(this.visitor.id, this.restaurant.id)
+      .subscribe(() => {
+        this.isChecked = 0;
+      })
     }
   }
 
