@@ -63,11 +63,14 @@
             <button class="w-100" mat-flat-button color="primary" (click)="save()">Save</button>
         </div>
 
-        <a mat-flat-button
+        <button mat-flat-button
            class="w-100"
            color="primary"
-           [routerLink]="['/reset-password']">
+           (click)="openDialog()">
             Reset Password
-        </a>
+        </button>
+
+        <p *ngIf="successBool">We sent you a confirmation email.</p>
+        <p *ngIf="errorBool" class="red">The server encountered an error!</p>
     </div>
 </div>

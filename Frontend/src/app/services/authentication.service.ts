@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponseDTO } from '../models/dtos/auth-response.dto';
+import { ResetPasswordDTO } from '../models/dtos/reset-password.dto';
 import { UserForAuthenticationDTO } from '../models/dtos/user-for-authentication.dto';
 import { UserForSignupDTO } from '../models/dtos/user-for-signup.dto';
 
@@ -15,8 +16,12 @@ export class AuthenticationService {
     return this.http.post<AuthResponseDTO>('https://localhost:5001/api/accounts/login', body);
   }
 
-  public forgotPassword = (body: {email: string}) => {
-    return this.http.post('https://localhost:5001/api/accounts/forgot-password', body);
+  public sendResetEmail = (email: string) => {
+    return this.http.post('https://localhost:5001/api/accounts/reset-password/email', {email: email, clientUri: 'http://localhost:4200/new-password'});
+  }
+
+  public resetPassword = (body: ResetPasswordDTO) => {
+    return this.http.post('https://localhost:5001/api/accounts/reset-password', body);
   }
 
   public signUpUser = (body: UserForSignupDTO) => {

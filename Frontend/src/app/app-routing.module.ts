@@ -10,6 +10,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ManagerProfileComponent } from './components/manager-profile/manager-profile.component';
 import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 
 const routes: Routes = [
   { path: 'user/:id/profile', component: UserProfileComponent },
@@ -18,8 +19,8 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'new-password', component: NewPasswordComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'restaurant-page/:id', component: RestaurantPageComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },

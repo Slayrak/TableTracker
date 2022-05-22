@@ -1,7 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ImageDTO } from 'src/app/models/dtos/image.dto';
 import { VisitorDTO } from 'src/app/models/dtos/visitor.dto';
 import { UserService } from 'src/app/services/user.service';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'app-user-info',
@@ -20,10 +22,15 @@ export class UserInfoComponent implements OnInit {
 
   isInEditMode: boolean = false;
 
+  successBool: boolean = false;
+  errorBool: boolean = false;
+
   @Input() userId!: number;
   user!: VisitorDTO;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userService.getVisitor(this.userId)
@@ -125,13 +132,34 @@ export class UserInfoComponent implements OnInit {
           this.savedAvatar = true;
           this.deletedAvatar = false;
           this.fileToUpload = null;
+          this.errorBool = false;
+          this.successBool = false;
         });
     } else if (this.deletedAvatar || this.user.avatar !== null && this.user.avatar.id === 0) {
       this.userService.deleteAvatar(this.user.id)
         .subscribe(() => {
           this.deletedAvatar = false;
           this.savedAvatar = true;
+          this.errorBool = false;
+          this.successBool = false;
         });
     }
+  }
+
+  success = () => {
+    this.errorBool = false;
+    this.successBool = true;
+  }
+
+  error = () => {
+    this.errorBool = true;
+    this.successBool = false;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ResetPasswordComponent, {
+      width: '250px',
+      data: { email: this.user.email, success: this.success, error: this.error },
+    });
   }
 }

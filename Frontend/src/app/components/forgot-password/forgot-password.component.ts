@@ -25,7 +25,7 @@ export class ForgotPasswordComponent implements OnInit {
   submit(resetpasswordformgroupvalue) {
     const a = {... resetpasswordformgroupvalue };
 
-    this.service.forgotPassword({email: a.email}).subscribe({
+    this.service.sendResetEmail(a.email).subscribe({
       next: _response => {
         this.message = 'We sent you a confirmation email.';
         this.error = false;
