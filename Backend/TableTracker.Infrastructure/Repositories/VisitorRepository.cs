@@ -22,6 +22,7 @@ namespace TableTracker.Infrastructure.Repositories
                 .Set<Visitor>()
                 .Include(x => x.Reservations)
                 .Include(x => x.Favourites)
+                .Include(x => x.Avatar)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -31,6 +32,7 @@ namespace TableTracker.Infrastructure.Repositories
                 .Set<Visitor>()
                 .Include(x => x.Reservations)
                 .Include(x => x.Favourites)
+                .Include(x => x.Avatar)
                 .Where(x => x.FullName.Contains(filter) || x.Email.Contains(filter))
                 .ToListAsync();
         }
@@ -41,6 +43,7 @@ namespace TableTracker.Infrastructure.Repositories
                 .Set<Visitor>()
                 .Include(x => x.Reservations)
                 .Include(x => x.Favourites)
+                .Include(x => x.Avatar)
                 .Where(x => x.GeneralTrustFactor == trustFactor)
                 .ToListAsync();
         }

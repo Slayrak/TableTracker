@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { VisitorDTO } from 'src/app/models/dtos/visitor.dto';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -12,11 +13,14 @@ export class HeaderComponent implements OnInit {
 
   user: VisitorDTO | null = null;
 
-  constructor(private router: Router, private authService: AuthenticationService) { }
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
-    if (localStorage['user'] !== undefined && localStorage['user'] !== null) {
-      this.user = JSON.parse(localStorage['user']);
+    if (localStorage['userId'] !== undefined && localStorage['userId'] !== null) {
+      this.userService.getVisitor(parseInt(localStorage['userId'], 10)).subscribe(user => this.user = user);
     }
   }
 
@@ -31,7 +35,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isLoggedIn(): boolean {
-    return localStorage['user'] !== undefined && localStorage['user'] !== null
+    return localStorage['userId'] !== undefined && localStorage['userId'] !== null
   }
 
 }

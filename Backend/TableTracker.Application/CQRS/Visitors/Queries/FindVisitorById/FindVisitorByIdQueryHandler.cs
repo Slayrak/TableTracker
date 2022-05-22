@@ -9,7 +9,7 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Visitors.Queries.FindVisitorByFind
+namespace TableTracker.Application.CQRS.Visitors.Queries.FindVisitorById
 {
     public class FindVisitorByIdQueryHandler : IRequestHandler<FindVisitorByIdQuery, VisitorDTO>
     {

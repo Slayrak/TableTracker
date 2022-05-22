@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TableTracker.Domain.DataTransferObjects
 {
@@ -8,11 +9,16 @@ namespace TableTracker.Domain.DataTransferObjects
 
         public string FullName { get; set; }
 
-        public string Avatar { get; set; }
-
         public string Email { get; set; }
 
         public float GeneralTrustFactor { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+
+        public string Location { get; set; }
+
+        public ImageDTO Avatar { get; set; }
+
 
         public ICollection<ReservationDTO> Reservations { get; set; }
 

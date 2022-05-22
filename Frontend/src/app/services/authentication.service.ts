@@ -21,6 +21,6 @@ export class AuthenticationService {
 
   public logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
   }
 }

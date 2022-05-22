@@ -55,7 +55,7 @@ export class SignupComponent implements OnInit {
           .subscribe({
             next: (response: AuthResponseDTO) => {
               localStorage.setItem("token", response.token);
-              localStorage.setItem('user', JSON.stringify(response.user));
+              localStorage.setItem('userId', `${response.user.id}`);
               
               this.router.navigate(['/home']);
             }

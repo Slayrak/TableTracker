@@ -10,6 +10,7 @@ namespace TableTracker.Application.MapperProfiles
         public ImageProfile()
         {
             CreateMap<Image, ImageDTO>();
+
             CreateMap<ImageDTO, Image>();
         }
     }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
-import { UserDTO } from 'src/app/models/dtos/user.dto';
 import { VisitorDTO } from 'src/app/models/dtos/visitor.dto';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,9 +11,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserProfileComponent implements OnInit {
   
-  public restaurants!: Array<RestaurantDTO>;
+  public restaurants!: RestaurantDTO[];
 
   user!: VisitorDTO;
+  userId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,13 +23,14 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     const idFromRoute = Number(routeParams.get('id'));
+    this.userId = idFromRoute;
 
     this.userService.getVisitor(idFromRoute)
-      .subscribe((data: VisitorDTO) => data = this.user);
+      .subscribe((data: VisitorDTO) => this.user = data);
   }
 
   discover(id: number): void {
-    console.log(this.user.reservations.filter(x => x.id == id)[0]);
+    console.log(this.user.reservations.filter(x => x.id === id)[0]);
   }
 
 }
