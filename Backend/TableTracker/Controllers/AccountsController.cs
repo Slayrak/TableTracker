@@ -13,6 +13,7 @@ using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 using TableTracker.Infrastructure.Identity;
 using TableTracker.JwtFeatures;
+using TableTracker.Requests;
 
 namespace TableTracker.Controllers
 {
@@ -89,6 +90,19 @@ namespace TableTracker.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPasswordEmail([FromBody] ForgotPasswordEmailRequest body)
+        {
+            var result = await _userManager.FindByEmailAsync(body.Email);
+
+            if (result is not null)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }

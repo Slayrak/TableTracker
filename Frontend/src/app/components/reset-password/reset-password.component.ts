@@ -21,9 +21,4 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  resetpasswordformgroup: FormGroup = new FormGroup( {
-    email: new FormControl('', [Validators.required, Validators.email])
-  });
-
-
 }

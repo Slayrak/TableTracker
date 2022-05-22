@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
           if (response.isAuthSuccessful) {
             localStorage.setItem("token", response.token);
             localStorage.setItem('userId', `${response.user.id}`);
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home']).then(() => location.reload());
           }
       },
       error: (err: HttpErrorResponse) => {

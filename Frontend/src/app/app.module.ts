@@ -49,6 +49,9 @@ import { MapComponent } from './components/map/map.component';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { InitialsPipe } from './pipes/initials.pipe';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetNewPasswordComponent } from './components/reset-new-password/reset-new-password.component';
+import { ForgotNewPasswordComponent } from './components/forgot-new-password/forgot-new-password.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,9 @@ import { InitialsPipe } from './pipes/initials.pipe';
     MenuComponent,
     MapComponent,
     InitialsPipe,
+    ForgotPasswordComponent,
+    ResetNewPasswordComponent,
+    ForgotNewPasswordComponent,
   ],
   imports: [
     BrowserModule,

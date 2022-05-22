@@ -57,7 +57,7 @@ export class SignupComponent implements OnInit {
               localStorage.setItem("token", response.token);
               localStorage.setItem('userId', `${response.user.id}`);
               
-              this.router.navigate(['/home']);
+              this.router.navigate(['/home']).then(() => location.reload());
             }
           })
       })

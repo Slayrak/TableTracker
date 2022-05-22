@@ -9,15 +9,17 @@ import { FaqComponent } from './components/faq/faq.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ManagerProfileComponent } from './components/manager-profile/manager-profile.component';
 import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: 'user/:id/profile', component: UserProfileComponent },
-  { path: 'manager/profile/:id', component: ManagerProfileComponent },
+  { path: 'manager/:id/profile', component: ManagerProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'restaurant-page/:id', component: RestaurantPageComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },

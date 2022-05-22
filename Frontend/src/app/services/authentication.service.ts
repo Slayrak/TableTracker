@@ -15,6 +15,10 @@ export class AuthenticationService {
     return this.http.post<AuthResponseDTO>('https://localhost:5001/api/accounts/login', body);
   }
 
+  public forgotPassword = (body: {email: string}) => {
+    return this.http.post('https://localhost:5001/api/accounts/forgot-password', body);
+  }
+
   public signUpUser = (body: UserForSignupDTO) => {
     return this.http.post('https://localhost:5001/api/accounts/signup', body);
   }
