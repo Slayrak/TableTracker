@@ -1,11 +1,15 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
 
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Entities;
@@ -13,7 +17,6 @@ using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 using TableTracker.Infrastructure.Identity;
 using TableTracker.JwtFeatures;
-using TableTracker.Requests;
 
 namespace TableTracker.Controllers
 {
@@ -25,17 +28,20 @@ namespace TableTracker.Controllers
         private readonly IMapper _mapper;
         private readonly JwtHandler _jwtHandler;
         private readonly IUnitOfWork<long> _unitOfWork;
+        private readonly IEmailHandler _emailHandler;
 
         public AccountsController(
             UserManager<TableTrackerIdentityUser> userManager,
             IMapper mapper,
             JwtHandler jwtHandler,
-            IUnitOfWork<long> unitOfWork)
+            IUnitOfWork<long> unitOfWork,
+            IEmailHandler emailHandler)
         {
             _userManager = userManager;
             _mapper = mapper;
             _jwtHandler = jwtHandler;
             _unitOfWork = unitOfWork;
+            _emailHandler = emailHandler;
         }
 
         [HttpPost("login")]
@@ -92,17 +98,71 @@ namespace TableTracker.Controllers
             return NoContent();
         }
 
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPasswordEmail([FromBody] ForgotPasswordEmailRequest body)
+        [HttpPost("reset-password/email")]
+        public async Task<IActionResult> ResetPasswordEmail([FromBody] ForgotPasswordDTO forgotPasswordDto)
         {
-            var result = await _userManager.FindByEmailAsync(body.Email);
+            var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
 
-            if (result is not null)
+            if (user is not null)
             {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var param = new Dictionary<string, string>
+                {
+                    {"token", token },
+                    {"email", forgotPasswordDto.Email }
+                };
+
+                var queries = new QueryBuilder(param).ToQueryString();
+
+                string body =
+                @$"
+                    <!DOCTYPE html>
+                    <html>
+                        <body>
+                    
+                        <p>To reset your password, follow this <a href='{forgotPasswordDto.ClientURI + queries}'>link.</a></p>
+                    
+                        </body>
+                    </html>
+                ";
+
+                await _emailHandler.SendEmail(new EmailDTO
+                {
+                    To = new[] { forgotPasswordDto.Email },
+                    Body = body,
+                    Subject = "Password recovery",
+                }, true);
+
                 return Ok();
             }
 
             return BadRequest();
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO resetPasswordDto)
+        {
+            if (resetPasswordDto.Password != resetPasswordDto.ConfirmPassword)
+            {
+                return BadRequest("Invalid Request");
+            }
+
+            var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
+
+            if (user is null)
+            {
+                return BadRequest("Invalid Request");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
+
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(new { Errors = errors });
+            }
+
+            return Ok();
         }
     }
 }
