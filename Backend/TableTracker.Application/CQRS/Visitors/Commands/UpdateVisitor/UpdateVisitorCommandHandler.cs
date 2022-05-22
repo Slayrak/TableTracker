@@ -29,6 +29,7 @@ namespace TableTracker.Application.CQRS.Visitors.Commands.UpdateVisitor
         public async Task<CommandResponse<VisitorDTO>> Handle(UpdateVisitorCommand request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.GetRepository<IVisitorRepository>();
+            request.Visitor.DateOfBirth.AddHours(3);
             var entity = _mapper.Map<Visitor>(request.Visitor);
 
             if (await repository.Contains(entity))

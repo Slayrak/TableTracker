@@ -37,6 +37,8 @@ namespace TableTracker.Infrastructure
 
         public DbSet<VisitorHistory> VisitorHistorys { get; set; }
 
+        public DbSet<Image> Image { get; set; }
+
         public DbSet<Cuisine> Cuisines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

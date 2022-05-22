@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ManagerProfileComponent implements OnInit {
   
-  public restaurants!: Array<RestaurantDTO>;
+  public restaurants!: RestaurantDTO[];
 
   user!: ManagerDTO;
 
