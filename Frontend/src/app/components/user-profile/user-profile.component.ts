@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ReservationDTO } from 'src/app/models/dtos/reservation.dto';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 import { VisitorDTO } from 'src/app/models/dtos/visitor.dto';
 import { UserService } from 'src/app/services/user.service';
@@ -11,7 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserProfileComponent implements OnInit {
   
-  public restaurants!: RestaurantDTO[];
+  public shownRestaurants!: RestaurantDTO[];
+  public shownReservations!: ReservationDTO[];
 
   user!: VisitorDTO;
   userId!: number;
@@ -26,11 +28,20 @@ export class UserProfileComponent implements OnInit {
     this.userId = idFromRoute;
 
     this.userService.getVisitor(idFromRoute)
-      .subscribe((data: VisitorDTO) => this.user = data);
+      .subscribe((data: VisitorDTO) => {
+        this.user = data;
+
+        for (let i = 0; i < this.user.reservations.length; i++) {
+          this.user.reservations[i].date = new Date(this.user.reservations[i].date)
+        }
+
+        this.shownRestaurants = this.user.favourites.slice(0, 3);
+        this.shownReservations = this.user.reservations.filter(x => x.date >= new Date());
+      });
   }
 
-  discover(id: number): void {
-    console.log(this.user.reservations.filter(x => x.id === id)[0]);
+  getImageSource(image: string) {
+    return `https://localhost:5001/images/${image}`;
   }
 
 }

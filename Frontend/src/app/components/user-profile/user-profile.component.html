@@ -1,13 +1,13 @@
 <div class="container">
     <app-user-info [userId]="userId"></app-user-info>
 
-    <div class="m-top-30">
+    <div class="m-top-30" *ngIf="shownReservations.length > 0">
         <h2>User Bookings</h2>
 
-        <mat-card *ngFor="let booking of user.reservations" class="booking-card">
+        <mat-card *ngFor="let booking of shownReservations" class="booking-card">
             <div class="booking-info">
                 <div class="image">
-                    <img [src]="booking.table.restaurant.mainImage" class="booking-image"/>
+                    <img [src]="getImageSource(booking.table.restaurant.mainImage.name)" class="booking-image"/>
                 </div>
             
                 <div class="date">
@@ -41,8 +41,8 @@
                 </div>
         
                 <div class="flex">
-                    <a [routerLink]="['/restaurant-page', booking.id]"
-                       mat-flat-button color="primary" (click)="discover(booking.id)">
+                    <a [routerLink]="['/restaurant-page', booking.table.restaurant.id]"
+                       mat-flat-button color="primary">
                         Discover
                     </a>
                 </div>
@@ -54,14 +54,14 @@
         </div>
     </div>
 
-    <div class="m-top-30">
+    <div class="m-top-30" *ngIf="user.favourites.length > 0">
         <h2>User favourite restaurants</h2>
 
-        <div class="restaurant-card" *ngFor="let restaurant of user.favourites">
+        <div class="restaurant-card" *ngFor="let restaurant of shownRestaurants">
             <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
         </div>
 
-        <div class="flex m-top-30">
+        <div class="flex m-top-30" *ngIf="shownRestaurants.length !== user.favourites.length">
             <a mat-flat-button color="primary" [routerLink]="['/search']">Show more</a>
         </div>
     </div>
