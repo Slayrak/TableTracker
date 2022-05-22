@@ -1,13 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, Inject } from '@angular/core';
 
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  Validators
-} from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,14 +11,29 @@ import {
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<ResetPasswordComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private authService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
-  resetpasswordformgroup: FormGroup = new FormGroup( {
-    email: new FormControl('', [Validators.required, Validators.email])
-  });
+  confirm() {
+    this.authService.sendResetEmail(this.data.email).subscribe({
+      next: () => {
+        this.data.success();
+        this.dialogRef.close();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.data.error();
+        this.dialogRef.close();
+      }
+    });
+  }
 
+  cancel() {
+    this.dialogRef.close();
+  }
 
 }

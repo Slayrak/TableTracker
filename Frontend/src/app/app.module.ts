@@ -27,6 +27,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -49,6 +50,8 @@ import { MapComponent } from './components/map/map.component';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { InitialsPipe } from './pipes/initials.pipe';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,8 @@ import { InitialsPipe } from './pipes/initials.pipe';
     MenuComponent,
     MapComponent,
     InitialsPipe,
+    ForgotPasswordComponent,
+    NewPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +103,7 @@ import { InitialsPipe } from './pipes/initials.pipe';
     MatExpansionModule,
     MatSelectModule,
     TextFieldModule,
+    MatDialogModule,
 
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBWfjzOxb-2roNizfHJah-t4P3oNffgoJA',

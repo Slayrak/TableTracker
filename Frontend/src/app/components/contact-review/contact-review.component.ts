@@ -1,5 +1,5 @@
 import { AgmInfoWindow } from '@agm/core';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 import { ReviewDTO } from 'src/app/models/dtos/review.dto';
@@ -12,10 +12,16 @@ import { ReviewDTO } from 'src/app/models/dtos/review.dto';
 
 export class ContactReviewComponent implements OnInit {
 
+  @ViewChild('one') one!: ElementRef;
+  @ViewChild('two') two!: ElementRef;
+  @ViewChild('three') three!: ElementRef;
+  @ViewChild('four') four!: ElementRef;
+  @ViewChild('five') five!: ElementRef;
+
   @Input() restaurant!: RestaurantDTO;
 
   fives!: number;
-  fourths!: number;
+  fours!: number;
   threes!: number;
   twos!: number;
   ones!: number;
@@ -43,9 +49,9 @@ export class ContactReviewComponent implements OnInit {
 
   restaurantForMap!: RestaurantDTO[];
 
-  constructor() {
+  constructor(private renderer: Renderer2) {
     this.fives = 0;
-    this.fourths = 0;
+    this.fours = 0;
     this.threes = 0;
     this.twos = 0;
     this.ones = 0;
@@ -65,43 +71,42 @@ export class ContactReviewComponent implements OnInit {
   }
 
   public calculateRatingRatio() {
-      for (let review of this.mySentences) {
-        switch(review.id) {
-          case 1:
-            this.ones += 1;
-            this.count += 1;
-            this.sum += 1;
-            break;
+    for (let review of this.mySentences) {
+      switch(review.rating) {
+        case 1:
+          this.ones += 1;
+          break;
 
-          case 2:
-            this.twos += 1;
-            this.count += 1;
-            this.sum += 2;
-            break;
+        case 2:
+          this.twos += 1;
+          break;
 
-          case 3:
-            this.threes += 1;
-            this.count += 1;
-            this.sum += 3;
-            break;
+        case 3:
+          this.threes += 1;
+          break;
 
-          case 4: 
-            this.fourths += 1;
-            this.count += 1;
-            this.sum += 4;
-            break;
+        case 4: 
+          this.fours += 1;
+          break;
 
-          case 5:
-            this.fives += 1;
-            this.count += 1;
-            this.sum += 5;
-            break;
+        case 5:
+          this.fives += 1;
+          break;
 
-          default:
-            break;
-        }        
+        default:
+          break;
       }
+      
+      this.count += 1;
+      this.sum += review.rating;
+    }
 
+    this.renderer.setStyle(this.one.nativeElement, 'width', `${this.ones / this.count * 85}%`);
+    this.renderer.setStyle(this.two.nativeElement, 'width', `${this.twos / this.count * 85}%`);
+    this.renderer.setStyle(this.three.nativeElement, 'width', `${this.threes / this.count * 85}%`);
+    this.renderer.setStyle(this.four.nativeElement, 'width', `${this.fours / this.count * 85}%`);
+    this.renderer.setStyle(this.five.nativeElement, 'width', `${this.fives / this.count * 85}%`);
+    
     this.overall = Math.round( this.sum/this.count );
     console.log(this.overall);
   }

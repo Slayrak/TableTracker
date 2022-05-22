@@ -39,7 +39,7 @@
           
           </div>
 
-          <a href="default.asp" target="_blank" style="color:black; font-family: Inter;">Reset password</a>
+          <a [routerLink]="['/forgot-password']" target="_blank" style="color:black; font-family: Inter;">Forgot password?</a>
             
           <div style="display: flex; justify-content: space-between;  margin-top: 15px;">
             <button mat-raised-button color=primary id="myFormButtons" [disabled]="!loginformgroup.valid">Log in</button>

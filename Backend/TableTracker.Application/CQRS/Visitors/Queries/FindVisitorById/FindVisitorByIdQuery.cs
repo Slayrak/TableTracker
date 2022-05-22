@@ -2,7 +2,7 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Visitors.Queries.FindVisitorByFind
+namespace TableTracker.Application.CQRS.Visitors.Queries.FindVisitorById
 {
     public class FindVisitorByIdQuery : IRequest<VisitorDTO>
     {
