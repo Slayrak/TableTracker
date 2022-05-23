@@ -76,7 +76,7 @@
                   </div>
             </mat-card>
 
-            <div class="buttons">
+            <div class="buttons" *ngIf="visitor !== null && visitor !== undefined">
                 <button mat-flat-button color="secondary" (click)="changeHeart()">
                     <mat-icon *ngIf="isChecked == 0">favorite_border</mat-icon>
                     <mat-icon *ngIf="isChecked == 1" svgIcon="filledHeartIcon"></mat-icon>
