@@ -57,21 +57,5 @@ namespace TableTracker.Controllers
 
             return ReturnResultHelper.ReturnCommandResult(response);
         }
-
-        [HttpPut]
-        public async Task<IActionResult> UpdateUser([FromBody] CuisineDTO cuisine)
-        {
-            var response = await _mediator.Send(new UpdateCuisineCommand(cuisine));
-
-            return ReturnResultHelper.ReturnCommandResult(response);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(long id)
-        {
-            var response = await _mediator.Send(new DeleteCuisineCommand(id));
-
-            return ReturnResultHelper.ReturnCommandResult(response);
-        }
     }
 }
