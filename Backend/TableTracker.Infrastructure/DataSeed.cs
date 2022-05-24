@@ -355,7 +355,7 @@ namespace TableTracker.Infrastructure
                 for (int i = 0; i < restaurants.Count * 10; i++)
                 {
 
-                    switch (i/restaurants.Count*10)
+                    switch (i/(restaurants.Count*2))
                     {
                         case 0:
                             tables.Add(new Table
@@ -414,66 +414,6 @@ namespace TableTracker.Infrastructure
                                 TableSize = 10,
                                 Number = 1,
                                 Restaurant = restaurants[4],
-                            });
-                            break;
-
-                        case 5:
-                            tables.Add(new Table
-                            {
-                                Floor = i + 1,
-                                State = TableState.Unoccupied,
-                                NumberOfSeats = 4,
-                                TableSize = 10,
-                                Number = 1,
-                                Restaurant = restaurants[5],
-                            });
-                            break;
-
-                        case 6:
-                            tables.Add(new Table
-                            {
-                                Floor = i + 1,
-                                State = TableState.Unoccupied,
-                                NumberOfSeats = 4,
-                                TableSize = 10,
-                                Number = 1,
-                                Restaurant = restaurants[6],
-                            });
-                            break;
-
-                        case 7:
-                            tables.Add(new Table
-                            {
-                                Floor = i + 1,
-                                State = TableState.Unoccupied,
-                                NumberOfSeats = 4,
-                                TableSize = 10,
-                                Number = 1,
-                                Restaurant = restaurants[7],
-                            });
-                            break;
-
-                        case 8:
-                            tables.Add(new Table
-                            {
-                                Floor = i + 1,
-                                State = TableState.Unoccupied,
-                                NumberOfSeats = 4,
-                                TableSize = 10,
-                                Number = 1,
-                                Restaurant = restaurants[8],
-                            });
-                            break;
-
-                        case 9:
-                            tables.Add(new Table
-                            {
-                                Floor = i + 1,
-                                State = TableState.Unoccupied,
-                                NumberOfSeats = 4,
-                                TableSize = 10,
-                                Number = 1,
-                                Restaurant = restaurants[9],
                             });
                             break;
 

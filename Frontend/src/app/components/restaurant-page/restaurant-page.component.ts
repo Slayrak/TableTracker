@@ -57,7 +57,12 @@ export class RestaurantPageComponent implements OnInit {
     this.minPeopleNumber = 1;
     this.isChecked = 0;
     this.minDate = new Date();
-    this.selectedDate = this.minDate;
+    if(localStorage["selected"] !== undefined) {
+      this.selectedDate = new Date(localStorage["selected"]);
+    } else {
+      this.selectedDate = this.minDate;
+    }
+    
   }
 
   ngOnInit(): void {
@@ -118,11 +123,16 @@ export class RestaurantPageComponent implements OnInit {
             {
               this.generateReservationTime(this.selectedDate, this.tables, this.reservations);
             }
-          }, error: (x:HttpErrorResponse)=> { 
+          }, error: (x:HttpErrorResponse)=> {
+            boolShit[i] = true; 
             if(boolShit.every(x => x === false)) 
             {
               this.generateReservationTime(this.selectedDate, this.tables, this.reservations);
             } }})
+            if(boolShit.every(x => x === true))
+            {
+              this.generateReservationTime(this.selectedDate, this.tables, this.reservations);
+            }
         }
       });
 
@@ -356,7 +366,8 @@ export class RestaurantPageComponent implements OnInit {
 
     let index = this.availableReservations.filter(x => x.resdate === this.chosenDate)[0].availableTables![0]
 
-    t = this.tables[index];
+    // t = this.tables[index];
+    t = this.tables.filter(x => x.id === index)[0];
 
     let pass: ReservationDTO = {
       id: 0,
@@ -364,9 +375,10 @@ export class RestaurantPageComponent implements OnInit {
       date: this.chosenDate!,
       table: t,
     };
-    
+
     this.reservationService.createReservation(pass)
     .subscribe(() => {
+      localStorage["selected"] = this.selectedDate;
       location.reload();
     })
 
