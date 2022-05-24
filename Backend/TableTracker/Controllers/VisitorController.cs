@@ -76,6 +76,8 @@ namespace TableTracker.Controllers
         public async Task<IActionResult> UpdateVisitor([FromBody] VisitorDTO visitor)
         {
             visitor.DateOfBirth = visitor.DateOfBirth.AddHours(3);
+            visitor.Reservations = null;
+            visitor.Favourites = null;
             var response = await _mediator.Send(new UpdateVisitorCommand(visitor));
 
             return ReturnResultHelper.ReturnCommandResult(response);
