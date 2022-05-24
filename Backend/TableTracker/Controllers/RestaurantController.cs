@@ -16,7 +16,6 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    //[Authorize]
     [ApiController]
     [Route("api/restaurants")]
     public class RestaurantController : ControllerBase
@@ -37,6 +36,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddRestaurant([FromBody] RestaurantDTO restaurant)
         {
             var response = await _mediator.Send(new AddRestaurantCommand(restaurant));
@@ -45,6 +45,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> UpdateRestaurant([FromBody] RestaurantDTO restaurant)
         {
             var response = await _mediator.Send(new UpdateRestaurantCommand(restaurant));
@@ -52,6 +53,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRestaurant([FromRoute] long id)
         {

@@ -2,6 +2,7 @@
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TableTracker.Application.CQRS.Cuisines.Commands.AddCuisine;
@@ -51,9 +52,28 @@ namespace TableTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddCuisine([FromBody] CuisineDTO cuisine)
         {
             var response = await _mediator.Send(new AddCuisineCommand(cuisine));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> UpdateCuisine([FromBody] CuisineDTO cuisine)
+        {
+            var response = await _mediator.Send(new UpdateCuisineCommand(cuisine));
+
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCuisine([FromRoute] long id)
+        {
+            var response = await _mediator.Send(new DeleteCuisineCommand(id));
 
             return ReturnResultHelper.ReturnCommandResult(response);
         }

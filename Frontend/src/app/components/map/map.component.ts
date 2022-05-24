@@ -9,7 +9,7 @@ import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 })
 export class MapComponent implements OnInit {
 
-  @Input() restaurants!: Array<RestaurantDTO>;
+  @Input() restaurants!: RestaurantDTO[];
   @Input() address!: string;
   
   restaurantsForMap!: Array<{restaurant: RestaurantDTO, latitude: number, longitude: number}>;
@@ -43,10 +43,9 @@ export class MapComponent implements OnInit {
 
     let geocoder = new google.maps.Geocoder();
   
-    geocoder.geocode({ 'address': this.address }, (results, status) => {
+    geocoder.geocode({ 'address': this.address }, (results, _status) => {
       this.latitude = results[0].geometry.location.lat();
       this.longitude = results[0].geometry.location.lng();
-      console.log("lat: " + this.latitude + ", long: " + this.longitude);
     });
   }
 
@@ -56,10 +55,9 @@ export class MapComponent implements OnInit {
     let latitude: number = 0;
     let longitude: number = 0;
   
-    geocoder.geocode({ 'address': address }, (results, status) => {
+    geocoder.geocode({ 'address': address }, (results, _status) => {
       latitude = results[0].geometry.location.lat();
       longitude = results[0].geometry.location.lng();
-      console.log("lat: " + this.latitude + ", long: " + this.longitude);
       callback(latitude, longitude);
     });
   }

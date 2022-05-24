@@ -19,7 +19,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RestaurantPageComponent implements OnInit {
 
-  visitor!: VisitorDTO;
+  visitor: VisitorDTO = {
+    id: 0,
+    fullName: '',
+    avatar: { id: 0, name: ''},
+    email: '',
+    reservations: [],
+    dateOfBirth: new Date(),
+    favourites: [],
+    generalTrustFactor: 0,
+    location: ''
+  };
 
   minDate!: Date;
 
@@ -28,11 +38,11 @@ export class RestaurantPageComponent implements OnInit {
 
   chosenDate!: Date | null;
 
-  tables!: Array<TableDTO>
+  tables: TableDTO[] = [];
 
-  reservations!: Array<ReservationDTO>
+  reservations: ReservationDTO[] = [];
 
-  availableReservations!: Array<AvaliableReservation> 
+  availableReservations: AvaliableReservation[] = [];
 
   isChecked!: number;
 
@@ -44,7 +54,20 @@ export class RestaurantPageComponent implements OnInit {
   public minPeopleNumber: number;
   public selectedDate: Date;
 
-  public restaurant!: RestaurantDTO;
+  public restaurant: RestaurantDTO = {
+    id: 0,
+    address: '',
+    name: '',
+    description: '',
+    rating: 0,
+    priceRange: 0,
+    numberOfTables: 0,
+    type: 0,
+    discount: 0,
+    mainImage: { id: 0, name: '' },
+    cuisines: [],
+    dateOfOpening: new Date(),
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -107,9 +130,6 @@ export class RestaurantPageComponent implements OnInit {
               this.reservations = this.reservations.concat(elem);
             }
 
-            
-            console.log('hello')
-
             this.maxPeopleNumber = Math.max(...this.tables.map(x => x.numberOfSeats));
 
             boolShit[i] = true;
@@ -127,8 +147,6 @@ export class RestaurantPageComponent implements OnInit {
       });
 
       });
-      
-      console.log(this.selectedDate.getHours());
   }
 
   increasePeople() {
@@ -219,8 +237,6 @@ export class RestaurantPageComponent implements OnInit {
         }
       }
     }
-
-    console.log(this.availableReservations.length);
 
     for (let i = 0; i < toDelete.length; i++) {
       delete this.availableReservations[toDelete[i]];
@@ -323,8 +339,6 @@ export class RestaurantPageComponent implements OnInit {
               this.reservations = this.reservations.concat(elem);
             }
 
-            
-            console.log('hello')
 
             this.maxPeopleNumber = Math.max(...this.tables.map(x => x.numberOfSeats));
 

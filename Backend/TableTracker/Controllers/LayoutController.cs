@@ -15,7 +15,6 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    //[Authorize]
     [ApiController]
     [Route("api/layouts")]
     public class LayoutController : ControllerBase
@@ -36,6 +35,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddLayout([FromBody] LayoutDTO layoutDTO)
         {
             var response = await _mediator.Send(new AddLayoutCommand(layoutDTO));
@@ -44,6 +44,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> UpdateLayout([FromBody] LayoutDTO layoutDTO)
         {
             var response = await _mediator.Send(new UpdateLayoutCommand(layoutDTO));
@@ -52,6 +53,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteLayout([FromRoute] long id)
         {
             var response = await _mediator.Send(new DeleteLayoutCommand(id));

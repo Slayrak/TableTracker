@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
   public myFormGroup!: FormGroup;
   public buttonToggle: string = 'Top';
 
-  public restaurants!: RestaurantDTO[];
-  public shownRestaurants!: RestaurantDTO[];
+  public restaurants: RestaurantDTO[] = [];
+  public shownRestaurants: RestaurantDTO[] = [];
 
   constructor(
     private restaurantService: RestaurantService,

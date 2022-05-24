@@ -19,7 +19,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/reservations")]
     public class ReservationController : ControllerBase

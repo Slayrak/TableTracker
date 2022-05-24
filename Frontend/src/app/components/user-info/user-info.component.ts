@@ -26,7 +26,17 @@ export class UserInfoComponent implements OnInit {
   errorBool: boolean = false;
 
   @Input() userId!: number;
-  user!: VisitorDTO;
+  user: VisitorDTO = {
+    id: 0,
+    fullName: '',
+    avatar: { id: 0, name: ''},
+    email: '',
+    reservations: [],
+    dateOfBirth: new Date(),
+    favourites: [],
+    generalTrustFactor: 0,
+    location: ''
+  };
 
   constructor(
     private userService: UserService,

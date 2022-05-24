@@ -27,7 +27,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -53,6 +53,13 @@ import { InitialsPipe } from './pipes/initials.pipe';
 import { TimeFormatPipe } from './pipes/time-format.pipe';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
+import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+
+const JWT_Module_Options: JwtModuleOptions = {
+  config: {
+      tokenGetter: x => localStorage['token'],
+  }
+};
 
 @NgModule({
   declarations: [
@@ -113,7 +120,8 @@ import { NewPasswordComponent } from './components/new-password/new-password.com
     }),
     MatDividerModule,
     MatListModule,
-    TextFieldModule
+    TextFieldModule,
+    JwtModule.forRoot(JWT_Module_Options)
   ],
 
   providers: [],

@@ -16,7 +16,6 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    //[Authorize]
     [ApiController]
     [Route("api/franchises")]
     public class FranchiseController : ControllerBase
@@ -53,6 +52,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddFranchise([FromBody] FranchiseDTO franchise)
         {
             var response = await _mediator.Send(new AddFranchiseCommand(franchise));
@@ -61,6 +61,7 @@ namespace TableTracker.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> UpdateFranchise([FromBody] FranchiseDTO franchise)
         {
             var response = await _mediator.Send(new UpdateFranchiseCommand(franchise));
@@ -68,6 +69,7 @@ namespace TableTracker.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFranchiseById(long id)
         {

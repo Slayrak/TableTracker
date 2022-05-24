@@ -11,9 +11,10 @@ import { ManagerProfileComponent } from './components/manager-profile/manager-pr
 import { RestaurantPageComponent } from './components/restaurant-page/restaurant-page.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'user/:id/profile', component: UserProfileComponent },
+  { path: 'user/:id/profile', component: UserProfileComponent, canActivate: [AuthGuardService] },
   { path: 'manager/:id/profile', component: ManagerProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },

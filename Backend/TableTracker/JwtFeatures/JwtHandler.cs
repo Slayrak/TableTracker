@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
+using TableTracker.Domain.DataTransferObjects;
+
 namespace TableTracker.JwtFeatures
 {
     public class JwtHandler
@@ -28,11 +30,12 @@ namespace TableTracker.JwtFeatures
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        public List<Claim> GetClaims(IdentityUser<Guid> user)
+        public List<Claim> GetClaims(IdentityUser<Guid> user, UserDTO userDTO)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Email)
+                new Claim("email", user.Email),
+                new Claim("id", $"{userDTO.Id}"),
             };
 
             return claims;

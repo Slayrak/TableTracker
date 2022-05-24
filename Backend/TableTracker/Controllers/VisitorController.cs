@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,7 @@ using TableTracker.Helpers;
 
 namespace TableTracker.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/visitors")]
     public class VisitorController : ControllerBase
@@ -74,6 +75,7 @@ namespace TableTracker.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateVisitor([FromBody] VisitorDTO visitor)
         {
+            visitor.DateOfBirth = visitor.DateOfBirth.AddHours(3);
             var response = await _mediator.Send(new UpdateVisitorCommand(visitor));
 
             return ReturnResultHelper.ReturnCommandResult(response);

@@ -49,20 +49,20 @@
             </div>
         </mat-card>
 
-        <div class="flex m-top-30">
-            <button mat-flat-button color="primary">Show previous</button>
+        <div class="flex m-top-30" *ngIf="shownReservations.length !== user.reservations.length">
+            <button mat-flat-button color="primary" (click)="showMoreReservations()">Show previous</button>
         </div>
     </div>
 
     <div class="m-top-30" *ngIf="user.favourites.length > 0">
         <h2>User favourite restaurants</h2>
 
-        <div class="restaurant-card" *ngFor="let restaurant of shownRestaurants">
+        <div class="restaurant-card" *ngFor="let restaurant of shownFavourites">
             <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
         </div>
 
-        <div class="flex m-top-30" *ngIf="shownRestaurants.length !== user.favourites.length">
-            <a mat-flat-button color="primary" [routerLink]="['/search']">Show more</a>
+        <div class="flex m-top-30" *ngIf="shownFavourites.length !== user.favourites.length">
+            <button mat-flat-button color="primary" (click)="showMoreFavourites()">Show more</button>
         </div>
     </div>
 </div>

@@ -11,7 +11,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent implements OnInit {
 
-  user: VisitorDTO | null = null;
+  user: VisitorDTO = {
+    id: 0,
+    fullName: '',
+    avatar: { id: 0, name: ''},
+    email: '',
+    reservations: [],
+    dateOfBirth: new Date(),
+    favourites: [],
+    generalTrustFactor: 0,
+    location: ''
+  }
 
   constructor(
     private router: Router,

@@ -19,9 +19,9 @@ export class SearchComponent implements OnInit {
   public cuisines!: CuisineDTO[];
   checkedCuisines: CuisineDTO[] = [];
 
-  public restaurants!: RestaurantDTO[];
-  public actualRestaurants!: RestaurantDTO[];
-  public shownRestaurants!: RestaurantDTO[];
+  public restaurants: RestaurantDTO[] = [];
+  public actualRestaurants: RestaurantDTO[] = [];
+  public shownRestaurants: RestaurantDTO[] = [];
 
   public restaurantQuery: string = '';
   public locationQuery: string = '';

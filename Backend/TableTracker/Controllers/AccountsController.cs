@@ -54,8 +54,12 @@ namespace TableTracker.Controllers
                 return Unauthorized(new AuthResponseDTO { ErrorMessage = "Invalid Authentication" });
             }
 
+            var userDTO = _mapper.Map<UserDTO>(await _unitOfWork
+                .GetRepository<IUserRepository>()
+                .GetUserByEmail(user.Email));
+
             var signingCredentials = _jwtHandler.GetSigningCredentials();
-            var claims = _jwtHandler.GetClaims(user);
+            var claims = _jwtHandler.GetClaims(user, userDTO);
             var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
