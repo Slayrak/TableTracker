@@ -144,15 +144,14 @@ export class RestaurantPageComponent implements OnInit {
               this.generateReservationTime(this.selectedDate, this.tables, this.reservations);
             }
           }, error: (x:HttpErrorResponse)=> {
-            boolShit[i] = true; 
-            if(boolShit.every(x => x === false)) 
-            {
-              this.generateReservationTime(this.selectedDate, this.tables, this.reservations);
-            } }})
+            boolShit[i] = true;
             if(boolShit.every(x => x === true))
             {
               this.generateReservationTime(this.selectedDate, this.tables, this.reservations);
             }
+          
+          }})
+            
         }
       });
 
@@ -359,10 +358,12 @@ export class RestaurantPageComponent implements OnInit {
               this.generateReservationTime(this.selectedDate, this.tables, this.reservations);
             }
           }, error: (x:HttpErrorResponse)=> { 
-            if(boolShit.every(x => x === false)) 
+            boolShit[i] = true;
+            if(boolShit.every(x => x === true))
             {
               this.generateReservationTime(this.selectedDate, this.tables, this.reservations);
-            } }
+            }
+          }
            }
            
           )
