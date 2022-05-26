@@ -45,8 +45,10 @@ export class UserProfileComponent implements OnInit {
           this.user.reservations[i].date = new Date(this.user.reservations[i].date)
         }
 
+        this.user.reservations = this.user.reservations.sort(this.compare);
+
         this.shownFavourites = this.user.favourites.slice(0, 3);
-        this.shownReservations = this.user.reservations.filter(x => x.date >= new Date()).sort(this.compare).slice(0, 3);
+        this.shownReservations = this.user.reservations.filter(x => x.date >= new Date()).slice(0, 3);
       });
   }
 
@@ -55,7 +57,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   compare(left: ReservationDTO, right: ReservationDTO): number {
-    return left.date > right.date ? 1 : left.date < right.date ? -1 : 0;
+    return left.date.getTime() > right.date.getTime() ? 1 : left.date.getTime() < right.date.getTime() ? -1 : 0;
   }
 
   showMoreFavourites() {

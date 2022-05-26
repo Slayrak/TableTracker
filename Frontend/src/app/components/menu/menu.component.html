@@ -14,7 +14,7 @@
     </mat-grid-list>
 
     <div class="buttons">
-        <button mat-flat-button color="secondary">Open pdf menu</button>
+        <a mat-flat-button color="secondary" [href]="restaurant.menu" target="_blank">Open pdf menu</a>
         <button mat-flat-button color="primary" *ngIf="show < menuItems.length" (click)="increaseShow()">
             Discover more
             <span class="icon">

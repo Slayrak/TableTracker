@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 import { MenuItem } from 'src/app/models/menu-item.model';
 
 @Component({
@@ -8,7 +9,7 @@ import { MenuItem } from 'src/app/models/menu-item.model';
 })
 export class MenuComponent implements OnInit {
 
-  @Input() restaurantId!: number;
+  @Input() restaurant!: RestaurantDTO;
 
   show = 8;
 

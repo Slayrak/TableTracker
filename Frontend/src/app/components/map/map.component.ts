@@ -1,5 +1,5 @@
 import { AgmInfoWindow } from '@agm/core';
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { RestaurantDTO } from 'src/app/models/dtos/restaurant.dto';
 
 @Component({
@@ -19,12 +19,15 @@ export class MapComponent implements OnInit {
 
   infoWindowOpened: AgmInfoWindow|null
   previous_info_window: AgmInfoWindow|null
+
+  mapReadyFlag: boolean = false;
+  addressReadyFlag: boolean = false;
   
   constructor() {
     this.infoWindowOpened = null;
     this.previous_info_window = null;
     this.restaurantsForMap = [];
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -85,6 +88,10 @@ export class MapComponent implements OnInit {
     }
 
     this.previous_info_window = infoWindow
+  }
+
+  isNullOrEmpty(value: string | undefined): boolean {
+    return !value || value === undefined || value === "" || value.length === 0;
   }
 
 }

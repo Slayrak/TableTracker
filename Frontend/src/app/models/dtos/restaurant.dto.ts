@@ -5,7 +5,6 @@ import { ImageDTO } from "./image.dto"
 
 export interface RestaurantDTO {
     id: number,
-    address: string,
     name: string,
     description: string,
     rating: number,
@@ -16,4 +15,10 @@ export interface RestaurantDTO {
     mainImage: ImageDTO,
     cuisines: CuisineDTO[],
     dateOfOpening: Date,
+
+    address: string,
+    email: string,
+    phone: string,
+    website: string,
+    menu: string,
 }

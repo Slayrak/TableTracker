@@ -54,20 +54,7 @@ export class RestaurantPageComponent implements OnInit {
   public minPeopleNumber: number;
   public selectedDate: Date;
 
-  public restaurant: RestaurantDTO = {
-    id: 0,
-    address: '',
-    name: '',
-    description: '',
-    rating: 0,
-    priceRange: 0,
-    numberOfTables: 0,
-    type: 0,
-    discount: 0,
-    mainImage: { id: 0, name: '' },
-    cuisines: [],
-    dateOfOpening: new Date(),
-  }
+  public restaurant!: RestaurantDTO;
 
   constructor(
     private route: ActivatedRoute,

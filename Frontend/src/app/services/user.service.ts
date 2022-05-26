@@ -32,7 +32,11 @@ export class UserService {
   }
 
   uploadAvatar(id: number, formData: FormData) {
-    return this.http.post<ImageDTO>(`https://localhost:5001/api/visitors/${id}/avatar`, formData, { headers: this.headers });
+    let headers = new HttpHeaders({
+      'authorization': `Bearer ${localStorage['token']}`,
+    });
+
+    return this.http.post<ImageDTO>(`https://localhost:5001/api/visitors/${id}/avatar`, formData, { headers: headers });
   }
 
   deleteAvatar(id: number) {

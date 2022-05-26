@@ -76,7 +76,7 @@
                   </div>
             </mat-card>
 
-            <div class="buttons" *ngIf="visitor !== null && visitor !== undefined">
+            <div class="buttons" *ngIf="visitor.id !== 0">
                 <button mat-flat-button color="secondary" (click)="changeHeart()">
                     <mat-icon *ngIf="isChecked == 0">favorite_border</mat-icon>
                     <mat-icon *ngIf="isChecked == 1" svgIcon="filledHeartIcon"></mat-icon>
@@ -89,7 +89,7 @@
 
     <div class="menuContactReview">
         <div class="menu">
-            <app-menu [restaurantId]="restaurant.id"></app-menu>
+            <app-menu [restaurant]="restaurant"></app-menu>
         </div>
     
         <div class="contact-review">

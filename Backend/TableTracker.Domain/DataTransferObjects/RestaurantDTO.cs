@@ -9,8 +9,6 @@ namespace TableTracker.Domain.DataTransferObjects
     {
         public long Id { get; set; }
 
-        public string Address { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -26,6 +24,17 @@ namespace TableTracker.Domain.DataTransferObjects
         public Discount Discount { get; set; }
 
         public DateTime DateOfOpening { get; set; }
+
+
+        public string Address { get; set; }
+
+        public string Email { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Menu { get; set; }
+
+        public string Website { get; set; }
 
 
         public ICollection<TableDTO> Tables { get; set; }

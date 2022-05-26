@@ -180,7 +180,6 @@ namespace TableTracker.Infrastructure
                     NumberOfTables = 10,
                     PriceRange = 3,
                     Rating = 5,
-                    Address = "Shevska St, 8, Lviv, Lviv Oblast, 79000",
                     Type = RestaurantType.Restaurant,
                     Cuisines = new[]
                     {
@@ -189,6 +188,12 @@ namespace TableTracker.Infrastructure
                     },
                     MainImage = images[0],
                     DateOfOpening = new DateTime(2022, 01, 01),
+
+                    Address = "Shevska St, 8, Lviv, Lviv Oblast, 79000",
+                    Email = "b.reserve@kumpelgroup.com",
+                    Phone = "+38 (067) 006 1111",
+                    Website = "https://baczewski.com.ua/",
+                    Menu = "https://kumpelgroup.com/wp-content/uploads/menu_baczewski_october2020-1.pdf"
                 });
 
                 restaurants.Add(new Restaurant
@@ -200,7 +205,6 @@ namespace TableTracker.Infrastructure
                     NumberOfTables = 10,
                     PriceRange = 2,
                     Rating = 3,
-                    Address = "Valova St, 23, Lviv, Lviv Oblast, 79000",
                     Type = RestaurantType.Restaurant,
                     Cuisines = new[]
                     {
@@ -208,6 +212,12 @@ namespace TableTracker.Infrastructure
                     },
                     MainImage = images[1],
                     DateOfOpening = new DateTime(2022, 03, 01),
+
+                    Address = "Valova St, 23, Lviv, Lviv Oblast, 79000",
+                    Email = "edisonpublviv@gmail.com",
+                    Phone = "+38 (099) 210 7840",
+                    Website = "https://www.facebook.com/Edison-Pub-2286943744873179/",
+                    Menu = "http://edisonpub.com/uk/menu"
                 });
 
                 restaurants.Add(new Restaurant
@@ -219,7 +229,6 @@ namespace TableTracker.Infrastructure
                     NumberOfTables = 10,
                     PriceRange = 3,
                     Rating = 5,
-                    Address = "Chaikovs'koho St, 20, Lviv, Lviv Oblast, 79000",
                     Type = RestaurantType.Restaurant,
                     Cuisines = new[]
                     {
@@ -227,6 +236,12 @@ namespace TableTracker.Infrastructure
                     },
                     MainImage = images[2],
                     DateOfOpening = new DateTime(2022, 02, 01),
+
+                    Address = "Chaikovs'koho St, 20, Lviv, Lviv Oblast, 79000",
+                    Email = "bughalter_cukor@ukr.net",
+                    Phone = "+38 (097) 337 9356",
+                    Website = "https://teddy.cukor.lviv.ua/",
+                    Menu = "https://teddy.cukor.lviv.ua/"
                 });
 
                 restaurants.Add(new Restaurant
@@ -238,7 +253,6 @@ namespace TableTracker.Infrastructure
                     NumberOfTables = 10,
                     PriceRange = 2,
                     Rating = 4,
-                    Address = "Staroievreiska St, 40, Lviv, Lviv Oblast, 79000",
                     Type = RestaurantType.Restaurant,
                     Cuisines = new[]
                     {
@@ -247,6 +261,12 @@ namespace TableTracker.Infrastructure
                     },
                     MainImage = images[3],
                     DateOfOpening = new DateTime(2022, 01, 02),
+
+                    Address = "Staroievreiska St, 40, Lviv, Lviv Oblast, 79000",
+                    Email = "roksolana.bl@gmail.com",
+                    Phone = "+38 (098) 634 9046",
+                    Website = "https://sowa.choiceqr.com/",
+                    Menu = "https://sowa.choiceqr.com/"
                 });
 
                 restaurants.Add(new Restaurant
@@ -258,7 +278,6 @@ namespace TableTracker.Infrastructure
                     NumberOfTables = 10,
                     PriceRange = 3,
                     Rating = 3,
-                    Address = "Kryva Lypa Passage, 8, Lviv, Lviv Oblast, 79000",
                     Type = RestaurantType.Restaurant,
                     Cuisines = new[]
                     {
@@ -268,6 +287,12 @@ namespace TableTracker.Infrastructure
                     },
                     MainImage = images[4],
                     DateOfOpening = new DateTime(2022, 02, 02),
+                    
+                    Address = "Kryva Lypa Passage, 8, Lviv, Lviv Oblast, 79000",
+                    Email = "info@kryva-lypa.com",
+                    Phone = "+38 (098) 094 8101",
+                    Website = "http://kryva-lypa.com.ua/",
+                    Menu = "http://kryva-lypa.com.ua/#eat_menu"
                 });
 
                 await context.AddRangeAsync(restaurants);

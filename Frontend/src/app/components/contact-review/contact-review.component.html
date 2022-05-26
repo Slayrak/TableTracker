@@ -14,7 +14,7 @@
                 <h4 class="header">Address: </h4>
 
                 <div>
-                    <p>Lviv, Kryva Lypa ave 6</p>
+                    <p>{{ restaurant.address }}</p>
                 </div>
             </div>
 
@@ -22,7 +22,7 @@
                 <h4 class="header">Phone: </h4>
 
                 <div>
-                    <p>+38 (067) 006 1111</p>
+                    <p>{{ restaurant.phone }}</p>
                 </div>
             </div>
 
@@ -30,12 +30,12 @@
                 <h4 class="header">Mail: </h4>
 
                 <div>
-                    <p>b.reserve@kumpelgroup.com</p>
+                    <p>{{ restaurant.email }}</p>
                 </div>
             </div>
 
             <div class="infoContainer">
-                <a href="default.asp" target="_blank" class="header">Website</a>
+                <a [href]="restaurant.website" target="_blank" class="header">Website</a>
             </div>
 
             <div class="infoContainer">
@@ -104,7 +104,7 @@
                 <div class="review">
                     <div class="visitorImage">
                         <img [src]="review.visitorImg">
-                        <div>{{review.visitorName}}</div>
+                        <div>{{ review.visitorName }}</div>
                     </div>
 
                     <div class="reviewMainBody">
@@ -125,7 +125,7 @@
                         </div>
 
                         <div class="reviewtext">
-                            {{review.review}}
+                            {{ review.review }}
                         </div>
                     </div>
                 </div>
