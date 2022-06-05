@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using TableTracker.Domain.Enums;
+﻿using TableTracker.Domain.Enums;
 
 namespace TableTracker.Domain.Entities
 {

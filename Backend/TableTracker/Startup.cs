@@ -1,9 +1,16 @@
+using System;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+
+using TableTracker.Domain.Interfaces;
+using TableTracker.Domain.Settings;
+using TableTracker.Infrastructure;
+using TableTracker.ServiceConfigurations;
 
 namespace TableTracker
 {
@@ -16,17 +23,27 @@ namespace TableTracker
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddSwagger();
+            services.AddMapper();
+            services.AddDataAccess(Configuration);
+            services.AddMediator();
+            services.AddValidaton();
+            services.AddCustomAuthorization(Configuration);
+            services.AddApiControllers();
+
+            services.AddScoped<IEmailHandler, EmailHandler>();
+            services.AddOptions();
+            services.Configure<EmailConfig>(Configuration.GetSection(nameof(EmailConfig)));
+            services.Configure<FormOptions>(x =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TableTracker", Version = "v1" });
+                x.ValueLengthLimit = Int32.MaxValue;
+                x.MultipartBodyLengthLimit = Int32.MaxValue;
+                x.MemoryBufferThreshold = Int32.MaxValue;
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -36,11 +53,15 @@ namespace TableTracker
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TableTracker v1"));
             }
 
+            app.UseStaticFiles();
+            app.UseCustomMiddlewares();
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCrossOriginResourceSharing();
 
             app.UseEndpoints(endpoints =>
             {

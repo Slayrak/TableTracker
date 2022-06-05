@@ -1,17 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TableTracker.Domain.Entities
 {
-    public class User
+    public class User : IEntity<long>
     {
-        public string FullName { get; set; }
+        public long Id { get; set; } 
 
-        public string Avatar { get; set; }
+        public string FullName { get; set; }
 
         //public UserRole Role { get; set; }
 
         public string Email { get; set; }
+
+        public string Location { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+
+
+        public long? AvatarId { get; set; }
+
+        public Image Avatar { get; set; }
     }
 }

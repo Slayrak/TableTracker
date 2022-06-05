@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TableTracker.Domain.Entities
+﻿namespace TableTracker.Domain.Entities
 {
-    public class Layout
+    public class Layout : IEntity<long>
     {
         public long Id { get; set; }
         public byte LayoutData { get; set; }

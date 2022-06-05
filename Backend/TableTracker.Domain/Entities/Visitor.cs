@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TableTracker.Domain.Entities
 {
@@ -9,5 +7,7 @@ namespace TableTracker.Domain.Entities
         public float GeneralTrustFactor { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }
+
+        public ICollection<Restaurant> Favourites { get; set; }
     }
 }
