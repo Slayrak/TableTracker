@@ -308,7 +308,7 @@ export class RestaurantPageComponent implements OnInit {
 
     this.selectedDate.setHours(0,0,0,0);
 
-    if(this.selectedDate.getFullYear() <= this.minDate.getFullYear() && this.selectedDate.getDay() <= this.minDate.getDay() && this.selectedDate.getMonth() <= this.minDate.getMonth())
+    if(this.selectedDate.getFullYear() <= this.minDate.getFullYear() && this.selectedDate.getDate() <= this.minDate.getDate() && this.selectedDate.getMonth() <= this.minDate.getMonth())
     {
       this.selectedDate = new Date();
     }
