@@ -12,61 +12,60 @@ using TableTracker.Domain.Settings;
 using TableTracker.Infrastructure;
 using TableTracker.ServiceConfigurations;
 
-namespace TableTracker
+namespace TableTracker;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSwagger();
+        services.AddMapper();
+        services.AddDataAccess(Configuration);
+        services.AddMediator();
+        services.AddValidaton();
+        services.AddCustomAuthorization(Configuration);
+        services.AddApiControllers();
+
+        services.AddScoped<IEmailHandler, EmailHandler>();
+        services.AddOptions();
+        services.Configure<EmailConfig>(Configuration.GetSection(nameof(EmailConfig)));
+        services.Configure<FormOptions>(x =>
         {
-            Configuration = configuration;
+            x.ValueLengthLimit = Int32.MaxValue;
+            x.MultipartBodyLengthLimit = Int32.MaxValue;
+            x.MemoryBufferThreshold = Int32.MaxValue;
+        });
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TableTracker v1"));
         }
 
-        public IConfiguration Configuration { get; }
+        app.UseStaticFiles();
+        app.UseCustomMiddlewares();
+        app.UseHttpsRedirection();
+        app.UseRouting();
 
-        public void ConfigureServices(IServiceCollection services)
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.UseCrossOriginResourceSharing();
+
+        app.UseEndpoints(endpoints =>
         {
-            services.AddSwagger();
-            services.AddMapper();
-            services.AddDataAccess(Configuration);
-            services.AddMediator();
-            services.AddValidaton();
-            services.AddCustomAuthorization(Configuration);
-            services.AddApiControllers();
-
-            services.AddScoped<IEmailHandler, EmailHandler>();
-            services.AddOptions();
-            services.Configure<EmailConfig>(Configuration.GetSection(nameof(EmailConfig)));
-            services.Configure<FormOptions>(x =>
-            {
-                x.ValueLengthLimit = Int32.MaxValue;
-                x.MultipartBodyLengthLimit = Int32.MaxValue;
-                x.MemoryBufferThreshold = Int32.MaxValue;
-            });
-        }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TableTracker v1"));
-            }
-
-            app.UseStaticFiles();
-            app.UseCustomMiddlewares();
-            app.UseHttpsRedirection();
-            app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseCrossOriginResourceSharing();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
+            endpoints.MapControllers();
+        });
     }
 }

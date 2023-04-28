@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Tables.Commands.DeleteTable
-{
-    public class DeleteTableCommand : IRequest<CommandResponse<TableDTO>>
-    {
-        public DeleteTableCommand(long id)
-        {
-            Id = id;
-        }
+namespace TableTracker.Application.CQRS.Tables.Commands.DeleteTable;
 
-        public long Id { get; set; }
+public class DeleteTableCommand : IRequest<CommandResponse<TableDTO>>
+{
+    public DeleteTableCommand(long id)
+    {
+        Id = id;
     }
+
+    public long Id { get; set; }
 }

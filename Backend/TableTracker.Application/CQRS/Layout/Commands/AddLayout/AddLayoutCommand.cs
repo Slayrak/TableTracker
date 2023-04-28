@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Layout.Commands.AddLayout
-{
-    public class AddLayoutCommand : IRequest<CommandResponse<LayoutDTO>>
-    {
-        public AddLayoutCommand(LayoutDTO layoutDTO)
-        {
-            LayoutDTO = layoutDTO;
-        }
+namespace TableTracker.Application.CQRS.Layout.Commands.AddLayout;
 
-        public LayoutDTO LayoutDTO { get; set; }
+public class AddLayoutCommand : IRequest<CommandResponse<LayoutDTO>>
+{
+    public AddLayoutCommand(LayoutDTO layoutDTO)
+    {
+        LayoutDTO = layoutDTO;
     }
+
+    public LayoutDTO LayoutDTO { get; set; }
 }

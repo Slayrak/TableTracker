@@ -1,9 +1,8 @@
-﻿namespace TableTracker.Domain.DataTransferObjects
-{
-    public class ImageDTO
-    {
-        public long Id { get; set; }
+﻿namespace TableTracker.Domain.DataTransferObjects;
 
-        public string Name { get; set; }
-    }
+public class ImageDTO
+{
+    public long Id { get; set; }
+
+    public string Name { get; set; }
 }

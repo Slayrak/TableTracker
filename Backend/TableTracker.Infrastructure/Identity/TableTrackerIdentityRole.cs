@@ -2,9 +2,8 @@
 
 using Microsoft.AspNetCore.Identity;
 
-namespace TableTracker.Infrastructure.Identity
+namespace TableTracker.Infrastructure.Identity;
+
+public class TableTrackerIdentityRole : IdentityRole<Guid>
 {
-    public class TableTrackerIdentityRole : IdentityRole<Guid>
-    {
-    }
 }

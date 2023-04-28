@@ -2,10 +2,9 @@
 
 using TableTracker.Domain.Entities;
 
-namespace TableTracker.Domain.Interfaces.Repositories
+namespace TableTracker.Domain.Interfaces.Repositories;
+
+public interface IFranchiseRepository : IRepository<Franchise, long>
 {
-    public interface IFranchiseRepository : IRepository<Franchise, long>
-    {
-        Task<Franchise> GetFranchiseByName(string name);
-    }
+    Task<Franchise> GetFranchiseByName(string name);
 }

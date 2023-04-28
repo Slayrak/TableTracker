@@ -1,7 +1,6 @@
-﻿namespace TableTracker.Domain.Entities
+﻿namespace TableTracker.Domain.Entities;
+
+public interface IEntity<T>
 {
-    public interface IEntity<T>
-    {
-        T Id { get; set; }
-    }
+    T Id { get; set; }
 }

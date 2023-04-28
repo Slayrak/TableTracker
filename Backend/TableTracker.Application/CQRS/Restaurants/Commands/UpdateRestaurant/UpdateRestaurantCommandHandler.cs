@@ -10,42 +10,41 @@ using TableTracker.Domain.Entities;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Restaurants.Commands.UpdateRestaurant
+namespace TableTracker.Application.CQRS.Restaurants.Commands.UpdateRestaurant;
+
+public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand, CommandResponse<RestaurantDTO>>
 {
-    public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand, CommandResponse<RestaurantDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public UpdateRestaurantCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public UpdateRestaurantCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<RestaurantDTO>> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
+    {
+        var repository = _unitOfWork.GetRepository<IRestaurantRepository>();
+        var entity = _mapper.Map<Restaurant>(request.Restaurant);
+
+        if (await repository.Contains(entity))
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            entity.Manager = null;
+            entity.Franchise = null;
+            entity.Layout = null;
+
+            repository.Update(entity);
+            await _unitOfWork.Save();
+
+            return new CommandResponse<RestaurantDTO>(request.Restaurant);
         }
 
-        public async Task<CommandResponse<RestaurantDTO>> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
-        {
-            var repository = _unitOfWork.GetRepository<IRestaurantRepository>();
-            var entity = _mapper.Map<Restaurant>(request.Restaurant);
-
-            if (await repository.Contains(entity))
-            {
-                entity.Manager = null;
-                entity.Franchise = null;
-                entity.Layout = null;
-
-                repository.Update(entity);
-                await _unitOfWork.Save();
-
-                return new CommandResponse<RestaurantDTO>(request.Restaurant);
-            }
-
-            return new CommandResponse<RestaurantDTO>(
-                request.Restaurant,
-                Domain.Enums.CommandResult.NotFound,
-                "Could not find the given restaurant.");
-        }
+        return new CommandResponse<RestaurantDTO>(
+            request.Restaurant,
+            Domain.Enums.CommandResult.NotFound,
+            "Could not find the given restaurant.");
     }
 }

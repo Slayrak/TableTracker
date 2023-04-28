@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 using MediatR;
@@ -9,35 +6,34 @@ using MediatR;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Visitors.Commands.DeleteAvatar
+namespace TableTracker.Application.CQRS.Visitors.Commands.DeleteAvatar;
+
+public class DeleteAvatarCommandHandler : IRequestHandler<DeleteAvatarCommand, CommandResponse<string>>
 {
-    public class DeleteAvatarCommandHandler : IRequestHandler<DeleteAvatarCommand, CommandResponse<string>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+
+    public DeleteAvatarCommandHandler(IUnitOfWork<long> unitOfWork)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
+        _unitOfWork = unitOfWork;
+    }
 
-        public DeleteAvatarCommandHandler(IUnitOfWork<long> unitOfWork)
+    public async Task<CommandResponse<string>> Handle(DeleteAvatarCommand request, CancellationToken cancellationToken)
+    {
+        var visitor = await _unitOfWork
+            .GetRepository<IVisitorRepository>()
+            .FindById(request.VisitorId);
+
+        string fileName = "";
+
+        if (visitor.Avatar is not null)
         {
-            _unitOfWork = unitOfWork;
+            fileName = visitor.Avatar.Name;
+
+            _unitOfWork.GetRepository<IImageRepository>().Remove(visitor.Avatar);
+
+            await _unitOfWork.Save();
         }
 
-        public async Task<CommandResponse<string>> Handle(DeleteAvatarCommand request, CancellationToken cancellationToken)
-        {
-            var visitor = await _unitOfWork
-                .GetRepository<IVisitorRepository>()
-                .FindById(request.VisitorId);
-
-            string fileName = "";
-
-            if (visitor.Avatar is not null)
-            {
-                fileName = visitor.Avatar.Name;
-
-                _unitOfWork.GetRepository<IImageRepository>().Remove(visitor.Avatar);
-
-                await _unitOfWork.Save();
-            }
-
-            return new CommandResponse<string>(fileName);
-        }
+        return new CommandResponse<string>(fileName);
     }
 }

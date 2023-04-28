@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Franchises.Queries.FindFranchiseById
-{
-    public class FindFranchiseByIdQuery : IRequest<FranchiseDTO>
-    {
-        public FindFranchiseByIdQuery(long id)
-        {
-            Id = id;
-        }
+namespace TableTracker.Application.CQRS.Franchises.Queries.FindFranchiseById;
 
-        public long Id { get; set; }
+public class FindFranchiseByIdQuery : IRequest<FranchiseDTO>
+{
+    public FindFranchiseByIdQuery(long id)
+    {
+        Id = id;
     }
+
+    public long Id { get; set; }
 }

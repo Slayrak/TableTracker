@@ -10,38 +10,37 @@ using TableTracker.Domain.Enums;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Users.Commands.DeleteUser
+namespace TableTracker.Application.CQRS.Users.Commands.DeleteUser;
+
+public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, CommandResponse<UserDTO>>
 {
-    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, CommandResponse<UserDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public DeleteUserCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public DeleteUserCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<UserDTO>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    {
+        var repository = _unitOfWork.GetRepository<IUserRepository>();
+        var entity = await repository.FindById(request.Id);
+
+        if (await repository.Contains(entity))
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            repository.Remove(entity);
+            await _unitOfWork.Save();
+
+            return new CommandResponse<UserDTO>(_mapper.Map<UserDTO>(entity));
         }
 
-        public async Task<CommandResponse<UserDTO>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
-        {
-            var repository = _unitOfWork.GetRepository<IUserRepository>();
-            var entity = await repository.FindById(request.Id);
-
-            if (await repository.Contains(entity))
-            {
-                repository.Remove(entity);
-                await _unitOfWork.Save();
-
-                return new CommandResponse<UserDTO>(_mapper.Map<UserDTO>(entity));
-            }
-
-            return new CommandResponse<UserDTO>(
-                _mapper.Map<UserDTO>(entity),
-                CommandResult.NotFound,
-                "Could not find the given user.");
-        }
+        return new CommandResponse<UserDTO>(
+            _mapper.Map<UserDTO>(entity),
+            CommandResult.NotFound,
+            "Could not find the given user.");
     }
 }

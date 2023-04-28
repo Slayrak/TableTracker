@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.RestaurantVisitors.Commands.DeleteRestaurantVisitor
-{
-    public class DeleteRestaurantVisitorCommand : IRequest<CommandResponse<RestaurantVisitorDTO>>
-    {
-        public DeleteRestaurantVisitorCommand(long id)
-        {
-            Id = id;
-        }
+namespace TableTracker.Application.CQRS.RestaurantVisitors.Commands.DeleteRestaurantVisitor;
 
-        public long Id { get; set; }
+public class DeleteRestaurantVisitorCommand : IRequest<CommandResponse<RestaurantVisitorDTO>>
+{
+    public DeleteRestaurantVisitorCommand(long id)
+    {
+        Id = id;
     }
+
+    public long Id { get; set; }
 }

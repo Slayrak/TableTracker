@@ -2,9 +2,8 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Tables.Queries.GetAllTables
+namespace TableTracker.Application.CQRS.Tables.Queries.GetAllTables;
+
+public class GetAllTablesQuery : IRequest<TableDTO[]>
 {
-    public class GetAllTablesQuery : IRequest<TableDTO[]>
-    {
-    }
 }

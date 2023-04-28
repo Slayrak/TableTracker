@@ -4,15 +4,14 @@ using MediatR;
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.VisitorHistories.Queries.GetAllVisitsByDate
-{
-    public class GetAllVisitsByDateQuery : IRequest<VisitorHistoryDTO[]>
-    {
-        public GetAllVisitsByDateQuery(DateTime date)
-        {
-            Date = date;
-        }
+namespace TableTracker.Application.CQRS.VisitorHistories.Queries.GetAllVisitsByDate;
 
-        public DateTime Date { get; set; }
+public class GetAllVisitsByDateQuery : IRequest<VisitorHistoryDTO[]>
+{
+    public GetAllVisitsByDateQuery(DateTime date)
+    {
+        Date = date;
     }
+
+    public DateTime Date { get; set; }
 }

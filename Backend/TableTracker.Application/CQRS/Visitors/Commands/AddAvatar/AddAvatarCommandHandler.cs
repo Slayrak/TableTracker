@@ -14,41 +14,40 @@ using TableTracker.Domain.Entities;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Visitors.Commands.AddAvatar
+namespace TableTracker.Application.CQRS.Visitors.Commands.AddAvatar;
+
+public class AddAvatarCommandHandler : IRequestHandler<AddAvatarCommand, CommandResponse<ImageDTO>>
 {
-    public class AddAvatarCommandHandler : IRequestHandler<AddAvatarCommand, CommandResponse<ImageDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public AddAvatarCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public AddAvatarCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<ImageDTO>> Handle(AddAvatarCommand request, CancellationToken cancellationToken)
+    {
+        var visitor = await _unitOfWork
+            .GetRepository<IVisitorRepository>()
+            .FindById(request.VisitorId);
+
+        var imageRepository = _unitOfWork.GetRepository<IImageRepository>();
+
+        if (visitor.Avatar is not null)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            imageRepository.Remove(visitor.Avatar);
         }
 
-        public async Task<CommandResponse<ImageDTO>> Handle(AddAvatarCommand request, CancellationToken cancellationToken)
-        {
-            var visitor = await _unitOfWork
-                .GetRepository<IVisitorRepository>()
-                .FindById(request.VisitorId);
+        var image = new Image { Name = request.FileName };
+        await imageRepository.Insert(image);
 
-            var imageRepository = _unitOfWork.GetRepository<IImageRepository>();
+        visitor.Avatar = image;
+        await _unitOfWork.Save();
 
-            if (visitor.Avatar is not null)
-            {
-                imageRepository.Remove(visitor.Avatar);
-            }
-
-            var image = new Image { Name = request.FileName };
-            await imageRepository.Insert(image);
-
-            visitor.Avatar = image;
-            await _unitOfWork.Save();
-
-            return new CommandResponse<ImageDTO>(_mapper.Map<ImageDTO>(image));
-        }
+        return new CommandResponse<ImageDTO>(_mapper.Map<ImageDTO>(image));
     }
 }

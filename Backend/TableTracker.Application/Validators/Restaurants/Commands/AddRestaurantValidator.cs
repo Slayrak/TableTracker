@@ -2,13 +2,12 @@
 
 using TableTracker.Application.CQRS.Restaurants.Queries.FindRestaurantById;
 
-namespace TableTracker.Application.Validators.Restaurants.Commands
+namespace TableTracker.Application.Validators.Restaurants.Commands;
+
+public class FindRestaurantByIdValidator : AbstractValidator<FindRestaurantByIdQuery>
 {
-    public class FindRestaurantByIdValidator : AbstractValidator<FindRestaurantByIdQuery>
+    public FindRestaurantByIdValidator()
     {
-        public FindRestaurantByIdValidator()
-        {
-            RuleFor(x => x.Id).GreaterThan(0);
-        }
+        RuleFor(x => x.Id).GreaterThan(0);
     }
 }

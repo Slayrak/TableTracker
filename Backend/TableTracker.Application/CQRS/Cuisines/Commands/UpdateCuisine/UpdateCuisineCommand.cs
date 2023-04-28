@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Cuisines.Commands.UpdateCuisine
-{
-    public class UpdateCuisineCommand : IRequest<CommandResponse<CuisineDTO>>
-    {
-        public UpdateCuisineCommand(CuisineDTO cuisine)
-        {
-            Cuisine = cuisine;
-        }
+namespace TableTracker.Application.CQRS.Cuisines.Commands.UpdateCuisine;
 
-        public CuisineDTO Cuisine { get; set; }
+public class UpdateCuisineCommand : IRequest<CommandResponse<CuisineDTO>>
+{
+    public UpdateCuisineCommand(CuisineDTO cuisine)
+    {
+        Cuisine = cuisine;
     }
+
+    public CuisineDTO Cuisine { get; set; }
 }

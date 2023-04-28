@@ -2,9 +2,8 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Franchises.Queries.GetAllFranchises
+namespace TableTracker.Application.CQRS.Franchises.Queries.GetAllFranchises;
+
+public class GetAllFranchisesQuery : IRequest<FranchiseDTO[]>
 {
-    public class GetAllFranchisesQuery : IRequest<FranchiseDTO[]>
-    {
-    }
 }

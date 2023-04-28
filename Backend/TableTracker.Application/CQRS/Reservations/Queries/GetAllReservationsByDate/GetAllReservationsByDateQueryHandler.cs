@@ -13,30 +13,29 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDate
+namespace TableTracker.Application.CQRS.Reservations.Queries.GetAllReservationsByDate;
+
+public class GetAllReservationsByDateQueryHandler : IRequestHandler<GetAllReservationsByDateQuery, ReservationDTO[]>
 {
-    public class GetAllReservationsByDateQueryHandler : IRequestHandler<GetAllReservationsByDateQuery, ReservationDTO[]>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public GetAllReservationsByDateQueryHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public GetAllReservationsByDateQueryHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+    public async Task<ReservationDTO[]> Handle(GetAllReservationsByDateQuery request, CancellationToken cancellationToken)
+    {
+        var result = await _unitOfWork
+            .GetRepository<IReservationRepository>()
+            .GetAllReservationsByDate(request.RestaurantId, request.Date.Date);
 
-        public async Task<ReservationDTO[]> Handle(GetAllReservationsByDateQuery request, CancellationToken cancellationToken)
-        {
-            var result = await _unitOfWork
-                .GetRepository<IReservationRepository>()
-                .GetAllReservationsByDate(request.RestaurantId, request.Date.Date);
-
-            return result
-                .Select(x => _mapper.Map<ReservationDTO>(x))
-                .ToArray();
-        }
+        return result
+            .Select(x => _mapper.Map<ReservationDTO>(x))
+            .ToArray();
     }
 }

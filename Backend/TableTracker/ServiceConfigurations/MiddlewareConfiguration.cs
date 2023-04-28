@@ -2,13 +2,12 @@
 
 using TableTracker.Middlewares;
 
-namespace TableTracker.ServiceConfigurations
+namespace TableTracker.ServiceConfigurations;
+
+public static class MiddlewareConfiguration
 {
-    public static class MiddlewareConfiguration
+    public static void UseCustomMiddlewares(this IApplicationBuilder app)
     {
-        public static void UseCustomMiddlewares(this IApplicationBuilder app)
-        {
-            app.UseMiddleware<ErrorHandlingMiddleware>();
-        }
+        app.UseMiddleware<ErrorHandlingMiddleware>();
     }
 }

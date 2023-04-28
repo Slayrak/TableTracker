@@ -4,13 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 using TableTracker.Application.CQRS;
 
-namespace TableTracker.ServiceConfigurations
+namespace TableTracker.ServiceConfigurations;
+
+public static class MediatorConfiguration
 {
-    public static class MediatorConfiguration
+    public static IServiceCollection AddMediator(this IServiceCollection services)
     {
-        public static IServiceCollection AddMediator(this IServiceCollection services)
-        {
-            return services.AddMediatR(typeof(CommandResponse<object>).Assembly);
-        }
+        return services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(CommandResponse<object>).Assembly));
     }
 }

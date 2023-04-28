@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Users.Queries.FindUserById
-{
-    public class FindUserByIdQuery : IRequest<UserDTO>
-    {
-        public FindUserByIdQuery(long id)
-        {
-            Id = id;
-        }
+namespace TableTracker.Application.CQRS.Users.Queries.FindUserById;
 
-        public long Id { get; set; }
+public class FindUserByIdQuery : IRequest<UserDTO>
+{
+    public FindUserByIdQuery(long id)
+    {
+        Id = id;
     }
+
+    public long Id { get; set; }
 }

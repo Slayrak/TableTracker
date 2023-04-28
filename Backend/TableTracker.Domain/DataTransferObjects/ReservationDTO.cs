@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace TableTracker.Domain.DataTransferObjects
+namespace TableTracker.Domain.DataTransferObjects;
+
+public class ReservationDTO
 {
-    public class ReservationDTO
-    {
-        public long Id { get; set; }
+    public long Id { get; set; }
 
-        public DateTime Date { get; set; }
+    public DateTime Date { get; set; }
 
-        public TableDTO Table { get; set; }
+    public TableDTO Table { get; set; }
 
-        public VisitorDTO Visitor { get; set; }
-    }
+    public VisitorDTO Visitor { get; set; }
 }

@@ -2,13 +2,12 @@
 
 using TableTracker.Application.MapperProfiles;
 
-namespace TableTracker.ServiceConfigurations
+namespace TableTracker.ServiceConfigurations;
+
+public static class AutoMapperConfiguration
 {
-    public static class AutoMapperConfiguration
+    public static IServiceCollection AddMapper(this IServiceCollection services)
     {
-        public static IServiceCollection AddMapper(this IServiceCollection services)
-        {
-            return services.AddAutoMapper(typeof(FranchiseProfile).Assembly);
-        }
+        return services.AddAutoMapper(typeof(FranchiseProfile).Assembly);
     }
 }

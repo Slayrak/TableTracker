@@ -2,10 +2,9 @@
 
 using TableTracker.Domain.Entities;
 
-namespace TableTracker.Domain.Interfaces.Repositories
+namespace TableTracker.Domain.Interfaces.Repositories;
+
+public interface ILayoutRepository : IRepository<Layout, long>
 {
-    public interface ILayoutRepository : IRepository<Layout, long>
-    {
-        Task<Layout> FindLayoutByRestaurant(long restaurant);
-    }
+    Task<Layout> FindLayoutByRestaurant(long restaurant);
 }

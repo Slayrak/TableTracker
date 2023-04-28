@@ -10,28 +10,27 @@ using TableTracker.Domain.Entities;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Managers.Queries.FindManagerByRestaurant
+namespace TableTracker.Application.CQRS.Managers.Queries.FindManagerByRestaurant;
+
+public class FindManagerByRestaurantQueryHandler : IRequestHandler<FindManagerByRestaurantQuery, ManagerDTO>
 {
-    public class FindManagerByRestaurantQueryHandler : IRequestHandler<FindManagerByRestaurantQuery, ManagerDTO>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public FindManagerByRestaurantQueryHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public FindManagerByRestaurantQueryHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+    public async Task<ManagerDTO> Handle(FindManagerByRestaurantQuery request, CancellationToken cancellationToken)
+    {
+        var result = await _unitOfWork
+            .GetRepository<IManagerRepository>()
+            .FindManagerByRestaurant(request.RestaurantDTO);
 
-        public async Task<ManagerDTO> Handle(FindManagerByRestaurantQuery request, CancellationToken cancellationToken)
-        {
-            var result = await _unitOfWork
-                .GetRepository<IManagerRepository>()
-                .FindManagerByRestaurant(request.RestaurantDTO);
-
-            return _mapper.Map<ManagerDTO>(result);
-        }
+        return _mapper.Map<ManagerDTO>(result);
     }
 }

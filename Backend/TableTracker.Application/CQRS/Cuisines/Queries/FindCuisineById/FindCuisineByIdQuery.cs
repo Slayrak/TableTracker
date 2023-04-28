@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Cuisines.Queries.FindCuisineById
-{
-    public class FindCuisineByIdQuery : IRequest<CuisineDTO>
-    {
-        public FindCuisineByIdQuery(long id)
-        {
-            Id = id;
-        }
+namespace TableTracker.Application.CQRS.Cuisines.Queries.FindCuisineById;
 
-        public long Id { get; set; }
+public class FindCuisineByIdQuery : IRequest<CuisineDTO>
+{
+    public FindCuisineByIdQuery(long id)
+    {
+        Id = id;
     }
+
+    public long Id { get; set; }
 }

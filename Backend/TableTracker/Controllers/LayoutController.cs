@@ -13,60 +13,59 @@ using TableTracker.Application.CQRS.Layout.Queries.FindLayoutByRestaurant;
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Helpers;
 
-namespace TableTracker.Controllers
+namespace TableTracker.Controllers;
+
+[ApiController]
+[Route("api/layouts")]
+public class LayoutController : ControllerBase
 {
-    [ApiController]
-    [Route("api/layouts")]
-    public class LayoutController : ControllerBase
+    private readonly IMediator _mediator;
+
+    public LayoutController(IMediator mediator)
     {
-        private readonly IMediator _mediator;
+        _mediator = mediator;
+    }
 
-        public LayoutController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> FindLayoutById([FromRoute] long id)
+    {
+        var response = await _mediator.Send(new FindLayoutByIdQuery(id));
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> FindLayoutById([FromRoute] long id)
-        {
-            var response = await _mediator.Send(new FindLayoutByIdQuery(id));
+        return ReturnResultHelper.ReturnQueryResult(response);
+    }
 
-            return ReturnResultHelper.ReturnQueryResult(response);
-        }
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> AddLayout([FromBody] LayoutDTO layoutDTO)
+    {
+        var response = await _mediator.Send(new AddLayoutCommand(layoutDTO));
 
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> AddLayout([FromBody] LayoutDTO layoutDTO)
-        {
-            var response = await _mediator.Send(new AddLayoutCommand(layoutDTO));
+        return ReturnResultHelper.ReturnCommandResult(response);
+    }
 
-            return ReturnResultHelper.ReturnCommandResult(response);
-        }
+    [HttpPut]
+    [Authorize]
+    public async Task<IActionResult> UpdateLayout([FromBody] LayoutDTO layoutDTO)
+    {
+        var response = await _mediator.Send(new UpdateLayoutCommand(layoutDTO));
 
-        [HttpPut]
-        [Authorize]
-        public async Task<IActionResult> UpdateLayout([FromBody] LayoutDTO layoutDTO)
-        {
-            var response = await _mediator.Send(new UpdateLayoutCommand(layoutDTO));
+        return ReturnResultHelper.ReturnCommandResult(response);
+    }
 
-            return ReturnResultHelper.ReturnCommandResult(response);
-        }
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<IActionResult> DeleteLayout([FromRoute] long id)
+    {
+        var response = await _mediator.Send(new DeleteLayoutCommand(id));
 
-        [HttpDelete("{id}")]
-        [Authorize]
-        public async Task<IActionResult> DeleteLayout([FromRoute] long id)
-        {
-            var response = await _mediator.Send(new DeleteLayoutCommand(id));
+        return ReturnResultHelper.ReturnCommandResult(response);
+    }
 
-            return ReturnResultHelper.ReturnCommandResult(response);
-        }
+    [HttpGet("restaurant")]
+    public async Task<IActionResult> FindLayoutByRestaurant([FromQuery] long restaurantDTO)
+    {
+        var response = await _mediator.Send(new FindLayoutByRestaurantQuery(restaurantDTO));
 
-        [HttpGet("restaurant")]
-        public async Task<IActionResult> FindLayoutByRestaurant([FromQuery] long restaurantDTO)
-        {
-            var response = await _mediator.Send(new FindLayoutByRestaurantQuery(restaurantDTO));
-
-            return ReturnResultHelper.ReturnQueryResult(response);
-        }
+        return ReturnResultHelper.ReturnQueryResult(response);
     }
 }

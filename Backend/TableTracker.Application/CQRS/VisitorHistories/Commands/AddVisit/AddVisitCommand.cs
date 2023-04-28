@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.VisitorHistories.Commands.AddVisit
-{
-    public class AddVisitCommand : IRequest<CommandResponse<VisitorHistoryDTO>>
-    {
-        public AddVisitCommand(VisitorHistoryDTO visit)
-        {
-            Visit = visit;
-        }
+namespace TableTracker.Application.CQRS.VisitorHistories.Commands.AddVisit;
 
-        public VisitorHistoryDTO Visit { get; set; }
+public class AddVisitCommand : IRequest<CommandResponse<VisitorHistoryDTO>>
+{
+    public AddVisitCommand(VisitorHistoryDTO visit)
+    {
+        Visit = visit;
     }
+
+    public VisitorHistoryDTO Visit { get; set; }
 }

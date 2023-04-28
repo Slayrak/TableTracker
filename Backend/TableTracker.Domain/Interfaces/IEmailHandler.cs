@@ -2,10 +2,9 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Domain.Interfaces
+namespace TableTracker.Domain.Interfaces;
+
+public interface IEmailHandler
 {
-    public interface IEmailHandler
-    {
-        Task SendEmail(EmailDTO email, bool html = false);
-    }
+    Task SendEmail(EmailDTO email, bool html = false);
 }

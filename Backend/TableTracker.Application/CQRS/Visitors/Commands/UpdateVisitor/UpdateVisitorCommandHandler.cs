@@ -11,38 +11,37 @@ using TableTracker.Domain.Enums;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Visitors.Commands.UpdateVisitor
+namespace TableTracker.Application.CQRS.Visitors.Commands.UpdateVisitor;
+
+public class UpdateVisitorCommandHandler : IRequestHandler<UpdateVisitorCommand, CommandResponse<VisitorDTO>>
 {
-    public class UpdateVisitorCommandHandler : IRequestHandler<UpdateVisitorCommand, CommandResponse<VisitorDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public UpdateVisitorCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public UpdateVisitorCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<VisitorDTO>> Handle(UpdateVisitorCommand request, CancellationToken cancellationToken)
+    {
+        var repository = _unitOfWork.GetRepository<IVisitorRepository>();
+        var entity = _mapper.Map<Visitor>(request.Visitor);
+
+        if (await repository.Contains(entity))
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            repository.Update(entity);
+            await _unitOfWork.Save();
+
+            return new CommandResponse<VisitorDTO>(request.Visitor);
         }
 
-        public async Task<CommandResponse<VisitorDTO>> Handle(UpdateVisitorCommand request, CancellationToken cancellationToken)
-        {
-            var repository = _unitOfWork.GetRepository<IVisitorRepository>();
-            var entity = _mapper.Map<Visitor>(request.Visitor);
-
-            if (await repository.Contains(entity))
-            {
-                repository.Update(entity);
-                await _unitOfWork.Save();
-
-                return new CommandResponse<VisitorDTO>(request.Visitor);
-            }
-
-            return new CommandResponse<VisitorDTO>(
-                request.Visitor,
-                CommandResult.NotFound,
-                "Could not find the given visitor.");
-        }
+        return new CommandResponse<VisitorDTO>(
+            request.Visitor,
+            CommandResult.NotFound,
+            "Could not find the given visitor.");
     }
 }

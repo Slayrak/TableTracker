@@ -1,8 +1,7 @@
-﻿namespace TableTracker.Domain.Enums
+﻿namespace TableTracker.Domain.Enums;
+
+public enum ManagerState
 {
-    public enum ManagerState
-    {
-        Occupied = 0,
-        Unocupied = 1,
-    }
+    Occupied = 0,
+    Unocupied = 1,
 }

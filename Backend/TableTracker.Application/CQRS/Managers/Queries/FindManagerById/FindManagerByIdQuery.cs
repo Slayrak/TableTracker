@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Managers.Queries.FindManagerById
-{
-    public class FindManagerByIdQuery : IRequest<ManagerDTO>
-    {
-        public FindManagerByIdQuery(long id)
-        {
-            Id = id;
-        }
+namespace TableTracker.Application.CQRS.Managers.Queries.FindManagerById;
 
-        public long Id { get; set; }
+public class FindManagerByIdQuery : IRequest<ManagerDTO>
+{
+    public FindManagerByIdQuery(long id)
+    {
+        Id = id;
     }
+
+    public long Id { get; set; }
 }

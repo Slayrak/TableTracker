@@ -7,46 +7,45 @@ using Microsoft.Extensions.Logging;
 
 using Newtonsoft.Json;
 
-namespace TableTracker.Middlewares
+namespace TableTracker.Middlewares;
+
+public class ErrorHandlingMiddleware
 {
-    public class ErrorHandlingMiddleware
+    private readonly RequestDelegate _next;
+    //private readonly ILogger _logger;
+
+    public ErrorHandlingMiddleware(
+        RequestDelegate next)
+        //ILogger logger)
     {
-        private readonly RequestDelegate _next;
-        //private readonly ILogger _logger;
+        _next = next;
+        //_logger = logger;
+    }
 
-        public ErrorHandlingMiddleware(
-            RequestDelegate next)
-            //ILogger logger)
+    public async Task InvokeAsync(HttpContext httpContext)
+    {
+        try
         {
-            _next = next;
-            //_logger = logger;
+            await _next(httpContext);
         }
-
-        public async Task InvokeAsync(HttpContext httpContext)
+        catch (Exception ex)
         {
-            try
+            //_logger.LogError(ex.Message);
+
+            await HandleExceptionAsync(httpContext, ex);
+        }
+    }
+
+    private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+        await context.Response.WriteAsync(
+            JsonConvert.SerializeObject(new
             {
-                await _next(httpContext);
-            }
-            catch (Exception ex)
-            {
-                //_logger.LogError(ex.Message);
-
-                await HandleExceptionAsync(httpContext, ex);
-            }
-        }
-
-        private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
-        {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-
-            await context.Response.WriteAsync(
-                JsonConvert.SerializeObject(new
-                {
-                    context.Response.StatusCode,
-                    exception.Message
-                }));
-        }
+                context.Response.StatusCode,
+                exception.Message
+            }));
     }
 }

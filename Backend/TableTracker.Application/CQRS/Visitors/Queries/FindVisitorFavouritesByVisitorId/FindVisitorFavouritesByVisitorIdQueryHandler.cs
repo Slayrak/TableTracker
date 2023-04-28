@@ -10,31 +10,30 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Visitors.Queries.FindVisitorFavouritesByVisitorId
+namespace TableTracker.Application.CQRS.Visitors.Queries.FindVisitorFavouritesByVisitorId;
+
+public class FindVisitorFavouritesByVisitorIdQueryHandler :
+    IRequestHandler<FindVisitorFavouritesByVisitorIdQuery, ICollection<RestaurantDTO>>
 {
-    public class FindVisitorFavouritesByVisitorIdQueryHandler :
-        IRequestHandler<FindVisitorFavouritesByVisitorIdQuery, ICollection<RestaurantDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public FindVisitorFavouritesByVisitorIdQueryHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public FindVisitorFavouritesByVisitorIdQueryHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+    public async Task<ICollection<RestaurantDTO>> Handle(
+        FindVisitorFavouritesByVisitorIdQuery request,
+        CancellationToken cancellationToken)
+    {
+        var visitorFavourite = await _unitOfWork
+            .GetRepository<IVisitorRepository>()
+            .FindVisitorFavouritesByVisitorId(request.VisitorId);
 
-        public async Task<ICollection<RestaurantDTO>> Handle(
-            FindVisitorFavouritesByVisitorIdQuery request,
-            CancellationToken cancellationToken)
-        {
-            var visitorFavourite = await _unitOfWork
-                .GetRepository<IVisitorRepository>()
-                .FindVisitorFavouritesByVisitorId(request.VisitorId);
-
-            return _mapper.Map<ICollection<RestaurantDTO>>(visitorFavourite);
-        }
+        return _mapper.Map<ICollection<RestaurantDTO>>(visitorFavourite);
     }
 }

@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Tables.Queries.GetAllTablesWithFiltering
-{
-    public class GetAllTablesWithFilteringQuery : IRequest<TableDTO[]>
-    {
-        public GetAllTablesWithFilteringQuery(TableFilterModel tableFilterModel)
-        {
-            FilterModel = tableFilterModel;
-        }
+namespace TableTracker.Application.CQRS.Tables.Queries.GetAllTablesWithFiltering;
 
-        public TableFilterModel FilterModel { get; set; }
+public class GetAllTablesWithFilteringQuery : IRequest<TableDTO[]>
+{
+    public GetAllTablesWithFilteringQuery(TableFilterModel tableFilterModel)
+    {
+        FilterModel = tableFilterModel;
     }
+
+    public TableFilterModel FilterModel { get; set; }
 }

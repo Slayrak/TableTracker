@@ -1,8 +1,7 @@
-﻿namespace TableTracker.Domain.Enums
+﻿namespace TableTracker.Domain.Enums;
+
+public enum WaiterState
 {
-    public enum WaiterState
-    {
-        Occupied = 0,
-        Unoccupied = 1,
-    }
+    Occupied = 0,
+    Unoccupied = 1,
 }

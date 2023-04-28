@@ -1,11 +1,10 @@
-﻿namespace TableTracker.Domain.Enums
+﻿namespace TableTracker.Domain.Enums;
+
+public enum UserRole
 {
-    public enum UserRole
-    {
-        Admin = 0,
-        Developer = 1,
-        Manager = 2,
-        Waiter = 3,
-        Visitor = 4,
-    }
+    Admin = 0,
+    Developer = 1,
+    Manager = 2,
+    Waiter = 3,
+    Visitor = 4,
 }

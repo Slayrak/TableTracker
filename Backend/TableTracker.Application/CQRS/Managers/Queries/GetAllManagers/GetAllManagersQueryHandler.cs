@@ -10,30 +10,29 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Managers.Queries.GetAllManagers
+namespace TableTracker.Application.CQRS.Managers.Queries.GetAllManagers;
+
+public class GetAllManagersQueryHandler : IRequestHandler<GetAllManagersQuery, ManagerDTO[]>
 {
-    public class GetAllManagersQueryHandler : IRequestHandler<GetAllManagersQuery, ManagerDTO[]>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public GetAllManagersQueryHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public GetAllManagersQueryHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+    public async Task<ManagerDTO[]> Handle(GetAllManagersQuery request, CancellationToken cancellationToken)
+    {
+        var result = await _unitOfWork
+            .GetRepository<IManagerRepository>()
+            .GetAll();
 
-        public async Task<ManagerDTO[]> Handle(GetAllManagersQuery request, CancellationToken cancellationToken)
-        {
-            var result = await _unitOfWork
-                .GetRepository<IManagerRepository>()
-                .GetAll();
-
-            return result
-                .Select(x => _mapper.Map<ManagerDTO>(x))
-                .ToArray();
-        }
+        return result
+            .Select(x => _mapper.Map<ManagerDTO>(x))
+            .ToArray();
     }
 }

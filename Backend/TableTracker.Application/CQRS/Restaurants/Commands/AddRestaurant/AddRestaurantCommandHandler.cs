@@ -11,41 +11,40 @@ using TableTracker.Domain.Enums;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Restaurants.Commands.AddRestaurant
+namespace TableTracker.Application.CQRS.Restaurants.Commands.AddRestaurant;
+
+public class AddRestaurantCommandHandler : IRequestHandler<AddRestaurantCommand, CommandResponse<RestaurantDTO>>
 {
-    public class AddRestaurantCommandHandler : IRequestHandler<AddRestaurantCommand, CommandResponse<RestaurantDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public AddRestaurantCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public AddRestaurantCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<RestaurantDTO>> Handle(AddRestaurantCommand request, CancellationToken cancellationToken)
+    {
+        var entity = _mapper.Map<Restaurant>(request.Restaurant);
+
+        if (entity.Id != 0)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            return new CommandResponse<RestaurantDTO>(
+                request.Restaurant,
+                CommandResult.Failure,
+                "The restaurant is already in the database.");
         }
 
-        public async Task<CommandResponse<RestaurantDTO>> Handle(AddRestaurantCommand request, CancellationToken cancellationToken)
-        {
-            var entity = _mapper.Map<Restaurant>(request.Restaurant);
+        entity.Manager = null;
+        entity.Franchise = null;
+        entity.Layout = null;
 
-            if (entity.Id != 0)
-            {
-                return new CommandResponse<RestaurantDTO>(
-                    request.Restaurant,
-                    CommandResult.Failure,
-                    "The restaurant is already in the database.");
-            }
+        await _unitOfWork.GetRepository<IRestaurantRepository>().Insert(entity);
+        await _unitOfWork.Save();
 
-            entity.Manager = null;
-            entity.Franchise = null;
-            entity.Layout = null;
-
-            await _unitOfWork.GetRepository<IRestaurantRepository>().Insert(entity);
-            await _unitOfWork.Save();
-
-            return new CommandResponse<RestaurantDTO>(request.Restaurant);
-        }
+        return new CommandResponse<RestaurantDTO>(request.Restaurant);
     }
 }

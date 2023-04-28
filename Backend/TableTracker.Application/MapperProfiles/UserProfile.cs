@@ -3,15 +3,14 @@
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Entities;
 
-namespace TableTracker.Application.MapperProfiles
-{
-    public class UserProfile : Profile
-    {
-        public UserProfile()
-        {
-            CreateMap<User, UserDTO>();
+namespace TableTracker.Application.MapperProfiles;
 
-            CreateMap<UserDTO, User>();
-        }
+public class UserProfile : Profile
+{
+    public UserProfile()
+    {
+        CreateMap<User, UserDTO>();
+
+        CreateMap<UserDTO, User>();
     }
 }

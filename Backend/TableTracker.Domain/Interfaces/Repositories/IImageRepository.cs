@@ -1,8 +1,7 @@
 ﻿using TableTracker.Domain.Entities;
 
-namespace TableTracker.Domain.Interfaces.Repositories
+namespace TableTracker.Domain.Interfaces.Repositories;
+
+public interface IImageRepository : IRepository<Image, long>
 {
-    public interface IImageRepository : IRepository<Image, long>
-    {
-    }
 }

@@ -10,30 +10,29 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.VisitorHistories.Queries.GetAllVisits
+namespace TableTracker.Application.CQRS.VisitorHistories.Queries.GetAllVisits;
+
+public class GetAllVisitsQueryHandler : IRequestHandler<GetAllVisitsQuery, VisitorHistoryDTO[]>
 {
-    public class GetAllVisitsQueryHandler : IRequestHandler<GetAllVisitsQuery, VisitorHistoryDTO[]>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public GetAllVisitsQueryHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
+    }
 
-        public GetAllVisitsQueryHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
-        {
-            _mapper = mapper;
-            _unitOfWork = unitOfWork;
-        }
+    public async Task<VisitorHistoryDTO[]> Handle(GetAllVisitsQuery request, CancellationToken cancellationToken)
+    {
+        var result = await _unitOfWork
+               .GetRepository<IVisitorHistoryRepository>()
+               .GetAll();
 
-        public async Task<VisitorHistoryDTO[]> Handle(GetAllVisitsQuery request, CancellationToken cancellationToken)
-        {
-            var result = await _unitOfWork
-                   .GetRepository<IVisitorHistoryRepository>()
-                   .GetAll();
-
-            return result
-                .Select(x => _mapper.Map<VisitorHistoryDTO>(x))
-                .ToArray();
-        }
+        return result
+            .Select(x => _mapper.Map<VisitorHistoryDTO>(x))
+            .ToArray();
     }
 }

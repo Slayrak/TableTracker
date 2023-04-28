@@ -9,30 +9,29 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.RestaurantVisitors.Queries.GetRestaurantVisitorById
+namespace TableTracker.Application.CQRS.RestaurantVisitors.Queries.GetRestaurantVisitorById;
+
+public class GetRestaurantVisitorByIdQueryHandler : IRequestHandler<GetRestaurantVisitorByIdQuery, RestaurantVisitorDTO>
 {
-    public class GetRestaurantVisitorByIdQueryHandler : IRequestHandler<GetRestaurantVisitorByIdQuery, RestaurantVisitorDTO>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public GetRestaurantVisitorByIdQueryHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
+    }
 
-        public GetRestaurantVisitorByIdQueryHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
-        {
-            _mapper = mapper;
-            _unitOfWork = unitOfWork;
-        }
+    public async Task<RestaurantVisitorDTO> Handle(
+        GetRestaurantVisitorByIdQuery request,
+        CancellationToken cancellationToken)
+    {
+        var result = await _unitOfWork
+            .GetRepository<IRestaurantVisitorRepository>()
+            .FindById(request.Id);
 
-        public async Task<RestaurantVisitorDTO> Handle(
-            GetRestaurantVisitorByIdQuery request,
-            CancellationToken cancellationToken)
-        {
-            var result = await _unitOfWork
-                .GetRepository<IRestaurantVisitorRepository>()
-                .FindById(request.Id);
-
-            return _mapper.Map<RestaurantVisitorDTO>(result);
-        }
+        return _mapper.Map<RestaurantVisitorDTO>(result);
     }
 }

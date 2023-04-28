@@ -9,38 +9,37 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.RestaurantVisitors.Commands.DeleteRestaurantVisitor
+namespace TableTracker.Application.CQRS.RestaurantVisitors.Commands.DeleteRestaurantVisitor;
+
+public class DeleteRestaurantVisitorCommandHandler : IRequestHandler<DeleteRestaurantVisitorCommand, CommandResponse<RestaurantVisitorDTO>>
 {
-    public class DeleteRestaurantVisitorCommandHandler : IRequestHandler<DeleteRestaurantVisitorCommand, CommandResponse<RestaurantVisitorDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public DeleteRestaurantVisitorCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
+    }
 
-        public DeleteRestaurantVisitorCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<RestaurantVisitorDTO>> Handle(DeleteRestaurantVisitorCommand request, CancellationToken cancellationToken)
+    {
+        var repository = _unitOfWork.GetRepository<IRestaurantVisitorRepository>();
+        var entity = await repository.FindById(request.Id);
+
+        if (await repository.Contains(entity))
         {
-            _mapper = mapper;
-            _unitOfWork = unitOfWork;
+            repository.Remove(entity);
+            await _unitOfWork.Save();
+
+            return new CommandResponse<RestaurantVisitorDTO>(_mapper.Map<RestaurantVisitorDTO>(entity));
         }
 
-        public async Task<CommandResponse<RestaurantVisitorDTO>> Handle(DeleteRestaurantVisitorCommand request, CancellationToken cancellationToken)
-        {
-            var repository = _unitOfWork.GetRepository<IRestaurantVisitorRepository>();
-            var entity = await repository.FindById(request.Id);
-
-            if (await repository.Contains(entity))
-            {
-                repository.Remove(entity);
-                await _unitOfWork.Save();
-
-                return new CommandResponse<RestaurantVisitorDTO>(_mapper.Map<RestaurantVisitorDTO>(entity));
-            }
-
-            return new CommandResponse<RestaurantVisitorDTO>(
-                _mapper.Map<RestaurantVisitorDTO>(entity),
-                Domain.Enums.CommandResult.NotFound,
-                "Could not find the given restaurant visitor.");
-        }
+        return new CommandResponse<RestaurantVisitorDTO>(
+            _mapper.Map<RestaurantVisitorDTO>(entity),
+            Domain.Enums.CommandResult.NotFound,
+            "Could not find the given restaurant visitor.");
     }
 }

@@ -13,53 +13,52 @@ using TableTracker.Infrastructure;
 using TableTracker.Infrastructure.Identity;
 using TableTracker.JwtFeatures;
 
-namespace TableTracker.ServiceConfigurations
+namespace TableTracker.ServiceConfigurations;
+
+public static class AuthorizationConfiguration
 {
-    public static class AuthorizationConfiguration
+    public static IServiceCollection AddCustomAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection AddCustomAuthorization(this IServiceCollection services, IConfiguration configuration)
+        services.AddScoped<JwtHandler>();
+
+        services.AddIdentity<TableTrackerIdentityUser, TableTrackerIdentityRole>(options =>
         {
-            services.AddScoped<JwtHandler>();
+            options.User.RequireUniqueEmail = true;
+            options.Password.RequireNonAlphanumeric = false;
+        })
+            .AddEntityFrameworkStores<IdentityTableDbContext>()
+            .AddDefaultTokenProviders()
+            .AddUserStore<UserStore<TableTrackerIdentityUser, TableTrackerIdentityRole, IdentityTableDbContext, Guid>>()
+            .AddRoleStore<RoleStore<TableTrackerIdentityRole, IdentityTableDbContext, Guid>>();
 
-            services.AddIdentity<TableTrackerIdentityUser, TableTrackerIdentityRole>(options =>
+        var jwtSettings = configuration.GetSection("JwtSettings");
+
+        services.AddAuthentication(opt =>
+        {
+            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
             {
-                options.User.RequireUniqueEmail = true;
-                options.Password.RequireNonAlphanumeric = false;
-            })
-                .AddEntityFrameworkStores<IdentityTableDbContext>()
-                .AddDefaultTokenProviders()
-                .AddUserStore<UserStore<TableTrackerIdentityUser, TableTrackerIdentityRole, IdentityTableDbContext, Guid>>()
-                .AddRoleStore<RoleStore<TableTrackerIdentityRole, IdentityTableDbContext, Guid>>();
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings["validIssuer"],
+                ValidAudience = jwtSettings["validAudience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                    .GetBytes(jwtSettings.GetSection("securityKey").Value))
+            };
+        });
 
-            var jwtSettings = configuration.GetSection("JwtSettings");
+        services.AddAuthorization(opt =>
+        {
+            opt.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                .RequireAuthenticatedUser()
+                .Build();
+        });
 
-            services.AddAuthentication(opt =>
-            {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = jwtSettings["validIssuer"],
-                    ValidAudience = jwtSettings["validAudience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                        .GetBytes(jwtSettings.GetSection("securityKey").Value))
-                };
-            });
-
-            services.AddAuthorization(opt =>
-            {
-                opt.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser()
-                    .Build();
-            });
-
-            return services;
-        }
+        return services;
     }
 }

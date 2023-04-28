@@ -3,15 +3,14 @@
 using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Entities;
 
-namespace TableTracker.Application.MapperProfiles
-{
-    public class ImageProfile : Profile
-    {
-        public ImageProfile()
-        {
-            CreateMap<Image, ImageDTO>();
+namespace TableTracker.Application.MapperProfiles;
 
-            CreateMap<ImageDTO, Image>();
-        }
+public class ImageProfile : Profile
+{
+    public ImageProfile()
+    {
+        CreateMap<Image, ImageDTO>();
+
+        CreateMap<ImageDTO, Image>();
     }
 }

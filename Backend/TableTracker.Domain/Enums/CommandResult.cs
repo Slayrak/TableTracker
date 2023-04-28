@@ -1,9 +1,8 @@
-﻿namespace TableTracker.Domain.Enums
+﻿namespace TableTracker.Domain.Enums;
+
+public enum CommandResult
 {
-    public enum CommandResult
-    {
-        Failure = 0,
-        Success = 1,
-        NotFound = 2,
-    }
+    Failure = 0,
+    Success = 1,
+    NotFound = 2,
 }

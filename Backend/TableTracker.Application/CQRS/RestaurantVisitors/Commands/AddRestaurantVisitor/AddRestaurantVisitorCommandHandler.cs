@@ -11,39 +11,38 @@ using TableTracker.Domain.Enums;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.RestaurantVisitors.Commands.AddRestaurantVisitor
+namespace TableTracker.Application.CQRS.RestaurantVisitors.Commands.AddRestaurantVisitor;
+
+public class AddRestaurantVisitorCommandHandler : IRequestHandler<AddRestaurantVisitorCommand, CommandResponse<RestaurantVisitorDTO>>
 {
-    public class AddRestaurantVisitorCommandHandler : IRequestHandler<AddRestaurantVisitorCommand, CommandResponse<RestaurantVisitorDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public AddRestaurantVisitorCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
+    }
 
-        public AddRestaurantVisitorCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<RestaurantVisitorDTO>> Handle(
+        AddRestaurantVisitorCommand request,
+        CancellationToken cancellationToken)
+    {
+        var entity = _mapper.Map<RestaurantVisitor>(request.RestaurantVisitor);
+
+        if (entity.Id != 0)
         {
-            _mapper = mapper;
-            _unitOfWork = unitOfWork;
+            return new CommandResponse<RestaurantVisitorDTO>(
+                request.RestaurantVisitor,
+                CommandResult.Failure,
+                "The restaurant visitor is already in the database.");
         }
 
-        public async Task<CommandResponse<RestaurantVisitorDTO>> Handle(
-            AddRestaurantVisitorCommand request,
-            CancellationToken cancellationToken)
-        {
-            var entity = _mapper.Map<RestaurantVisitor>(request.RestaurantVisitor);
+        await _unitOfWork.GetRepository<IRestaurantVisitorRepository>().Insert(entity);
+        await _unitOfWork.Save();
 
-            if (entity.Id != 0)
-            {
-                return new CommandResponse<RestaurantVisitorDTO>(
-                    request.RestaurantVisitor,
-                    CommandResult.Failure,
-                    "The restaurant visitor is already in the database.");
-            }
-
-            await _unitOfWork.GetRepository<IRestaurantVisitorRepository>().Insert(entity);
-            await _unitOfWork.Save();
-
-            return new CommandResponse<RestaurantVisitorDTO>(request.RestaurantVisitor);
-        }
+        return new CommandResponse<RestaurantVisitorDTO>(request.RestaurantVisitor);
     }
 }

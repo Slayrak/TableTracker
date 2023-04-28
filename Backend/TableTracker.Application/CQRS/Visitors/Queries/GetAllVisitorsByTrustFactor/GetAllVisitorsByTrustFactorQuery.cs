@@ -2,15 +2,14 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Visitors.Queries.GetAllVisitorsByTrustFactor
-{
-    public class GetAllVisitorsByTrustFactorQuery : IRequest<VisitorDTO[]>
-    {
-        public GetAllVisitorsByTrustFactorQuery(float trustFactor)
-        {
-            TrustFactor = trustFactor;
-        }
+namespace TableTracker.Application.CQRS.Visitors.Queries.GetAllVisitorsByTrustFactor;
 
-        public float TrustFactor { get; set; }
+public class GetAllVisitorsByTrustFactorQuery : IRequest<VisitorDTO[]>
+{
+    public GetAllVisitorsByTrustFactorQuery(float trustFactor)
+    {
+        TrustFactor = trustFactor;
     }
+
+    public float TrustFactor { get; set; }
 }

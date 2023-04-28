@@ -2,9 +2,8 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.VisitorHistories.Queries.GetAllVisits
+namespace TableTracker.Application.CQRS.VisitorHistories.Queries.GetAllVisits;
+
+public class GetAllVisitsQuery : IRequest<VisitorHistoryDTO[]>
 {
-    public class GetAllVisitsQuery : IRequest<VisitorHistoryDTO[]>
-    {
-    }
 }

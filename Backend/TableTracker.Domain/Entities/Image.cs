@@ -1,9 +1,8 @@
-﻿namespace TableTracker.Domain.Entities
-{
-    public class Image : IEntity<long>
-    {
-        public long Id { get; set; }
+﻿namespace TableTracker.Domain.Entities;
 
-        public string Name { get; set; }
-    }
+public class Image : IEntity<long>
+{
+    public long Id { get; set; }
+
+    public string Name { get; set; }
 }

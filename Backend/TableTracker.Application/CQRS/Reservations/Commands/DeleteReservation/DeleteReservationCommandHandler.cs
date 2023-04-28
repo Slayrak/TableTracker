@@ -9,38 +9,37 @@ using TableTracker.Domain.DataTransferObjects;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.Reservations.Commands.DeleteReservation
+namespace TableTracker.Application.CQRS.Reservations.Commands.DeleteReservation;
+
+public class DeleteReservationCommandHandler : IRequestHandler<DeleteReservationCommand, CommandResponse<ReservationDTO>>
 {
-    public class DeleteReservationCommandHandler : IRequestHandler<DeleteReservationCommand, CommandResponse<ReservationDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public DeleteReservationCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public DeleteReservationCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<ReservationDTO>> Handle(DeleteReservationCommand request, CancellationToken cancellationToken)
+    {
+        var repository = _unitOfWork.GetRepository<IReservationRepository>();
+        var entity = await repository.FindById(request.Id);
+
+        if (await repository.Contains(entity))
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            repository.Remove(entity);
+            await _unitOfWork.Save();
+
+            return new CommandResponse<ReservationDTO>(_mapper.Map<ReservationDTO>(entity));
         }
 
-        public async Task<CommandResponse<ReservationDTO>> Handle(DeleteReservationCommand request, CancellationToken cancellationToken)
-        {
-            var repository = _unitOfWork.GetRepository<IReservationRepository>();
-            var entity = await repository.FindById(request.Id);
-
-            if (await repository.Contains(entity))
-            {
-                repository.Remove(entity);
-                await _unitOfWork.Save();
-
-                return new CommandResponse<ReservationDTO>(_mapper.Map<ReservationDTO>(entity));
-            }
-
-            return new CommandResponse<ReservationDTO>(
-                _mapper.Map<ReservationDTO>(entity),
-                Domain.Enums.CommandResult.NotFound,
-                "Could not find the given reservation.");
-        }
+        return new CommandResponse<ReservationDTO>(
+            _mapper.Map<ReservationDTO>(entity),
+            Domain.Enums.CommandResult.NotFound,
+            "Could not find the given reservation.");
     }
 }

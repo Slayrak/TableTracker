@@ -1,9 +1,8 @@
-﻿namespace TableTracker.Domain.Enums
+﻿namespace TableTracker.Domain.Enums;
+
+public enum RestaurantType
 {
-    public enum RestaurantType
-    {
-        Restaurant = 0,
-        Fastfood = 1,
-        Cafe = 2,
-    }
+    Restaurant = 0,
+    Fastfood = 1,
+    Cafe = 2,
 }

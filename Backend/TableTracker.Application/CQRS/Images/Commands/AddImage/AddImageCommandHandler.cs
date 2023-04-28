@@ -8,13 +8,12 @@ using MediatR;
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Images.Commands.AddImage
+namespace TableTracker.Application.CQRS.Images.Commands.AddImage;
+
+public class AddImageCommandHandler : IRequestHandler<AddImageCommand, CommandResponse<ImageDTO>>
 {
-    public class AddImageCommandHandler : IRequestHandler<AddImageCommand, CommandResponse<ImageDTO>>
+    public Task<CommandResponse<ImageDTO>> Handle(AddImageCommand request, CancellationToken cancellationToken)
     {
-        public Task<CommandResponse<ImageDTO>> Handle(AddImageCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }

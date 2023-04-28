@@ -11,37 +11,36 @@ using TableTracker.Domain.Enums;
 using TableTracker.Domain.Interfaces;
 using TableTracker.Domain.Interfaces.Repositories;
 
-namespace TableTracker.Application.CQRS.VisitorHistories.Commands.AddVisit
+namespace TableTracker.Application.CQRS.VisitorHistories.Commands.AddVisit;
+
+public class AddVisitCommandHandler : IRequestHandler<AddVisitCommand, CommandResponse<VisitorHistoryDTO>>
 {
-    public class AddVisitCommandHandler : IRequestHandler<AddVisitCommand, CommandResponse<VisitorHistoryDTO>>
+    private readonly IUnitOfWork<long> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public AddVisitCommandHandler(
+        IUnitOfWork<long> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<long> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public AddVisitCommandHandler(
-            IUnitOfWork<long> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<VisitorHistoryDTO>> Handle(AddVisitCommand request, CancellationToken cancellationToken)
+    {
+        var entity = _mapper.Map<VisitorHistory>(request.Visit);
+
+        if (entity.Id != 0)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            return new CommandResponse<VisitorHistoryDTO>(
+                request.Visit,
+                CommandResult.Failure,
+                "The visit is already in the database.");
         }
 
-        public async Task<CommandResponse<VisitorHistoryDTO>> Handle(AddVisitCommand request, CancellationToken cancellationToken)
-        {
-            var entity = _mapper.Map<VisitorHistory>(request.Visit);
+        await _unitOfWork.GetRepository<IVisitorHistoryRepository>().Insert(entity);
+        await _unitOfWork.Save();
 
-            if (entity.Id != 0)
-            {
-                return new CommandResponse<VisitorHistoryDTO>(
-                    request.Visit,
-                    CommandResult.Failure,
-                    "The visit is already in the database.");
-            }
-
-            await _unitOfWork.GetRepository<IVisitorHistoryRepository>().Insert(entity);
-            await _unitOfWork.Save();
-
-            return new CommandResponse<VisitorHistoryDTO>(request.Visit);
-        }
+        return new CommandResponse<VisitorHistoryDTO>(request.Visit);
     }
 }

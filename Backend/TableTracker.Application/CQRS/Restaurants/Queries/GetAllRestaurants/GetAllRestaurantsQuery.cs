@@ -2,9 +2,8 @@
 
 using TableTracker.Domain.DataTransferObjects;
 
-namespace TableTracker.Application.CQRS.Restaurants.Queries.GetAllRestaurants
+namespace TableTracker.Application.CQRS.Restaurants.Queries.GetAllRestaurants;
+
+public class GetAllRestaurantsQuery : IRequest<RestaurantDTO[]>
 {
-    public class GetAllRestaurantsQuery : IRequest<RestaurantDTO[]>
-    {
-    }
 }

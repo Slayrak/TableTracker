@@ -1,11 +1,10 @@
-﻿namespace TableTracker.Domain.DataTransferObjects
+﻿namespace TableTracker.Domain.DataTransferObjects;
+
+public class LayoutDTO
 {
-    public class LayoutDTO
-    {
-        public long Id { get; set; }
+    public long Id { get; set; }
 
-        public byte LayoutData { get; set; }
+    public byte LayoutData { get; set; }
 
-        public RestaurantDTO Restaurant { get; set; }
-    }
+    public RestaurantDTO Restaurant { get; set; }
 }
